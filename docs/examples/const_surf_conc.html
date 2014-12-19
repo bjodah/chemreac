@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Diffusion from constant concentration surface &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Two coupled decays" href="decay.html"/>
+        <link rel="prev" title="Automatic electric field computation" href="auto_efield.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Diffusion from constant concentration surface</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/examples/const_surf_conc.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-const_surf_conc"></span><div class="section" id="diffusion-from-constant-concentration-surface">
+<h1>Diffusion from constant concentration surface<a class="headerlink" href="#diffusion-from-constant-concentration-surface" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" href="../_downloads/const_surf_conc.py"><tt class="xref download docutils literal"><span class="pre">examples/const_surf_conc.py</span></tt></a> models a diffusion process
+and reports the error from the model integration by comparison to the
+analytic solution (intial concentrations are taken from Green&#8217;s
+function expressions for respective geometry).</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python const_surf_conc.py --help
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>usage: const_surf_conc.py [-h] [-D D] [--t0 T0] [--tend TEND] [--x0 X0]
+                          [--xend XEND] [-N N] [--nt NT] [--logt] [--logy]
+                          [--logx] [--random] [-k K] [--nstencil NSTENCIL]
+                          [--linterpol] [--rinterpol] [--num-jacobian]
+                          [-m METHOD] [-p] [-a ATOL] [--rtol RTOL] [-f FACTOR]
+                          [--random-seed RANDOM_SEED] [--savefig SAVEFIG] [-v]
+                          [--scaling SCALING]
+
+    Solves the time evolution of diffusion from a constant source term.
+    Optionally plots the results. In the plots time is represented by
+    color scaling from black (:math:`t_0`) to red (:math:`t_{end}`)
+
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -D D, --D D           0.002
+  --t0 T0               1.0
+  --tend TEND           13.0
+  --x0 X0               1e-10
+  --xend XEND           1.0
+  -N N, --N N           64
+  --nt NT               42
+  --logt                False
+  --logy                False
+  --logx                False
+  --random              False
+  -k K, --k K           1
+  --nstencil NSTENCIL   3
+  --linterpol           False
+  --rinterpol           False
+  --num-jacobian        False
+  -m METHOD, --method METHOD
+                        u&#39;bdf&#39;
+  -p, --plot            False
+  -a ATOL, --atol ATOL  1e-06
+  --rtol RTOL           1e-06
+  -f FACTOR, --factor FACTOR
+                        100000.0
+  --random-seed RANDOM_SEED
+                        42
+  --savefig SAVEFIG     u&#39;None&#39;
+  -v, --verbose         False
+  --scaling SCALING     1.0
+</pre></div>
+</div>
+<p>Here is an example generated by:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python const_surf_conc.py --plot --savefig const_surf_conc.png
+</pre></div>
+</div>
+<img alt="../_images/const_surf_conc.png" src="../_images/const_surf_conc.png" />
+<p>Solving the transformed system (<span class="math">\(\frac{d}{dt} \ln(c(\ln(x), t))\)</span>):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python const_surf_conc.py --plot --N 1024 --verbose --nstencil 3 --scaling 1e-20 --logx --logy --factor 1e12 --x0 1e-6 --atol 1e-8 --rtol 1e-8 --savefig const_surf_conc_logy_logx.png
+</pre></div>
+</div>
+<img alt="../_images/const_surf_conc_logy_logx.png" src="../_images/const_surf_conc_logy_logx.png" />
+<dl class="function">
+<dt id="const_surf_conc.analytic">
+<tt class="descclassname">const_surf_conc.</tt><tt class="descname">analytic</tt><big>(</big><em>x</em>, <em>t</em>, <em>D</em>, <em>x0</em>, <em>xend</em>, <em>logx=False</em>, <em>c_s=1</em><big>)</big><a class="reference internal" href="../_modules/const_surf_conc.html#analytic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#const_surf_conc.analytic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the analytic expression for the concentration
+in a medium with a constant source term at x=0:</p>
+<div class="math">
+\[c(x, t) = c_s \mathrm{erfc}\left( \frac{x}{2\sqrt{Dt}}\right)\]</div>
+<p>where <span class="math">\(c_s\)</span> is the constant surface concentration.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="const_surf_conc.integrate_rd">
+<tt class="descclassname">const_surf_conc.</tt><tt class="descname">integrate_rd</tt><big>(</big><em>D=0.002</em>, <em>t0=1.0</em>, <em>tend=13.0</em>, <em>x0=1e-10</em>, <em>xend=1.0</em>, <em>N=64</em>, <em>nt=42</em>, <em>logt=False</em>, <em>logy=False</em>, <em>logx=False</em>, <em>random=False</em>, <em>k=1</em>, <em>nstencil=3</em>, <em>linterpol=False</em>, <em>rinterpol=False</em>, <em>num_jacobian=False</em>, <em>method=u'bdf'</em>, <em>plot=False</em>, <em>atol=1e-06</em>, <em>rtol=1e-06</em>, <em>factor=100000.0</em>, <em>random_seed=42</em>, <em>savefig=u'None'</em>, <em>verbose=False</em>, <em>scaling=1.0</em><big>)</big><a class="reference internal" href="../_modules/const_surf_conc.html#integrate_rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#const_surf_conc.integrate_rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves the time evolution of diffusion from a constant source term.
+Optionally plots the results. In the plots time is represented by
+color scaling from black (<span class="math">\(t_0\)</span>) to red (<span class="math">\(t_{end}\)</span>)</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="decay.html" class="btn btn-neutral float-right" title="Two coupled decays"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auto_efield.html" class="btn btn-neutral" title="Automatic electric field computation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chemreac.util.analysis &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>chemreac.util.analysis</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/_modules/chemreac/util/analysis.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for chemreac.util.analysis</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">analysis</span>
+<span class="sd">--------</span>
+
+<span class="sd">Functions to analyze output.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span>
+                        <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">future.builtins</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="solver_linear_error"><a class="viewcode-back" href="../../../util/analysis.html#chemreac.util.analysis.solver_linear_error">[docs]</a><span class="k">def</span> <span class="nf">solver_linear_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">atol</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">scale_err</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns linear estimated error bounds from numerical integration</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+<span class="sd">    y : array_like</span>
+<span class="sd">         Output from integration (before back-transformation is applied)</span>
+<span class="sd">    rtol : float</span>
+<span class="sd">         Relative tolerance</span>
+<span class="sd">    atol : float</span>
+<span class="sd">         Absolute tolerance</span>
+<span class="sd">    logy : bool</span>
+<span class="sd">         Is y from a run with logarithmic concentration?</span>
+<span class="sd">    scale_err : float</span>
+<span class="sd">         scale estimated error bounds (useful for testing)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    =======</span>
+<span class="sd">    Length 2 tuple of arrays corrsponding to lower and upper bounds around y.</span>
+
+<span class="sd">    .. note:: Assumes maximum mangitude of error be: e_max = \|y*rtol\| + atol</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">solver_err</span> <span class="o">=</span> <span class="n">scale_err</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">rtol</span><span class="p">)</span> <span class="o">+</span> <span class="n">atol</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">logy</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">solver_err</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">solver_err</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">solver_err</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">solver_err</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="solver_linear_error_from_integration"><a class="viewcode-back" href="../../../util/analysis.html#chemreac.util.analysis.solver_linear_error_from_integration">[docs]</a><span class="k">def</span> <span class="nf">solver_linear_error_from_integration</span><span class="p">(</span><span class="n">integration</span><span class="p">,</span> <span class="n">ti</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span> <span class="n">bi</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                         <span class="n">si</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    See solver_linear_error</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    integration</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">atol_i</span> <span class="o">=</span> <span class="n">integration</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">][</span><span class="n">si</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">atol_i</span> <span class="o">=</span> <span class="n">integration</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">solver_linear_error</span><span class="p">(</span>
+        <span class="n">integration</span><span class="o">.</span><span class="n">yout</span><span class="p">[</span><span class="n">ti</span><span class="p">,</span> <span class="n">bi</span><span class="p">,</span> <span class="n">si</span><span class="p">],</span>
+        <span class="n">integration</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;rtol&#39;</span><span class="p">],</span>
+        <span class="n">atol_i</span><span class="p">,</span>
+        <span class="n">integration</span><span class="o">.</span><span class="n">rd</span><span class="o">.</span><span class="n">logy</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="suggest_t0"><a class="viewcode-back" href="../../../util/analysis.html#chemreac.util.analysis.suggest_t0">[docs]</a><span class="k">def</span> <span class="nf">suggest_t0</span><span class="p">(</span><span class="n">rd</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">max_f</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Suggests an appropriate initial time,</span>
+<span class="sd">    useful when logy==True and logt==True,</span>
+<span class="sd">    If suggested t0 &gt; 1, 1 is returned.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+<span class="sd">    rd: ReactionDiffusion instance</span>
+<span class="sd">         System at hand</span>
+<span class="sd">    y0: sequence</span>
+<span class="sd">         initial values</span>
+<span class="sd">    max_f: float</span>
+<span class="sd">         upper bound of absolute value for largest element in for the</span>
+<span class="sd">         inital step.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fout</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">alloc_fout</span><span class="p">()</span>
+    <span class="n">rd</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">fout</span><span class="p">)</span>
+    <span class="n">fout_maxabs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fout</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">fout_maxabs</span> <span class="o">&lt;</span> <span class="n">max_f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">1.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">max_f</span><span class="o">/</span><span class="n">fout_maxabs</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

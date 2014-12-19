@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>core &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="index.html"/>
+        <link rel="up" title="Modules Reference" href="modules.html"/>
+        <link rel="next" title="integrate" href="integrate.html"/>
+        <link rel="prev" title="Modules Reference" href="modules.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="modules.html">Modules Reference</a> &raquo;</li>
+      
+    <li>core</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/core.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-chemreac.core"></span><div class="section" id="core">
+<h1>core<a class="headerlink" href="#core" title="Permalink to this headline">¶</a></h1>
+<p>Provides core functinoality: ReactionDiffusion</p>
+<dl class="class">
+<dt id="chemreac.core.ReactionDiffusion">
+<em class="property">class </em><tt class="descclassname">chemreac.core.</tt><tt class="descname">ReactionDiffusion</tt><a class="reference internal" href="_modules/chemreac/core.html#ReactionDiffusion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.core.ReactionDiffusion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object representing the numerical model, with callbacks for evaluating
+derivatives and jacobian.</p>
+<p>The instance provides methods:</p>
+<p>f(t, y, fout)
+dense_jac_rmaj(t, y, Jout)
+dense_jac_cmaj(t, y, Jout)
+banded_jac_cmaj(t, y, Jout)
+banded_packed_jac_cmaj(t, y, Jout)</p>
+<p>some of which are used by chemreac.integrate.integrate_scipy</p>
+<p>In addition error estimates (if provided by user) are stored as:
+- k_err
+- D_err</p>
+<p>Additional convenience attributes (not used by underlying C++ class):
+- substance_names
+- substance_tex_names</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n: integer</strong></p>
+<blockquote>
+<div><p>number of species</p>
+</div></blockquote>
+<p><strong>stoich_reac: list of lists of integer indices</strong></p>
+<blockquote>
+<div><p>reactant index lists per reaction.</p>
+</div></blockquote>
+<p><strong>stoich_prod: list of lists of integer indices</strong></p>
+<blockquote>
+<div><p>product index lists per reaction.</p>
+</div></blockquote>
+<p><strong>k: 1-dimensional array</strong></p>
+<blockquote>
+<div><p>reaction rate coefficients (if 2-tuples,
+assumed (val, stddev) pairs)</p>
+</div></blockquote>
+<p><strong>N: integer</strong></p>
+<blockquote>
+<div><p>number of compartments (default: 1 if x==None else len(x)-1)</p>
+</div></blockquote>
+<p><strong>D: sequence of floats</strong></p>
+<blockquote>
+<div><p>diffusion coefficients (of length n)</p>
+</div></blockquote>
+<p><strong>z_chg: sequence of integers</strong></p>
+<blockquote>
+<div><p>1-dimensional array ion charges</p>
+</div></blockquote>
+<p><strong>mobility: sequence of floats</strong></p>
+<blockquote>
+<div><p>mobility of ions</p>
+</div></blockquote>
+<p><strong>x: sequence of floats or pair of flats or float, optional</strong></p>
+<blockquote>
+<div><p>compartment boundaries (of length N+1), default: linspace(0, 1, N+1)
+if x is a pair of floats it is expanded into linspace(x[0], x[1], N+1).
+if x is a float it is expanded into linspace(0, x, N+1)</p>
+</div></blockquote>
+<p><strong>stoich_actv: list of lists of integer indices</strong></p>
+<blockquote>
+<div><p>list of ACTIVE reactant index lists per reaction.n, default: []</p>
+</div></blockquote>
+<p><strong>bin_k_factor: sequence of sequences of floats</strong></p>
+<blockquote>
+<div><p>per compartment modulation of rate coefficients</p>
+</div></blockquote>
+<p><strong>bin_k_factor_span: sequence of integers</strong></p>
+<blockquote>
+<div><p>spans over reaction indices affected by bin_k_factor</p>
+</div></blockquote>
+<p><strong>geom: integer</strong></p>
+<blockquote>
+<div><p>any of (FLAT, SPHERICAL, CYLINDRICAL)</p>
+</div></blockquote>
+<p><strong>logy: bool</strong></p>
+<blockquote>
+<div><p>f and *_jac_* routines operate on log(concentration)</p>
+</div></blockquote>
+<p><strong>logt: bool</strong></p>
+<blockquote>
+<div><p>f and *_jac_* routines operate on log(time)</p>
+</div></blockquote>
+<p><strong>logx: bool</strong></p>
+<blockquote>
+<div><p>f and *_jac_* routines operate on log(space)</p>
+</div></blockquote>
+<p><strong>nstencil: integer</strong></p>
+<blockquote>
+<div><p>number of points used in finite difference scheme</p>
+</div></blockquote>
+<p><strong>lrefl: bool</strong></p>
+<blockquote>
+<div><p>reflective left boundary (default: True)</p>
+</div></blockquote>
+<p><strong>rrefl: bool</strong></p>
+<blockquote>
+<div><p>reflective right boundary (default: True)</p>
+</div></blockquote>
+<p><strong>auto_efield: bool</strong></p>
+<blockquote>
+<div><p>calculate electric field from concentrations (default: False)</p>
+</div></blockquote>
+<p><strong>surf_chg: pair of floats</strong></p>
+<blockquote>
+<div><p>total charge of surface (defaut: (0.0, 0.0))</p>
+</div></blockquote>
+<p><strong>eps: float</strong></p>
+<blockquote>
+<div><p>relative permitivity of medium (dielectric constant)</p>
+</div></blockquote>
+<p><strong>xscale: float</strong></p>
+<blockquote class="last">
+<div><p>use internal scaling of length (default: 1.0)
+(finite difference scheme works best for step-size ~1)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="integrate.html" class="btn btn-neutral float-right" title="integrate"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral" title="Modules Reference"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

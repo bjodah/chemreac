@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Analytic diffusion &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Analytic error scaling vs. number of bins" href="analytic_N_scaling.html"/>
+        <link rel="prev" title="Examples" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Analytic diffusion</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/examples/analytic_diffusion.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-analytic_diffusion"></span><div class="section" id="analytic-diffusion">
+<h1>Analytic diffusion<a class="headerlink" href="#analytic-diffusion" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" href="../_downloads/analytic_diffusion.py"><tt class="xref download docutils literal"><span class="pre">examples/analytic_diffusion.py</span></tt></a> models a diffusion process
+and reports the error from the model integration by comparison to the
+analytic solution (intial concentrations are taken from Green&#8217;s
+function expressions for respective geometry).</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python analytic_diffusion.py --help
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>usage: analytic_diffusion.py [-h] [-D D] [--t0 T0] [--tend TEND] [--x0 X0]
+                             [--xend XEND] [--mu MU] [-N N] [--nt NT]
+                             [-g GEOM] [--logt] [--logy] [--logx] [--random]
+                             [-k K] [--nstencil NSTENCIL] [--linterpol]
+                             [--rinterpol] [--num-jacobian] [--method METHOD]
+                             [--scale-x] [-p] [-a ATOL] [--rtol RTOL] [-e]
+                             [--random-seed RANDOM_SEED] [--savefig SAVEFIG]
+                             [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -D D, --D D           0.002
+  --t0 T0               3.0
+  --tend TEND           7.0
+  --x0 X0               0.0
+  --xend XEND           1.0
+  --mu MU               -
+  -N N, --N N           64
+  --nt NT               42
+  -g GEOM, --geom GEOM  u&#39;f&#39;
+  --logt                False
+  --logy                False
+  --logx                False
+  --random              False
+  -k K, --k K           0.0
+  --nstencil NSTENCIL   3
+  --linterpol           False
+  --rinterpol           False
+  --num-jacobian        False
+  --method METHOD       u&#39;bdf&#39;
+  --scale-x             False
+  -p, --plot            False
+  -a ATOL, --atol ATOL  1e-06
+  --rtol RTOL           1e-06
+  -e, --efield          False
+  --random-seed RANDOM_SEED
+                        42
+  --savefig SAVEFIG     u&#39;None&#39;
+  -v, --verbose         False
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>$ python analytic_diffusion.py --plot --efield --mu 0.5 --nstencil 5 --k 0.1 --geom f
+
+$ python analytic_diffusion.py --x0 0 --xend 1000 --N 1000 --mu 500 -D 400 --nstencil 3
+</pre></div>
+</div>
+<p>Note -D 475</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python analytic_diffusion.py --x0 0 --xend 1000 --N 1000 --mu 500 -D 475  --nstencil 7
+</pre></div>
+</div>
+<p>Still problematic (should not need to be):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python analytic_diffusion.py --plot --nstencil 5 --logy --D 0.0005
+</pre></div>
+</div>
+<p>Here is an example generated by:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python analytic_diffusion.py --plot --nstencil 3 --k 0.1 --geom f --savefig analytic_diffusion.png
+</pre></div>
+</div>
+<img alt="../_images/analytic_diffusion.png" src="../_images/analytic_diffusion.png" />
+<dl class="function">
+<dt id="analytic_diffusion.cylindrical_analytic">
+<tt class="descclassname">analytic_diffusion.</tt><tt class="descname">cylindrical_analytic</tt><big>(</big><em>x</em>, <em>t</em>, <em>D</em>, <em>mu</em>, <em>x0</em>, <em>xend</em>, <em>v</em>, <em>logy=False</em>, <em>logx=False</em><big>)</big><a class="reference internal" href="../_modules/analytic_diffusion.html#cylindrical_analytic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#analytic_diffusion.cylindrical_analytic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the Green&#8217;s function:</p>
+<div class="math">
+\[c(x, t) = \frac{x_{end}-x_{0}}{4 \pi D t} \
+    e^{-\frac{(x - \mu - vt)^2}{4Dt}}\]</div>
+<p>which satisfies:</p>
+<div class="math">
+\[\frac{\partial c(x, t)}{\partial t} = D\nabla^2 \
+    c(x, t) - \vec{v} \cdot c(x, t)\]</div>
+<p>where <span class="math">\(\nabla\)</span> in cylindrical coordinates with axial symmetry is:</p>
+<div class="math">
+\[\nabla = \frac{1}{x}\]</div>
+<p>and where <span class="math">\(\nabla^2\)</span> is:</p>
+<div class="math">
+\[\nabla^2 = \frac{1}{x} \frac{\partial}{\partial x}
+    \left( x \frac{\partial}{\partial x} \right)\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="analytic_diffusion.flat_analytic">
+<tt class="descclassname">analytic_diffusion.</tt><tt class="descname">flat_analytic</tt><big>(</big><em>x</em>, <em>t</em>, <em>D</em>, <em>mu</em>, <em>x0</em>, <em>xend</em>, <em>v</em>, <em>logy=False</em>, <em>logx=False</em><big>)</big><a class="reference internal" href="../_modules/analytic_diffusion.html#flat_analytic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#analytic_diffusion.flat_analytic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the Green&#8217;s function:</p>
+<div class="math">
+\[c(x, t) = \frac{x_{end}-x_{0}}{\sqrt{4 \pi D t}} \
+    e^{-\frac{(x - \mu - vt)^2}{4Dt}}\]</div>
+<p>which satisfies:</p>
+<div class="math">
+\[\frac{\partial c(x, t)}{\partial t} = D\nabla^2 \
+    c(x, t)  - \vec{v} \cdot c(x, t)\]</div>
+<p>where <span class="math">\(\nabla\)</span> in cartesian coordinates with planar (yz-plane)
+symmetry is:</p>
+<div class="math">
+\[\nabla = \frac{\partial}{\partial x}\]</div>
+<p>and where <span class="math">\(\nabla^2\)</span> :</p>
+<div class="math">
+\[\nabla^2 = \frac{\partial^2}{\partial x^2}\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="analytic_diffusion.integrate_rd">
+<tt class="descclassname">analytic_diffusion.</tt><tt class="descname">integrate_rd</tt><big>(</big><em>D=0.002</em>, <em>t0=3.0</em>, <em>tend=7.0</em>, <em>x0=0.0</em>, <em>xend=1.0</em>, <em>mu=None</em>, <em>N=64</em>, <em>nt=42</em>, <em>geom=u'f'</em>, <em>logt=False</em>, <em>logy=False</em>, <em>logx=False</em>, <em>random=False</em>, <em>k=0.0</em>, <em>nstencil=3</em>, <em>linterpol=False</em>, <em>rinterpol=False</em>, <em>num_jacobian=False</em>, <em>method=u'bdf'</em>, <em>scale_x=False</em>, <em>plot=False</em>, <em>atol=1e-06</em>, <em>rtol=1e-06</em>, <em>efield=False</em>, <em>random_seed=42</em>, <em>savefig=u'None'</em>, <em>verbose=False</em><big>)</big><a class="reference internal" href="../_modules/analytic_diffusion.html#integrate_rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#analytic_diffusion.integrate_rd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="analytic_diffusion.spherical_analytic">
+<tt class="descclassname">analytic_diffusion.</tt><tt class="descname">spherical_analytic</tt><big>(</big><em>x</em>, <em>t</em>, <em>D</em>, <em>mu</em>, <em>x0</em>, <em>xend</em>, <em>v</em>, <em>logy=False</em>, <em>logx=False</em><big>)</big><a class="reference internal" href="../_modules/analytic_diffusion.html#spherical_analytic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#analytic_diffusion.spherical_analytic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the Green&#8217;s function:</p>
+<div class="math">
+\[c(x, t) = \frac{x_{end}-x_{0}}{\sqrt{4 \pi D t^3}} \
+    e^{-\frac{(x - \mu - vt)^2}{4Dt}}\]</div>
+<p>which satisfies:</p>
+<div class="math">
+\[\frac{\partial c(x, t)}{\partial t} = D\nabla^2
+    c(x, t) - \vec{v} \cdot c(x, t)\]</div>
+<p>where <span class="math">\(\nabla\)</span> in spherical coordinates for a isotropic system is:</p>
+<div class="math">
+\[\nabla = \frac{\partial}{\partial x}\]</div>
+<p>and where <span class="math">\(\nabla^2\)</span> is:</p>
+<div class="math">
+\[\nabla^2 = \frac{1}{x^2} \frac{\partial}{\partial x}
+    \left( x^2 \frac{\partial}{\partial x} \right)\]</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="analytic_N_scaling.html" class="btn btn-neutral float-right" title="Analytic error scaling vs. number of bins"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Examples"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

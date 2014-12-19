@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chemreac.integrate &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>chemreac.integrate</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/_modules/chemreac/integrate.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for chemreac.integrate</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">integrate</span>
+<span class="sd">=========</span>
+
+<span class="sd">This module provides functions for integrating the</span>
+<span class="sd">system of ODEs which the ReactionDiffusion represent.</span>
+<span class="sd">Currently the user may choose from using a</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span>
+                        <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">__version__</span> <span class="k">as</span> <span class="n">__scipy_version__</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">ode</span>
+<span class="n">scipy_version</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">__scipy_version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]))</span>
+
+<span class="kn">from</span> <span class="nn">chemreac</span> <span class="kn">import</span> <span class="n">DENSE</span><span class="p">,</span> <span class="n">BANDED</span><span class="p">,</span> <span class="n">SPARSE</span>
+<span class="kn">from</span> <span class="nn">chemreac.util.analysis</span> <span class="kn">import</span> <span class="n">suggest_t0</span>
+
+
+<span class="n">DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;atol&#39;</span><span class="p">:</span> <span class="mf">1e-9</span><span class="p">,</span>
+    <span class="s">&#39;rtol&#39;</span><span class="p">:</span> <span class="mf">1e-7</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">_integrate_cvode_direct</span><span class="p">(</span><span class="n">rd</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">tout</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    see integrate.</span>
+
+<span class="sd">    kwargs:</span>
+<span class="sd">      method: linear multistep method: &#39;bdf&#39; or &#39;adams&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">._chemreac</span> <span class="kn">import</span> <span class="n">cvode_direct</span>
+
+    <span class="c"># Handle kwargs</span>
+    <span class="n">new_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s">&quot;Sundials integrator auto-selects banded for N&gt;1&quot;</span><span class="p">)</span>
+    <span class="n">atol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;atol&#39;</span><span class="p">,</span> <span class="n">DEFAULTS</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="n">atol</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">atol</span> <span class="o">=</span> <span class="n">atol</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,))</span>
+    <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">atol</span>
+    <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;rtol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;rtol&#39;</span><span class="p">,</span> <span class="n">DEFAULTS</span><span class="p">[</span><span class="s">&#39;rtol&#39;</span><span class="p">])</span>
+    <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;method&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;method&#39;</span><span class="p">,</span> <span class="s">&#39;bdf&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;with_jacobian&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;CVODE(S) wrapper uses explicit jacobian&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">kwargs</span> <span class="o">!=</span> <span class="p">{}:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;Unkown kwargs: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+
+    <span class="c"># Run the integration</span>
+    <span class="n">rd</span><span class="o">.</span><span class="n">neval_f</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rd</span><span class="o">.</span><span class="n">neval_j</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">texec</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">yout</span> <span class="o">=</span> <span class="n">cvode_direct</span><span class="p">(</span><span class="n">rd</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tout</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+                            <span class="o">**</span><span class="n">new_kwargs</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="n">yout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">tout</span><span class="p">),</span> <span class="n">rd</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">rd</span><span class="o">.</span><span class="n">n</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s">&#39;C&#39;</span><span class="p">)</span><span class="o">/</span><span class="mi">0</span>  <span class="c"># NaN</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">texec</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">texec</span>
+
+    <span class="n">info</span> <span class="o">=</span> <span class="n">new_kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s">&#39;neval_f&#39;</span><span class="p">:</span> <span class="n">rd</span><span class="o">.</span><span class="n">neval_f</span><span class="p">,</span>
+        <span class="s">&#39;neval_j&#39;</span><span class="p">:</span> <span class="n">rd</span><span class="o">.</span><span class="n">neval_j</span><span class="p">,</span>
+        <span class="s">&#39;texec&#39;</span><span class="p">:</span> <span class="n">texec</span><span class="p">,</span>
+        <span class="s">&#39;success&#39;</span><span class="p">:</span> <span class="n">success</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="n">yout</span><span class="p">,</span> <span class="n">info</span>
+
+
+<span class="k">def</span> <span class="nf">_integrate_rk4</span><span class="p">(</span><span class="n">rd</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">tout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    For demonstration purposes only, fixed step size</span>
+<span class="sd">    give no error control and requires excessive work</span>
+<span class="sd">    for accurate solutions. Unknown kwargs are simply</span>
+<span class="sd">    ignored.</span>
+
+<span class="sd">    see integrate</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">._chemreac</span> <span class="kn">import</span> <span class="n">rk4</span>
+    <span class="n">texec</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">yout</span><span class="p">,</span> <span class="n">Dyout</span> <span class="o">=</span> <span class="n">rk4</span><span class="p">(</span><span class="n">rd</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">tout</span><span class="p">)</span>
+    <span class="n">texec</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">texec</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;neval_f&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">tout</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+        <span class="s">&#39;neval_j&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s">&#39;texec&#39;</span><span class="p">:</span> <span class="n">texec</span><span class="p">,</span>
+        <span class="s">&#39;success&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">yout</span><span class="p">,</span> <span class="n">info</span>
+
+
+<span class="k">def</span> <span class="nf">_integrate_scipy</span><span class="p">(</span><span class="n">rd</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">tout</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                     <span class="n">integrator_name</span><span class="o">=</span><span class="s">&#39;vode&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    see integrate</span>
+
+<span class="sd">    tout: array-like</span>
+<span class="sd">        at what times to report, e.g.:</span>
+<span class="sd">        - np.linspace(t0, tend, nt+1)</span>
+<span class="sd">        - np.logspace(np.log10(t0 + 1e-12), np.log10(tend), nt+1)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    =======</span>
+<span class="sd">    yout: numpy array of shape (len(tout), rd.N, rd.n)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y0</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="n">rd</span><span class="o">.</span><span class="n">n</span><span class="o">*</span><span class="n">rd</span><span class="o">.</span><span class="n">N</span><span class="p">:</span>
+        <span class="n">fmtstr</span> <span class="o">=</span> <span class="s">&quot;y0.size (={})not compatible with rd.n*rd.N (={})&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">fmtstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y0</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">rd</span><span class="o">.</span><span class="n">n</span><span class="o">*</span><span class="n">rd</span><span class="o">.</span><span class="n">N</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rd</span><span class="o">.</span><span class="n">N</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">DENSE</span>
+        <span class="k">elif</span> <span class="n">rd</span><span class="o">.</span><span class="n">N</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">BANDED</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">BANDED</span><span class="p">:</span>
+        <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;lband&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">n</span>
+        <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;uband&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">n</span>
+
+    <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;atol&#39;</span><span class="p">,</span> <span class="n">DEFAULTS</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">])</span>
+    <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;rtol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;rtol&#39;</span><span class="p">,</span> <span class="n">DEFAULTS</span><span class="p">[</span><span class="s">&#39;rtol&#39;</span><span class="p">])</span>
+    <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;method&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;method&#39;</span><span class="p">,</span> <span class="s">&#39;bdf&#39;</span><span class="p">)</span>
+    <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;with_jacobian&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;with_jacobian&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">kwargs</span> <span class="o">!=</span> <span class="p">{}:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;Unkown kwargs: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kwargs</span><span class="p">))</span>
+
+    <span class="c"># Create python callbacks with right signature</span>
+    <span class="n">fout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">rd</span><span class="o">.</span><span class="n">n</span><span class="o">*</span><span class="n">rd</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">f_args</span><span class="p">):</span>
+        <span class="c"># Python function closure circumvents reallocation</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">neval</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">rd</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">fout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fout</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">neval</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">DENSE</span><span class="p">:</span>
+        <span class="n">jout</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">alloc_jout</span><span class="p">(</span><span class="n">banded</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&#39;F&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">BANDED</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">scipy_version</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">scipy_version</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">14</span><span class="p">:</span>
+            <span class="c"># Currently SciPy &lt;= v0.14 needs extra padding</span>
+            <span class="n">jout</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">alloc_jout</span><span class="p">(</span><span class="n">banded</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&#39;F&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="n">rd</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># SciPy &gt;= v0.15 need no extra padding</span>
+            <span class="n">jout</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">alloc_jout</span><span class="p">(</span><span class="n">banded</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&#39;F&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">jac</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">j_args</span><span class="p">):</span>
+        <span class="n">jac</span><span class="o">.</span><span class="n">neval</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">jout</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c"># &lt;--- this is very important (clear old LU decomp)</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">DENSE</span><span class="p">:</span>
+            <span class="n">rd</span><span class="o">.</span><span class="n">dense_jac_cmaj</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">jout</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rd</span><span class="o">.</span><span class="n">banded_packed_jac_cmaj</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">jout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">jout</span>
+    <span class="n">jac</span><span class="o">.</span><span class="n">neval</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">runner</span> <span class="o">=</span> <span class="n">ode</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">jac</span> <span class="k">if</span> <span class="n">new_kwargs</span><span class="p">[</span><span class="s">&#39;with_jacobian&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">runner</span><span class="o">.</span><span class="n">set_integrator</span><span class="p">(</span><span class="n">integrator_name</span><span class="p">,</span> <span class="o">**</span><span class="n">new_kwargs</span><span class="p">)</span>
+    <span class="n">runner</span><span class="o">.</span><span class="n">set_initial_value</span><span class="p">(</span><span class="n">y0</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">tout</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">yout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">tout</span><span class="p">),</span> <span class="n">rd</span><span class="o">.</span><span class="n">n</span><span class="o">*</span><span class="n">rd</span><span class="o">.</span><span class="n">N</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
+    <span class="n">yout</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">y0</span>
+    <span class="n">texec</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tout</span><span class="p">)):</span>
+        <span class="n">runner</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">tout</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">yout</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">runner</span><span class="o">.</span><span class="n">y</span>
+    <span class="n">texec</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">texec</span>
+
+    <span class="n">info</span> <span class="o">=</span> <span class="n">new_kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+        <span class="s">&#39;integrator_name&#39;</span><span class="p">:</span> <span class="n">integrator_name</span><span class="p">,</span>
+        <span class="s">&#39;success&#39;</span><span class="p">:</span> <span class="n">runner</span><span class="o">.</span><span class="n">successful</span><span class="p">(),</span>
+        <span class="s">&#39;texec&#39;</span><span class="p">:</span> <span class="n">texec</span><span class="p">,</span>
+        <span class="s">&#39;neval_f&#39;</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">neval</span><span class="p">,</span>
+        <span class="s">&#39;neval_j&#39;</span><span class="p">:</span> <span class="n">jac</span><span class="o">.</span><span class="n">neval</span><span class="p">,</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="n">yout</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">tout</span><span class="p">),</span> <span class="n">rd</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">rd</span><span class="o">.</span><span class="n">n</span><span class="p">)),</span> <span class="n">info</span>
+
+
+<div class="viewcode-block" id="sigm"><a class="viewcode-back" href="../../integrate.html#chemreac.integrate.sigm">[docs]</a><span class="k">def</span> <span class="nf">sigm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lim</span><span class="o">=</span><span class="mf">150.</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Algebraic sigmoid to avoid overflow/underflow of &#39;double exp(double)&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">/</span><span class="p">((</span><span class="n">x</span><span class="o">/</span><span class="n">lim</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Integration"><a class="viewcode-back" href="../../integrate.html#chemreac.integrate.Integration">[docs]</a><span class="k">class</span> <span class="nc">Integration</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Model kinetcs by integrating system of ODEs using</span>
+<span class="sd">    user specified solver.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    solver: string</span>
+<span class="sd">        &quot;cvode_direct&quot; or &quot;scipy&quot; where scipy uses VODE</span>
+<span class="sd">        as the solver.</span>
+<span class="sd">    rd: ReactionDiffusion instance</span>
+<span class="sd">    C0: array</span>
+<span class="sd">        initial concentrations (unscaled, untransformed)</span>
+<span class="sd">    tout: array</span>
+<span class="sd">        times for which to report solver results (untransformed)</span>
+
+<span class="sd">    scaling: float</span>
+<span class="sd">        Scale concentrations (and rate constants)</span>
+<span class="sd">    sigm_damp: bool or tuple of (lim: float, n: int)</span>
+<span class="sd">        conditionally damp C0 with an algebraic sigmoid when rd.logy == True.</span>
+<span class="sd">        s(x) = x/((x/lim)**n+1)**(1./n)</span>
+<span class="sd">        if sigm==True then `lim` and `n` are the default of `sigm()`</span>
+<span class="sd">    C0_is_log: bool</span>
+<span class="sd">        If True: passed values in C0 are taken to be the natural logarithm of</span>
+<span class="sd">        initial concentrations. If False and rd.logy == True: a very small</span>
+<span class="sd">        number is added to C0 to avoid applying log to zero (see `tiny`).</span>
+<span class="sd">    tiny: float</span>
+<span class="sd">        added to C0 when rd.logy==True and C0_is_log==False. Note that</span>
+<span class="sd">        if you explicitly want to avoid adding tiny you need to set it</span>
+<span class="sd">        to zero (e.g. when manually setting any C0==0 to some epsilon).</span>
+<span class="sd">    (default: numpy.finfo(np.float64).tiny)</span>
+
+<span class="sd">    **kwargs:</span>
+<span class="sd">        mode: not supported by Sundials solver (current wrapper</span>
+<span class="sd">              code auto selects banded for N&gt;1 and uses dense</span>
+<span class="sd">              mode for N==1)</span>
+<span class="sd">        atol: float or sequence</span>
+<span class="sd">            absolute tolerance of solution</span>
+<span class="sd">        rtol: float</span>
+<span class="sd">            relative tolerance of solution</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Cout: array</span>
+<span class="sd">        linear output concentrations</span>
+<span class="sd">    yout: array</span>
+<span class="sd">        output from solver: log(concentrations) if rd.logy == True</span>
+<span class="sd">    info: dict</span>
+<span class="sd">        Information from solver. Guaranteed to contain:</span>
+<span class="sd">            - &#39;texec&#39;: execution time in seconds.</span>
+<span class="sd">            - &#39;atol&#39;: float or array, absolute tolerance(s).</span>
+<span class="sd">            - &#39;rtol&#39;: float, relative tolerance</span>
+
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    _integrate()</span>
+<span class="sd">        performs the integration, automatically called by __init__</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_callbacks</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;cvode_direct&#39;</span><span class="p">:</span> <span class="n">_integrate_cvode_direct</span><span class="p">,</span>
+        <span class="s">&#39;scipy&#39;</span><span class="p">:</span> <span class="n">_integrate_scipy</span><span class="p">,</span>
+        <span class="s">&#39;rk4&#39;</span><span class="p">:</span> <span class="n">_integrate_rk4</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver</span><span class="p">,</span> <span class="n">rd</span><span class="p">,</span> <span class="n">C0</span><span class="p">,</span> <span class="n">tout</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">sigm_damp</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">C0_is_log</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tiny</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">solver</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callbacks</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;Unknown solver </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">solver</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span> <span class="o">=</span> <span class="n">solver</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rd</span> <span class="o">=</span> <span class="n">rd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">C0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">C0</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tout</span> <span class="o">=</span> <span class="n">tout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">=</span> <span class="n">scaling</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigm_damp</span> <span class="o">=</span> <span class="n">sigm_damp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">C0_is_log</span> <span class="o">=</span> <span class="n">C0_is_log</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tiny</span> <span class="o">=</span> <span class="n">tiny</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">tiny</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yout</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Cout</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sanity_checks</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_integrate</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_sanity_checks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">C0_is_log</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">C0</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Negative concentrations encountered in C0&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs the integration by calling the callback chosen by</span>
+<span class="sd">        self.solver. If rd.logy == True, a transformation of self.C0 to</span>
+<span class="sd">        log(C0) will be performed before running the integration (the same</span>
+<span class="sd">        is done for self.tout / rd.logt == True).</span>
+
+<span class="sd">        After the integration is done the attributes `Cout`, `info` and `yout`</span>
+<span class="sd">        are set. Cout is guaranteed to be linear concentrations (transformed</span>
+<span class="sd">        from yout by calling exp if rd.logy==True) and yout is the unprocessed</span>
+<span class="sd">        output from the solver.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Possibly scale the concentrations</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">C0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">C0</span>
+            <span class="n">ori_k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="o">.</span><span class="n">k</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">scaling</span><span class="o">**-</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sa</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">sa</span> <span class="ow">in</span>
+                         <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="o">.</span><span class="n">stoich_actv</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">C0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">C0</span>
+
+        <span class="c"># Transform initial concentrations</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="o">.</span><span class="n">logy</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">C0_is_log</span><span class="p">:</span>
+                <span class="n">C0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">C0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tiny</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigm_damp</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="n">y0</span> <span class="o">=</span> <span class="n">sigm</span><span class="p">(</span><span class="n">C0</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigm_damp</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="n">y0</span> <span class="o">=</span> <span class="n">sigm</span><span class="p">(</span><span class="n">C0</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">sigm_damp</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">y0</span> <span class="o">=</span> <span class="n">C0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">C0_is_log</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigm_damp</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+                    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sigm</span><span class="p">(</span><span class="n">C0</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigm_damp</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sigm</span><span class="p">(</span><span class="n">C0</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">sigm_damp</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">C0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">y0</span> <span class="o">=</span> <span class="n">C0</span>
+
+        <span class="c"># Transform time</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tout</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="o">.</span><span class="n">logt</span><span class="p">:</span>
+            <span class="n">t0_set</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">suggest_t0</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tout</span> <span class="o">+</span> <span class="n">t0</span><span class="p">)</span>  <span class="c"># conserve total time</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">t0_set</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tout</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="o">.</span><span class="n">logt</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">tout</span>
+
+        <span class="c"># Run the integration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_callbacks</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="p">](</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">internal_t</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;t0_set&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t0</span> <span class="k">if</span> <span class="n">t0_set</span> <span class="k">else</span> <span class="bp">False</span>
+
+        <span class="c"># Back-transform integration output into linear concentration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Cout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">yout</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="o">.</span><span class="n">logy</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">yout</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Cout</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scaling</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rd</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">ori_k</span>
+
+</div>
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../integrate.html#chemreac.integrate.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ``run`` is provided for environment variable directed solver choice.</span>
+
+<span class="sd">    Set ``CHEMREAC_SOLVER`` to indicate what integrator to</span>
+<span class="sd">    use (default: &quot;scipy&quot;).</span>
+
+<span class="sd">    Set ``CHEMREAC_SOLVER_KWARGS`` to a string which can be eval&#39;d to</span>
+<span class="sd">    a python dictionary. e.g. &quot;{&#39;atol&#39;: 1e-4, &#39;rtol&#39;=1e-7}&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="n">environ_kwargs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">&#39;CHEMREAC_SOLVER_KWARGS&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">environ_kwargs</span><span class="p">:</span>
+        <span class="n">environ_kwargs</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">environ_kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">environ_kwargs</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">fmtstr</span> <span class="o">=</span> <span class="s">&quot;CHEMREAC_SOLVER_KWARGS not evaluated to a dictinary: {}&quot;</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">fmtstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">environ_kwargs</span><span class="p">))</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">environ_kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Integration</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">&#39;CHEMREAC_SOLVER&#39;</span><span class="p">,</span> <span class="s">&#39;scipy&#39;</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

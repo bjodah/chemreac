@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Two coupled decays &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Equilibrium" href="equilibrium.html"/>
+        <link rel="prev" title="Diffusion from constant concentration surface" href="const_surf_conc.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Two coupled decays</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/examples/decay.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-decay"></span><div class="section" id="two-coupled-decays">
+<h1>Two coupled decays<a class="headerlink" href="#two-coupled-decays" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" href="../_downloads/decay.py"><tt class="xref download docutils literal"><span class="pre">examples/decay.py</span></tt></a> demonstrates accuracy
+by comparison with analytic solution for a simple system
+of two coupled decays</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python decay.py --help
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>usage: decay.py [-h] [--tend TEND] [-A A0] [--nt NT] [--t0 T0] [--rates RATES]
+                [--logy] [--logt] [--plot] [--savefig SAVEFIG] [-m METHOD]
+                [-a ATOL] [--rtol RTOL] [--num-jac] [--scale-err SCALE_ERR]
+                [--small SMALL] [--plotlogy] [--plotlogt] [-v]
+
+    Analytic solution through Bateman equation =&gt;
+    ensure :math:`|k_i - k_j| \gg eps`
+
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --tend TEND           2.0
+  -A A0, --A0 A0        1.0
+  --nt NT               67
+  --t0 T0               0.0
+  --rates RATES         u&#39;3.40715,4.0&#39;
+  --logy                False
+  --logt                False
+  --plot                False
+  --savefig SAVEFIG     u&#39;None&#39;
+  -m METHOD, --method METHOD
+                        u&#39;bdf&#39;
+  -a ATOL, --atol ATOL  u&#39;1e-7,1e-6,1e-5&#39;
+  --rtol RTOL           u&#39;1e-6&#39;
+  --num-jac             False
+  --scale-err SCALE_ERR
+                        1.0
+  --small SMALL         u&#39;None&#39;
+  --plotlogy            False
+  --plotlogt            False
+  -v, --verbose         False
+</pre></div>
+</div>
+<p>Here is an example generated by:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python decay.py --plot --savefig decay.png
+</pre></div>
+</div>
+<img alt="../_images/decay.png" src="../_images/decay.png" />
+<dl class="function">
+<dt id="decay.get_Cref">
+<tt class="descclassname">decay.</tt><tt class="descname">get_Cref</tt><big>(</big><em>k</em>, <em>y0</em>, <em>tout</em><big>)</big><a class="reference internal" href="../_modules/decay.html#get_Cref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#decay.get_Cref" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="decay.integrate_rd">
+<tt class="descclassname">decay.</tt><tt class="descname">integrate_rd</tt><big>(</big><em>tend=2.0</em>, <em>A0=1.0</em>, <em>nt=67</em>, <em>t0=0.0</em>, <em>rates=u'3.40715</em>, <em>4.0'</em>, <em>logy=False</em>, <em>logt=False</em>, <em>plot=False</em>, <em>savefig=u'None'</em>, <em>method=u'bdf'</em>, <em>atol=u'1e-7</em>, <em>1e-6</em>, <em>1e-5'</em>, <em>rtol=u'1e-6'</em>, <em>num_jac=False</em>, <em>scale_err=1.0</em>, <em>small=u'None'</em>, <em>plotlogy=False</em>, <em>plotlogt=False</em>, <em>verbose=False</em><big>)</big><a class="reference internal" href="../_modules/decay.html#integrate_rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#decay.integrate_rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analytic solution through Bateman equation =&gt;
+ensure <span class="math">\(|k_i - k_j| \gg eps\)</span></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="equilibrium.html" class="btn btn-neutral float-right" title="Equilibrium"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="const_surf_conc.html" class="btn btn-neutral" title="Diffusion from constant concentration surface"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

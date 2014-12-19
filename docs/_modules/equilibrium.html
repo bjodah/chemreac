@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>equilibrium &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>equilibrium</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/_modules/equilibrium.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for equilibrium</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Equilibrium</span>
+<span class="sd">-----------</span>
+
+<span class="sd">:download:`examples/equilibrium.py` demonstrates how</span>
+<span class="sd">scaling can be used together with tolerances to achieve</span>
+<span class="sd">desired accuracy from the numerical integration.</span>
+
+<span class="sd">We will consider the transient towards an equilibrium</span>
+<span class="sd">for a dimerization:</span>
+
+<span class="sd">.. math ::</span>
+
+<span class="sd">    A + &amp;B &amp;\\overset{k_f}{\\underset{k_b}{\\rightleftharpoons}}  C</span>
+
+<span class="sd">The analytic solution is (its derivation is left as an exercise):</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    A(t) &amp;= A_0 - x(t) \\\\</span>
+<span class="sd">    B(t) &amp;= B_0 - x(t) \\\\</span>
+<span class="sd">    C(t) &amp;= C_0 + x(t) \\\\</span>
+<span class="sd">    x(t) &amp;= \\frac{(U-b)(U+b)(e^{Ut}-1)}{2k_f(Ue^{Ut} + U - qe^{Ut} +  q)} \\\\</span>
+
+<span class="sd">where</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    U    &amp;= \\sqrt{A^2k_f^2 + 2ABk_f^2 - 2Ak_bk_f + B^2k_f^2 -</span>
+<span class="sd">                2Bk_bk_f + 4Ck_bk_f + k_b^2} \\\\</span>
+<span class="sd">    q    &amp;= Ak_f + Bk_f - k_b</span>
+
+
+<span class="sd">::</span>
+
+<span class="sd"> $ python equilibrium.py --help</span>
+
+<span class="sd">.. exec::</span>
+<span class="sd">   echo &quot;::\\\\n\\\\n&quot;</span>
+<span class="sd">   python examples/examples/equilibrium.py --help | sed &quot;s/^/   /&quot;</span>
+
+
+<span class="sd">Here is an example generated by:</span>
+
+<span class="sd">::</span>
+
+<span class="sd"> $ python equilibrium.py --plot --savefig equilibrium.png</span>
+
+
+<span class="sd">.. image:: ../_generated/equilibrium.png</span>
+
+
+<span class="sd">If concentrations are far from 1 (and below abstol) the accuracy of</span>
+<span class="sd">the numerical solution will be very poor:</span>
+
+<span class="sd">::</span>
+
+<span class="sd"> $ python equilibrium.py --A0 1.0 --B0 1e-10 --C0 1e-30 --kf 10 --kb 1 --t0 0\</span>
+<span class="sd"> --tend 5 --plot --plotlogy --plotlogt --savefig equilibrium_unscaled.png</span>
+
+
+<span class="sd">.. image:: ../_generated/equilibrium_unscaled.png</span>
+
+
+<span class="sd">But by scaling the concentrations so that the smallest is well above the</span>
+<span class="sd">absolute tolerance we can get accurate results:</span>
+
+<span class="sd">::</span>
+
+<span class="sd"> $ python equilibrium.py --scaling 1e10 --A0 1.0 --B0 1e-10 --C0 1e-30 --kf 10\</span>
+<span class="sd"> --kb 1 --t0 0 --tend 5 --plot --plotlogy --plotlogt --savefig\</span>
+<span class="sd"> equilibrium_scaled.png</span>
+
+
+<span class="sd">.. image:: ../_generated/equilibrium_scaled.png</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span>
+                        <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">future.builtins</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">argh</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">chemreac</span> <span class="kn">import</span> <span class="n">ReactionDiffusion</span>
+<span class="kn">from</span> <span class="nn">chemreac.integrate</span> <span class="kn">import</span> <span class="n">run</span>
+<span class="kn">from</span> <span class="nn">chemreac.util.analysis</span> <span class="kn">import</span> <span class="n">solver_linear_error</span>
+<span class="kn">from</span> <span class="nn">chemreac.util.plotting</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">save_and_or_show_plot</span><span class="p">,</span> <span class="n">plot_solver_linear_error</span><span class="p">,</span>
+    <span class="n">plot_solver_linear_excess_error</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_algebraic_sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">power</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
+    <span class="c"># Avoid overflow in exp()</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">/</span><span class="p">((</span><span class="n">x</span><span class="o">/</span><span class="n">limit</span><span class="p">)</span><span class="o">**</span><span class="n">power</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">power</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="analytic_x"><a class="viewcode-back" href="../examples/equilibrium.html#equilibrium.analytic_x">[docs]</a><span class="k">def</span> <span class="nf">analytic_x</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">kf</span><span class="p">,</span> <span class="n">kb</span><span class="p">,</span> <span class="n">_exp</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analytic solution to the dimeriztion reaction:</span>
+<span class="sd">        A + B &lt;=&gt; C; (K = kf/kb)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="o">-</span><span class="n">A</span><span class="o">*</span><span class="n">kf</span> <span class="o">-</span> <span class="n">B</span><span class="o">*</span><span class="n">kf</span> <span class="o">-</span> <span class="n">kb</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">kf</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">kf</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">A</span><span class="o">*</span><span class="n">kb</span><span class="o">*</span><span class="n">kf</span> <span class="o">+</span> <span class="n">B</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">kf</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+         <span class="mi">2</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">kb</span><span class="o">*</span><span class="n">kf</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">C</span><span class="o">*</span><span class="n">kb</span><span class="o">*</span><span class="n">kf</span> <span class="o">+</span> <span class="n">kb</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="n">expUt</span> <span class="o">=</span> <span class="n">_exp</span><span class="p">(</span><span class="n">U</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">U</span> <span class="o">+</span> <span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="n">expUt</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">kf</span><span class="o">*</span><span class="p">(</span><span class="n">U</span> <span class="o">+</span> <span class="n">U</span><span class="o">/</span><span class="n">expUt</span> <span class="o">-</span> <span class="n">q</span> <span class="o">+</span> <span class="n">q</span><span class="o">/</span><span class="n">expUt</span><span class="p">))</span>
+
+</div>
+<span class="k">def</span> <span class="nf">_get_Cref</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">use_mpmath</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; convenience function for generating reference trajectory &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">use_mpmath</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">mpmath</span> <span class="kn">as</span> <span class="nn">mp</span>
+        <span class="n">mp</span><span class="o">.</span><span class="n">mp</span><span class="o">.</span><span class="n">dps</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c"># number of significant figures</span>
+        <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">mp</span><span class="o">.</span><span class="n">mpf</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">y0</span><span class="p">]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="p">[</span><span class="n">mp</span><span class="o">.</span><span class="n">mpf</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">k</span><span class="p">]</span>
+        <span class="n">_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_exp</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_algebraic_sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">350</span><span class="p">))</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">y0</span>
+    <span class="n">kf</span><span class="p">,</span> <span class="n">kb</span> <span class="o">=</span> <span class="n">k</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">analytic_x</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">kf</span><span class="p">,</span> <span class="n">kb</span><span class="p">,</span> <span class="n">_exp</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">t</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">y0</span> <span class="o">+</span> <span class="n">dy</span>
+    <span class="k">if</span> <span class="n">use_mpmath</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+
+<div class="viewcode-block" id="integrate_rd"><a class="viewcode-back" href="../examples/equilibrium.html#equilibrium.integrate_rd">[docs]</a><span class="k">def</span> <span class="nf">integrate_rd</span><span class="p">(</span>
+        <span class="n">tend</span><span class="o">=</span><span class="mf">1.9</span><span class="p">,</span> <span class="n">A0</span><span class="o">=</span><span class="mf">4.2</span><span class="p">,</span> <span class="n">B0</span><span class="o">=</span><span class="mf">3.1</span><span class="p">,</span> <span class="n">C0</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">nt</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">t0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">kf</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">kb</span><span class="o">=</span><span class="mf">0.23</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="s">&#39;1e-7,1e-6,1e-5&#39;</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="s">&#39;1e-6&#39;</span><span class="p">,</span>
+        <span class="n">logy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">logt</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">num_jac</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="s">&#39;None&#39;</span><span class="p">,</span>
+        <span class="n">splitplots</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">plotlogy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">plotsymlogy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">plotlogt</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">scale_err</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs the integration and (optionally) plots:</span>
+
+<span class="sd">    - Individual concentrations as function of time</span>
+<span class="sd">    - Reaction Quotient vs. time (with equilibrium constant as reference)</span>
+<span class="sd">    - Numerical error commited (with tolerance span plotted)</span>
+<span class="sd">    - Excess error committed (deviation outside tolerance span)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rtol</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">rtol</span><span class="p">)</span>
+    <span class="n">atol</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">atol</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">atol</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">atol</span> <span class="o">=</span> <span class="n">atol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">ReactionDiffusion</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">kf</span><span class="p">,</span> <span class="n">kb</span><span class="p">],</span>
+                           <span class="n">logy</span><span class="o">=</span><span class="n">logy</span><span class="p">,</span> <span class="n">logt</span><span class="o">=</span><span class="n">logt</span><span class="p">)</span>
+
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">A0</span><span class="p">,</span> <span class="n">B0</span><span class="p">,</span> <span class="n">C0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">plotlogt</span><span class="p">:</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-16</span>
+        <span class="n">tout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">t0</span><span class="o">+</span><span class="n">eps</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">tend</span><span class="o">+</span><span class="n">eps</span><span class="p">),</span> <span class="n">nt</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">tend</span><span class="p">,</span> <span class="n">nt</span><span class="p">)</span>
+    <span class="n">integr</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">rd</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">tout</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span> <span class="n">with_jacobian</span><span class="o">=</span><span class="ow">not</span> <span class="n">num_jac</span><span class="p">,</span>
+                 <span class="n">scaling</span><span class="o">=</span><span class="n">scaling</span><span class="p">)</span>
+    <span class="n">Cout</span><span class="p">,</span> <span class="n">yout</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">integr</span><span class="o">.</span><span class="n">Cout</span><span class="p">,</span> <span class="n">integr</span><span class="o">.</span><span class="n">yout</span><span class="p">,</span> <span class="n">integr</span><span class="o">.</span><span class="n">info</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">mpmath</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="n">use_mpmath</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">use_mpmath</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">Cref</span> <span class="o">=</span> <span class="n">_get_Cref</span><span class="p">(</span><span class="n">tout</span> <span class="o">-</span> <span class="n">tout</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y0</span><span class="p">,</span> <span class="p">[</span><span class="n">kf</span><span class="p">,</span> <span class="n">kb</span><span class="p">],</span>
+                     <span class="n">use_mpmath</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">nt</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="n">npltcols</span> <span class="o">=</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">splitplots</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span> <span class="k">if</span> <span class="n">splitplots</span> <span class="k">else</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">subplot</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">adapt_yscale</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">adapt_xscale</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                    <span class="n">span_all_x</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">idx</span> <span class="k">if</span> <span class="n">splitplots</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">span_all_x</span> <span class="k">else</span> <span class="n">npltcols</span><span class="p">,</span>
+                             <span class="mi">1</span> <span class="o">+</span> <span class="n">row</span><span class="o">*</span><span class="n">npltcols</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">adapt_yscale</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">plotlogy</span><span class="p">:</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s">&#39;log&#39;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">plotsymlogy</span><span class="p">:</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s">&#39;symlog&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">adapt_xscale</span> <span class="ow">and</span> <span class="n">plotlogt</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s">&#39;log&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ax</span>
+
+        <span class="n">c</span> <span class="o">=</span> <span class="s">&#39;rgb&#39;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="s">&#39;ABC&#39;</span><span class="p">):</span>
+            <span class="c"># Plot solution trajectory for i:th species</span>
+            <span class="n">ax_sol</span> <span class="o">=</span> <span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">ax_sol</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">Cout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">splitplots</span><span class="p">:</span>
+                <span class="c"># Plot relative error</span>
+                <span class="n">ax_relerr</span> <span class="o">=</span> <span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">ax_relerr</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">Cout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">Cref</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">,</span>
+                               <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">ax_relerr</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">&quot;Relative error&quot;</span><span class="p">)</span>
+                <span class="n">ax_relerr</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">})</span>
+
+                <span class="c"># Plot absolute error</span>
+                <span class="n">ax_abserr</span> <span class="o">=</span> <span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">ax_abserr</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">Cout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">Cref</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span>
+                               <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">ax_abserr</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">&quot;Absolute error&quot;</span><span class="p">)</span>
+                <span class="n">ax_abserr</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">})</span>
+
+            <span class="c"># Plot absolute error</span>
+            <span class="n">linE</span> <span class="o">=</span> <span class="n">Cout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Cref</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">atol_i</span> <span class="o">=</span> <span class="n">atol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">atol_i</span> <span class="o">=</span> <span class="n">atol</span>
+            <span class="n">wtol_i</span> <span class="o">=</span> <span class="n">atol_i</span> <span class="o">+</span> <span class="n">rtol</span><span class="o">*</span><span class="n">Cout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">linE</span><span class="o">/</span><span class="n">wtol_i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">):</span>
+                <span class="c"># Plot true curve in first plot when deviation is large enough</span>
+                <span class="c"># to be seen visually</span>
+                <span class="n">ax_sol</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">Cref</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;true &#39;</span><span class="o">+</span><span class="n">l</span><span class="p">,</span>
+                            <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s">&#39;--&#39;</span><span class="p">)</span>
+
+            <span class="n">ax_err</span> <span class="o">=</span> <span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">plot_solver_linear_error</span><span class="p">(</span><span class="n">integr</span><span class="p">,</span> <span class="n">Cref</span><span class="p">,</span> <span class="n">ax_err</span><span class="p">,</span> <span class="n">si</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+                                     <span class="n">scale_err</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">wtol_i</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+            <span class="n">ax_excess</span> <span class="o">=</span> <span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">adapt_yscale</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">plot_solver_linear_excess_error</span><span class="p">(</span><span class="n">integr</span><span class="p">,</span> <span class="n">Cref</span><span class="p">,</span> <span class="n">ax_excess</span><span class="p">,</span>
+                                            <span class="n">si</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+
+        <span class="c"># Plot Reaction Quotient vs time</span>
+        <span class="n">ax_q</span> <span class="o">=</span> <span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">span_all_x</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">adapt_yscale</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                       <span class="n">adapt_xscale</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">Qnum</span> <span class="o">=</span> <span class="n">Cout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">Cout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">Cout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">Qref</span> <span class="o">=</span> <span class="n">Cref</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">Cref</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">Cref</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">ax_q</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">Qnum</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Q&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Qnum</span><span class="o">/</span><span class="n">Qref</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">):</span>
+            <span class="c"># If more than 1% error in Q, plot the reference curve too</span>
+            <span class="n">ax_q</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">Qref</span><span class="p">,</span> <span class="s">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;Qref&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="c"># Plot the</span>
+        <span class="n">ax_q</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">tout</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tout</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="p">[</span><span class="n">kf</span><span class="o">/</span><span class="n">kb</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;--k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;K&#39;</span><span class="p">)</span>
+        <span class="n">ax_q</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+        <span class="n">ax_q</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">&#39;[C]/([A][B])&#39;</span><span class="p">)</span>
+        <span class="n">ax_q</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">&quot;Transient towards equilibrium&quot;</span><span class="p">)</span>
+        <span class="n">ax_q</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">})</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npltcols</span><span class="p">):</span>
+            <span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">adapt_yscale</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Concentration vs. time&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">})</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;[X]&#39;</span><span class="p">)</span>
+
+            <span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">adapt_yscale</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Absolute error in [{}](t) / wtol&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;ABC&#39;</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+            <span class="n">ttl</span> <span class="o">=</span> <span class="s">&#39;|E_i[{0}]|/(atol_i + rtol*(y0_i+yf_i)/2&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ttl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;ABC&#39;</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+            <span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">adapt_yscale</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">ttl</span> <span class="o">=</span> <span class="s">&#39;Excess error in [{}](t) / solver linear error span&#39;</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">ttl</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="s">&#39;ABC&#39;</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;|E_excess[{0}]| / e_span&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;ABC&#39;</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">save_and_or_show_plot</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="n">savefig</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">yout</span><span class="p">,</span> <span class="n">Cref</span><span class="p">,</span> <span class="n">rd</span><span class="p">,</span> <span class="n">info</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">argh</span><span class="o">.</span><span class="n">dispatch_command</span><span class="p">(</span><span class="n">integrate_rd</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

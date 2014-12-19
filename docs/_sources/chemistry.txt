@@ -1,0 +1,2 @@
+.. automodule:: chemreac.chemistry
+    :members:

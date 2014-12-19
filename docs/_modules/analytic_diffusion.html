@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>analytic_diffusion &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>analytic_diffusion</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/_modules/analytic_diffusion.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for analytic_diffusion</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Analytic diffusion</span>
+<span class="sd">------------------</span>
+
+<span class="sd">:download:`examples/analytic_diffusion.py` models a diffusion process</span>
+<span class="sd">and reports the error from the model integration by comparison to the</span>
+<span class="sd">analytic solution (intial concentrations are taken from Green&#39;s</span>
+<span class="sd">function expressions for respective geometry).</span>
+
+<span class="sd">::</span>
+
+<span class="sd"> $ python analytic_diffusion.py --help</span>
+
+<span class="sd">.. exec::</span>
+<span class="sd">   echo &quot;::\\n\\n&quot;</span>
+<span class="sd">   python examples/examples/analytic_diffusion.py --help | sed &quot;s/^/   /&quot;</span>
+
+<span class="sd">::</span>
+
+<span class="sd"> $ python analytic_diffusion.py --plot --efield --mu 0.5 --nstencil 5 --k 0.1\</span>
+<span class="sd"> --geom f</span>
+
+<span class="sd"> $ python analytic_diffusion.py --x0 0 --xend 1000 --N 1000 --mu 500 -D 400\</span>
+<span class="sd"> --nstencil 3</span>
+
+<span class="sd">Note -D 475</span>
+
+<span class="sd">::</span>
+
+<span class="sd"> $ python analytic_diffusion.py --x0 0 --xend 1000 --N 1000 --mu 500 -D 475\</span>
+<span class="sd">  --nstencil 7</span>
+
+<span class="sd">Still problematic (should not need to be):</span>
+
+<span class="sd">::</span>
+
+<span class="sd"> $ python analytic_diffusion.py --plot --nstencil 5 --logy --D 0.0005</span>
+
+<span class="sd">Here is an example generated by:</span>
+
+<span class="sd">::</span>
+
+<span class="sd"> $ python analytic_diffusion.py --plot --nstencil 3 --k 0.1 --geom f\</span>
+<span class="sd"> --savefig analytic_diffusion.png</span>
+
+
+<span class="sd">.. image:: ../_generated/analytic_diffusion.png</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span>
+                        <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">future.builtins</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span>
+
+<span class="kn">import</span> <span class="nn">argh</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">chemreac</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ReactionDiffusion</span><span class="p">,</span> <span class="n">FLAT</span><span class="p">,</span> <span class="n">CYLINDRICAL</span><span class="p">,</span> <span class="n">SPHERICAL</span><span class="p">,</span> <span class="n">Geom_names</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">chemreac.integrate</span> <span class="kn">import</span> <span class="n">run</span>
+<span class="kn">from</span> <span class="nn">chemreac.util.plotting</span> <span class="kn">import</span> <span class="n">save_and_or_show_plot</span>
+
+
+<div class="viewcode-block" id="flat_analytic"><a class="viewcode-back" href="../examples/analytic_diffusion.html#analytic_diffusion.flat_analytic">[docs]</a><span class="k">def</span> <span class="nf">flat_analytic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">xend</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">logx</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    Evaluates the Green&#39;s function:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        c(x, t) = \frac{x_{end}-x_{0}}{\sqrt{4 \pi D t}} \</span>
+<span class="sd">            e^{-\frac{(x - \mu - vt)^2}{4Dt}}</span>
+
+<span class="sd">    which satisfies:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        \frac{\partial c(x, t)}{\partial t} = D\nabla^2 \</span>
+<span class="sd">            c(x, t)  - \vec{v} \cdot c(x, t)</span>
+
+<span class="sd">    where :math:`\nabla` in cartesian coordinates with planar (yz-plane)</span>
+<span class="sd">    symmetry is:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        \nabla = \frac{\partial}{\partial x}</span>
+
+<span class="sd">    and where :math:`\nabla^2` :</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        \nabla^2 = \frac{\partial^2}{\partial x^2}</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">logx</span> <span class="k">else</span> <span class="n">x</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">D</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">**-</span><span class="mf">0.5</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="o">-</span><span class="n">v</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">D</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">logy</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">xend</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">xend</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="cylindrical_analytic"><a class="viewcode-back" href="../examples/analytic_diffusion.html#analytic_diffusion.cylindrical_analytic">[docs]</a><span class="k">def</span> <span class="nf">cylindrical_analytic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">xend</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">logx</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    Evaluates the Green&#39;s function:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        c(x, t) = \frac{x_{end}-x_{0}}{4 \pi D t} \</span>
+<span class="sd">            e^{-\frac{(x - \mu - vt)^2}{4Dt}}</span>
+
+<span class="sd">    which satisfies:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        \frac{\partial c(x, t)}{\partial t} = D\nabla^2 \</span>
+<span class="sd">            c(x, t) - \vec{v} \cdot c(x, t)</span>
+
+<span class="sd">    where :math:`\nabla` in cylindrical coordinates with axial symmetry is:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        \nabla = \frac{1}{x}</span>
+
+<span class="sd">    and where :math:`\nabla^2` is:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        \nabla^2 = \frac{1}{x} \frac{\partial}{\partial x}</span>
+<span class="sd">            \left( x \frac{\partial}{\partial x} \right)</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">logx</span> <span class="k">else</span> <span class="n">x</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">D</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">**-</span><span class="mi">1</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="o">-</span><span class="n">v</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">D</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">logy</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">xend</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">xend</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="spherical_analytic"><a class="viewcode-back" href="../examples/analytic_diffusion.html#analytic_diffusion.spherical_analytic">[docs]</a><span class="k">def</span> <span class="nf">spherical_analytic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">xend</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">logx</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    Evaluates the Green&#39;s function:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        c(x, t) = \frac{x_{end}-x_{0}}{\sqrt{4 \pi D t^3}} \</span>
+<span class="sd">            e^{-\frac{(x - \mu - vt)^2}{4Dt}}</span>
+
+<span class="sd">    which satisfies:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        \frac{\partial c(x, t)}{\partial t} = D\nabla^2</span>
+<span class="sd">            c(x, t) - \vec{v} \cdot c(x, t)</span>
+
+<span class="sd">    where :math:`\nabla` in spherical coordinates for a isotropic system is:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        \nabla = \frac{\partial}{\partial x}</span>
+
+<span class="sd">    and where :math:`\nabla^2` is:</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">        \nabla^2 = \frac{1}{x^2} \frac{\partial}{\partial x}</span>
+<span class="sd">            \left( x^2 \frac{\partial}{\partial x} \right)</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">logx</span> <span class="k">else</span> <span class="n">x</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">D</span><span class="p">)</span><span class="o">**-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">t</span><span class="o">**-</span><span class="mf">1.5</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="o">-</span><span class="n">v</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">D</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">logy</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">xend</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">xend</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span>
+
+</div>
+<span class="k">def</span> <span class="nf">_efield_cb</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a flat efield (-1)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="integrate_rd"><a class="viewcode-back" href="../examples/analytic_diffusion.html#analytic_diffusion.integrate_rd">[docs]</a><span class="k">def</span> <span class="nf">integrate_rd</span><span class="p">(</span><span class="n">D</span><span class="o">=</span><span class="mf">2e-3</span><span class="p">,</span> <span class="n">t0</span><span class="o">=</span><span class="mf">3.</span><span class="p">,</span> <span class="n">tend</span><span class="o">=</span><span class="mf">7.</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">xend</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+                 <span class="n">nt</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">geom</span><span class="o">=</span><span class="s">&#39;f&#39;</span><span class="p">,</span> <span class="n">logt</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">logx</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="n">random</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">nstencil</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linterpol</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                 <span class="n">rinterpol</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">num_jacobian</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;bdf&#39;</span><span class="p">,</span>
+                 <span class="n">scale_x</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span>
+                 <span class="n">efield</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="s">&#39;None&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t0</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;t0==0 =&gt; Dirac delta function C0 profile.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">random_seed</span><span class="p">:</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
+    <span class="n">decay</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">decay</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mu</span> <span class="ow">or</span> <span class="n">x0</span><span class="p">)</span>
+    <span class="n">tout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">tend</span><span class="p">,</span> <span class="n">nt</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">geom</span> <span class="ow">in</span> <span class="s">&#39;fcs&#39;</span>
+    <span class="n">geom</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;f&#39;</span><span class="p">:</span> <span class="n">FLAT</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">:</span> <span class="n">CYLINDRICAL</span><span class="p">,</span> <span class="s">&#39;s&#39;</span><span class="p">:</span> <span class="n">SPHERICAL</span><span class="p">}[</span><span class="n">geom</span><span class="p">]</span>
+    <span class="n">analytic</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">FLAT</span><span class="p">:</span> <span class="n">flat_analytic</span><span class="p">,</span>
+        <span class="n">CYLINDRICAL</span><span class="p">:</span> <span class="n">cylindrical_analytic</span><span class="p">,</span>
+        <span class="n">SPHERICAL</span><span class="p">:</span> <span class="n">spherical_analytic</span>
+    <span class="p">}[</span><span class="n">geom</span><span class="p">]</span>
+
+    <span class="c"># Setup the grid</span>
+    <span class="n">_x0</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="k">if</span> <span class="n">logx</span> <span class="k">else</span> <span class="n">x0</span>
+    <span class="n">_xend</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">xend</span><span class="p">)</span> <span class="k">if</span> <span class="n">logx</span> <span class="k">else</span> <span class="n">xend</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">_x0</span><span class="p">,</span> <span class="n">_xend</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">random</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">_xend</span><span class="o">-</span><span class="n">_x0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">sys</span> <span class="o">=</span> <span class="n">ReactionDiffusion</span><span class="p">(</span>
+        <span class="mi">2</span> <span class="k">if</span> <span class="n">decay</span> <span class="k">else</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="p">[[</span><span class="mi">0</span><span class="p">]]</span> <span class="k">if</span> <span class="n">decay</span> <span class="k">else</span> <span class="p">[],</span>
+        <span class="p">[[</span><span class="mi">1</span><span class="p">]]</span> <span class="k">if</span> <span class="n">decay</span> <span class="k">else</span> <span class="p">[],</span>
+        <span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">if</span> <span class="n">decay</span> <span class="k">else</span> <span class="p">[],</span>
+        <span class="n">N</span><span class="p">,</span>
+        <span class="n">D</span><span class="o">=</span><span class="p">[</span><span class="n">D</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span> <span class="k">if</span> <span class="n">decay</span> <span class="k">else</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">z_chg</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span> <span class="k">if</span> <span class="n">decay</span> <span class="k">else</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">mobility</span><span class="o">=</span><span class="p">[</span><span class="mf">0.01</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span> <span class="k">if</span> <span class="n">decay</span> <span class="k">else</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+        <span class="n">geom</span><span class="o">=</span><span class="n">geom</span><span class="p">,</span>
+        <span class="n">logy</span><span class="o">=</span><span class="n">logy</span><span class="p">,</span>
+        <span class="n">logt</span><span class="o">=</span><span class="n">logt</span><span class="p">,</span>
+        <span class="n">logx</span><span class="o">=</span><span class="n">logx</span><span class="p">,</span>
+        <span class="n">nstencil</span><span class="o">=</span><span class="n">nstencil</span><span class="p">,</span>
+        <span class="n">lrefl</span><span class="o">=</span><span class="ow">not</span> <span class="n">linterpol</span><span class="p">,</span>
+        <span class="n">rrefl</span><span class="o">=</span><span class="ow">not</span> <span class="n">rinterpol</span><span class="p">,</span>
+        <span class="n">xscale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">scale_x</span> <span class="k">else</span> <span class="mf">1.0</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">efield</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">geom</span> <span class="o">!=</span> <span class="n">FLAT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Only analytic sol. for flat drift implemented.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">efield</span> <span class="o">=</span> <span class="n">_efield_cb</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">xcenters</span><span class="p">)</span>
+
+    <span class="c"># Calc initial conditions / analytic reference values</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">tout</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">nt</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">yref</span> <span class="o">=</span> <span class="n">analytic</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">xcenters</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">xend</span><span class="p">,</span>
+                    <span class="mf">0.01</span> <span class="k">if</span> <span class="n">efield</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span> <span class="n">logy</span><span class="p">,</span> <span class="n">logx</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">decay</span><span class="p">:</span>
+        <span class="n">yref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">yref</span><span class="p">,</span> <span class="n">yref</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">logy</span><span class="p">:</span>
+            <span class="n">yref</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">t</span>
+            <span class="n">yref</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">yref</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">yref</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c"># Run the integration</span>
+    <span class="n">integr</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">yref</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">tout</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span>
+                 <span class="n">with_jacobian</span><span class="o">=</span><span class="p">(</span><span class="ow">not</span> <span class="n">num_jacobian</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+                 <span class="n">C0_is_log</span><span class="o">=</span><span class="n">logy</span><span class="p">)</span>
+    <span class="n">yout</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">integr</span><span class="o">.</span><span class="n">yout</span><span class="p">,</span> <span class="n">integr</span><span class="o">.</span><span class="n">info</span>
+
+    <span class="k">if</span> <span class="n">logy</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">lin_err</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+            <span class="n">linref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">yref</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">])</span>
+            <span class="n">linerr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">yout</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">])</span><span class="o">-</span><span class="n">linref</span>
+            <span class="n">linatol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">yref</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">])</span>
+            <span class="n">linrtol</span> <span class="o">=</span> <span class="n">linatol</span>
+            <span class="k">return</span> <span class="n">linerr</span><span class="o">/</span><span class="p">(</span><span class="n">linrtol</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">linref</span><span class="p">)</span><span class="o">+</span><span class="n">linatol</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">logy</span><span class="p">:</span>
+        <span class="n">rmsd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">lin_err</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rmsd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">yref</span><span class="o">-</span><span class="n">yout</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">N</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="n">ave_rmsd_over_atol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">rmsd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">]</span>
+
+    <span class="c"># Plot results</span>
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">apply_exp_on_y</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">vlines</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">xcenters</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">if</span> <span class="n">apply_exp_on_y</span> <span class="k">else</span> <span class="n">y</span><span class="p">,</span>
+                     <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">vlines</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+                           <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;x / m&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;C / M&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ttl</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="p">):</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">tout</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">tend</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="o">-</span><span class="n">c</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="o">-</span><span class="n">c</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">_plot</span><span class="p">(</span><span class="n">yout</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">,</span> <span class="s">&#39;Simulation (N={})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">N</span><span class="p">),</span>
+                  <span class="n">apply_exp_on_y</span><span class="o">=</span><span class="n">logy</span><span class="p">,</span> <span class="n">vlines</span><span class="o">=</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">N</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">decay</span><span class="p">:</span>
+                <span class="n">_plot</span><span class="p">(</span><span class="n">yout</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">apply_exp_on_y</span><span class="o">=</span><span class="n">logy</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">_plot</span><span class="p">(</span><span class="n">yref</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">,</span> <span class="s">&#39;Analytic&#39;</span><span class="p">,</span> <span class="n">apply_exp_on_y</span><span class="o">=</span><span class="n">logy</span><span class="p">,</span>
+                  <span class="n">vlines</span><span class="o">=</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">N</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">decay</span><span class="p">:</span>
+                <span class="n">_plot</span><span class="p">(</span><span class="n">yref</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">apply_exp_on_y</span><span class="o">=</span><span class="n">logy</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">logy</span><span class="p">:</span>
+                <span class="n">_plot</span><span class="p">(</span><span class="n">lin_err</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">],</span> <span class="n">c</span><span class="p">,</span>
+                      <span class="s">&#39;Linear rel error / Log abs. tol. (={})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                          <span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">]),</span> <span class="n">vlines</span><span class="o">=</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">nt</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">N</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">decay</span><span class="p">:</span>
+                    <span class="n">_plot</span><span class="p">(</span><span class="n">lin_err</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">],</span> <span class="n">c</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_plot</span><span class="p">((</span><span class="n">yref</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">yout</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">],</span> <span class="n">c</span><span class="p">,</span>
+                      <span class="s">&#39;Abs. err. / Abs. tol. (={})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">]),</span>
+                      <span class="n">vlines</span><span class="o">=</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">nt</span><span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">N</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">decay</span><span class="p">:</span>
+                    <span class="n">_plot</span><span class="p">((</span><span class="n">yref</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">yout</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">],</span>
+                          <span class="n">c</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">tspan</span> <span class="o">=</span> <span class="p">[</span><span class="n">tout</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tout</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">rmsd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">],</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tspan</span><span class="p">,</span> <span class="p">[</span><span class="n">ave_rmsd_over_atol</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;r--&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">decay</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">rmsd</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">info</span><span class="p">[</span><span class="s">&#39;atol&#39;</span><span class="p">],</span> <span class="s">&#39;b&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tspan</span><span class="p">,</span> <span class="p">[</span><span class="n">ave_rmsd_over_atol</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;b--&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time / s&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">r&#39;$\sqrt{\langle E^2 \rangle} / atol$&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">save_and_or_show_plot</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="n">savefig</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">ave_rmsd_over_atol</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">tout</span><span class="p">,</span> <span class="n">yout</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">ave_rmsd_over_atol</span><span class="p">,</span> <span class="n">sys</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">argh</span><span class="o">.</span><span class="n">dispatch_command</span><span class="p">(</span><span class="n">integrate_rd</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

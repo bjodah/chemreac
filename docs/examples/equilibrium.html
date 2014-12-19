@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Equilibrium &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Four species two reactions" href="four_species.html"/>
+        <link rel="prev" title="Two coupled decays" href="decay.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decay.html">Two coupled decays</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Equilibrium</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/examples/equilibrium.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-equilibrium"></span><div class="section" id="equilibrium">
+<h1>Equilibrium<a class="headerlink" href="#equilibrium" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" href="../_downloads/equilibrium.py"><tt class="xref download docutils literal"><span class="pre">examples/equilibrium.py</span></tt></a> demonstrates how
+scaling can be used together with tolerances to achieve
+desired accuracy from the numerical integration.</p>
+<p>We will consider the transient towards an equilibrium
+for a dimerization:</p>
+<div class="math">
+\[\begin{split}A + &amp;B &amp;\overset{k_f}{\underset{k_b}{\rightleftharpoons}}  C\end{split}\]</div>
+<p>The analytic solution is (its derivation is left as an exercise):</p>
+<div class="math">
+\[\begin{split}A(t) &amp;= A_0 - x(t) \\
+B(t) &amp;= B_0 - x(t) \\
+C(t) &amp;= C_0 + x(t) \\
+x(t) &amp;= \frac{(U-b)(U+b)(e^{Ut}-1)}{2k_f(Ue^{Ut} + U - qe^{Ut} +  q)} \\\end{split}\]</div>
+<p>where</p>
+<div class="math">
+\[\begin{split}U    &amp;= \sqrt{A^2k_f^2 + 2ABk_f^2 - 2Ak_bk_f + B^2k_f^2 -
+            2Bk_bk_f + 4Ck_bk_f + k_b^2} \\
+q    &amp;= Ak_f + Bk_f - k_b\end{split}\]</div>
+<div class="highlight-python"><div class="highlight"><pre>$ python equilibrium.py --help
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>usage: equilibrium.py [-h] [--tend TEND] [-A A0] [-B B0] [-C C0] [--nt NT]
+                      [--t0 T0] [--kf KF] [--kb KB] [-a ATOL] [-r RTOL]
+                      [--logy] [--logt] [--num-jac] [--plot]
+                      [--savefig SAVEFIG] [--splitplots] [--plotlogy]
+                      [--plotsymlogy] [--plotlogt] [--scale-err SCALE_ERR]
+                      [--scaling SCALING] [-v]
+
+    Runs the integration and (optionally) plots:
+
+    - Individual concentrations as function of time
+    - Reaction Quotient vs. time (with equilibrium constant as reference)
+    - Numerical error commited (with tolerance span plotted)
+    - Excess error committed (deviation outside tolerance span)
+
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --tend TEND           1.9
+  -A A0, --A0 A0        4.2
+  -B B0, --B0 B0        3.1
+  -C C0, --C0 C0        1.4
+  --nt NT               100
+  --t0 T0               0.0
+  --kf KF               0.9
+  --kb KB               0.23
+  -a ATOL, --atol ATOL  u&#39;1e-7,1e-6,1e-5&#39;
+  -r RTOL, --rtol RTOL  u&#39;1e-6&#39;
+  --logy                False
+  --logt                False
+  --num-jac             False
+  --plot                False
+  --savefig SAVEFIG     u&#39;None&#39;
+  --splitplots          False
+  --plotlogy            False
+  --plotsymlogy         False
+  --plotlogt            False
+  --scale-err SCALE_ERR
+                        1.0
+  --scaling SCALING     1.0
+  -v, --verbose         False
+</pre></div>
+</div>
+<p>Here is an example generated by:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python equilibrium.py --plot --savefig equilibrium.png
+</pre></div>
+</div>
+<img alt="../_images/equilibrium.png" src="../_images/equilibrium.png" />
+<p>If concentrations are far from 1 (and below abstol) the accuracy of
+the numerical solution will be very poor:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python equilibrium.py --A0 1.0 --B0 1e-10 --C0 1e-30 --kf 10 --kb 1 --t0 0 --tend 5 --plot --plotlogy --plotlogt --savefig equilibrium_unscaled.png
+</pre></div>
+</div>
+<img alt="../_images/equilibrium_unscaled.png" src="../_images/equilibrium_unscaled.png" />
+<p>But by scaling the concentrations so that the smallest is well above the
+absolute tolerance we can get accurate results:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python equilibrium.py --scaling 1e10 --A0 1.0 --B0 1e-10 --C0 1e-30 --kf 10 --kb 1 --t0 0 --tend 5 --plot --plotlogy --plotlogt --savefig equilibrium_scaled.png
+</pre></div>
+</div>
+<img alt="../_images/equilibrium_scaled.png" src="../_images/equilibrium_scaled.png" />
+<dl class="function">
+<dt id="equilibrium.analytic_x">
+<tt class="descclassname">equilibrium.</tt><tt class="descname">analytic_x</tt><big>(</big><em>t</em>, <em>A</em>, <em>B</em>, <em>C</em>, <em>kf</em>, <em>kb</em>, <em>_exp=&lt;ufunc 'exp'&gt;</em><big>)</big><a class="reference internal" href="../_modules/equilibrium.html#analytic_x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#equilibrium.analytic_x" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Analytic solution to the dimeriztion reaction:</dt>
+<dd>A + B &lt;=&gt; C; (K = kf/kb)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="equilibrium.integrate_rd">
+<tt class="descclassname">equilibrium.</tt><tt class="descname">integrate_rd</tt><big>(</big><em>tend=1.9</em>, <em>A0=4.2</em>, <em>B0=3.1</em>, <em>C0=1.4</em>, <em>nt=100</em>, <em>t0=0.0</em>, <em>kf=0.9</em>, <em>kb=0.23</em>, <em>atol=u'1e-7</em>, <em>1e-6</em>, <em>1e-5'</em>, <em>rtol=u'1e-6'</em>, <em>logy=False</em>, <em>logt=False</em>, <em>num_jac=False</em>, <em>plot=False</em>, <em>savefig=u'None'</em>, <em>splitplots=False</em>, <em>plotlogy=False</em>, <em>plotsymlogy=False</em>, <em>plotlogt=False</em>, <em>scale_err=1.0</em>, <em>scaling=1.0</em>, <em>verbose=False</em><big>)</big><a class="reference internal" href="../_modules/equilibrium.html#integrate_rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#equilibrium.integrate_rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the integration and (optionally) plots:</p>
+<ul class="simple">
+<li>Individual concentrations as function of time</li>
+<li>Reaction Quotient vs. time (with equilibrium constant as reference)</li>
+<li>Numerical error commited (with tolerance span plotted)</li>
+<li>Excess error committed (deviation outside tolerance span)</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="four_species.html" class="btn btn-neutral float-right" title="Four species two reactions"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="decay.html" class="btn btn-neutral" title="Two coupled decays"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

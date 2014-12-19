@@ -1,0 +1,403 @@
+python examples/examples/analytic_diffusion.py --plot --nstencil 3 --k 0.1 --geom f --savefig _generated/analytic_diffusion.png
+python examples/examples/steady_state_approx.py --plot --savefig _generated/steady_state_approx.png
+python examples/examples/steady_state_approx.py --plot --savefig _generated/steady_state_approx.html
+python examples/examples/aqueous_radiolysis.py --doserate 25 --plot --savefig _generated/aqueous_radiolysis.png
+texec=9.55527210236, f.neval=272, jac.neval=6
+python examples/examples/analytic_N_scaling.py --nNs 6 --plot --savefig _generated/analytic_N_scaling.png
+Flat 3 0.0
+8: {u'neval_f': 76, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.0016570091247558594, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 80, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.001773834228515625, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 84, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.002228975296020508, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 80, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003022909164428711, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 80, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.004315853118896484, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 80, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.007057905197143555, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Flat 5 0.0
+8: {u'neval_f': 78, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.0016200542449951172, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 84, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.001909017562866211, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 80, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0022459030151367188, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 88, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0033309459686279297, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 96, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.005190849304199219, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 479, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 8, u'with_jacobian': True, u'texec': 0.039321184158325195, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Flat 7 0.0
+8: {u'neval_f': 79, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.0017440319061279297, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 78, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0019578933715820312, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 80, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0023970603942871094, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 86, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003582000732421875, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 134, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.007815837860107422, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 546, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 61, u'with_jacobian': True, u'texec': 0.06417107582092285, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Flat 3 0.1
+8: {u'neval_f': 76, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.0018970966339111328, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 79, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0023970603942871094, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 76, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.00304412841796875, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 77, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.004726886749267578, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 78, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.007879972457885742, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 78, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.014383792877197266, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Flat 5 0.1
+8: {u'neval_f': 67, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0018568038940429688, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 75, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0022919178009033203, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 77, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0033071041107177734, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 82, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.005403041839599609, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 97, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.010381937026977539, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 250, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 5, u'with_jacobian': True, u'texec': 0.04424619674682617, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Flat 7 0.1
+8: {u'neval_f': 69, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0019121170043945312, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 76, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.002476215362548828, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 78, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003523111343383789, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 82, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.005909919738769531, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 139, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 5, u'with_jacobian': True, u'texec': 0.016983985900878906, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 566, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 8, u'with_jacobian': True, u'texec': 0.10741901397705078, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Cylindrical 3 0.0
+8: {u'neval_f': 78, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.0015141963958740234, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 98, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0019371509552001953, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 106, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0024979114532470703, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 109, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003504037857055664, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 109, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0053141117095947266, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 109, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.009202003479003906, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Cylindrical 5 0.0
+8: {u'neval_f': 98, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0018842220306396484, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 104, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0021820068359375, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 109, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0028219223022460938, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 109, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003930091857910156, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 119, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0063478946685791016, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 318, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 13, u'with_jacobian': True, u'texec': 0.028545856475830078, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Cylindrical 7 0.0
+8: {u'neval_f': 89, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0018749237060546875, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 107, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0023488998413085938, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 109, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003042936325073242, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 114, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.004563093185424805, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 163, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 3, u'with_jacobian': True, u'texec': 0.010035037994384766, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 754, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 86, u'with_jacobian': True, u'texec': 0.09080386161804199, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Cylindrical 3 0.1
+8: {u'neval_f': 94, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.002132892608642578, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 98, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0026628971099853516, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 105, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003854990005493164, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 108, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.006155967712402344, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 112, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.011168956756591797, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 112, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.020718097686767578, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Cylindrical 5 0.1
+8: {u'neval_f': 91, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0021719932556152344, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 109, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0030519962310791016, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 112, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.004391908645629883, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 110, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.007071971893310547, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 133, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.014256000518798828, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 455, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 8, u'with_jacobian': True, u'texec': 0.08067178726196289, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Cylindrical 7 0.1
+8: {u'neval_f': 90, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0022208690643310547, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 111, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003304004669189453, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 112, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.005387067794799805, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 113, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.00803685188293457, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 149, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 3, u'with_jacobian': True, u'texec': 0.017472028732299805, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 623, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 73, u'with_jacobian': True, u'texec': 0.16179895401000977, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Spherical 3 0.0
+8: {u'neval_f': 75, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.0016019344329833984, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 81, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.001817941665649414, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 86, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.002299070358276367, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 96, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0031919479370117188, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 94, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.0051310062408447266, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 94, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.009068965911865234, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Spherical 5 0.0
+8: {u'neval_f': 83, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0017621517181396484, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 99, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0022029876708984375, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 93, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0025489330291748047, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 88, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003401041030883789, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 101, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.005797147750854492, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 351, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 34, u'with_jacobian': True, u'texec': 0.036435842514038086, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Spherical 7 0.0
+8: {u'neval_f': 71, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0016021728515625, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 87, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0020720958709716797, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 93, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.002732992172241211, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 94, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003882884979248047, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 147, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 4, u'with_jacobian': True, u'texec': 0.008974075317382812, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 611, u'lband': 1, u'uband': 1, u'success': True, u'integrator_name': u'vode', u'neval_j': 85, u'with_jacobian': True, u'texec': 0.07485818862915039, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Spherical 3 0.1
+8: {u'neval_f': 66, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.0017418861389160156, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 90, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0025131702423095703, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 92, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003442049026489258, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 93, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.005312919616699219, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 91, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.008961915969848633, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 95, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.017368078231811523, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Spherical 5 0.1
+8: {u'neval_f': 71, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 1, u'with_jacobian': True, u'texec': 0.0016698837280273438, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 97, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.002671957015991211, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 96, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.003909111022949219, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 92, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0062389373779296875, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 100, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.011013031005859375, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 423, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 53, u'with_jacobian': True, u'texec': 0.10153317451477051, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+Spherical 7 0.1
+8: {u'neval_f': 79, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0021359920501708984, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+16: {u'neval_f': 92, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.0029180049896240234, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+32: {u'neval_f': 90, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.004122018814086914, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+64: {u'neval_f': 92, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.006556987762451172, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+128: {u'neval_f': 133, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 2, u'with_jacobian': True, u'texec': 0.01612091064453125, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+256: {u'neval_f': 564, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 54, u'with_jacobian': True, u'texec': 0.14322113990783691, u'rtol': 1e-10, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+python examples/examples/auto_efield.py --plot --savefig _generated/auto_efield.png
+python examples/examples/decay.py --plot --savefig _generated/decay.png
+python examples/examples/four_species.py --plot --savefig _generated/four_species.png
+python examples/examples/equilibrium.py --plot --savefig _generated/equilibrium.png
+python examples/examples/equilibrium.py --A0 1.0 --B0 1e-10 --C0 1e-30 --kf 10 --kb 1 --t0 0 --tend 5 --plot --plotlogy --plotlogt --savefig _generated/equilibrium_unscaled.png
+python examples/examples/equilibrium.py  --scaling 1e10 --A0 1.0 --B0 1e-10 --C0 1e-30 --kf 10 --kb 1 --t0 0 --tend 5 --plot --plotlogy --plotlogt --savefig _generated/equilibrium_scaled.png
+python examples/examples/const_surf_conc.py --plot --savefig _generated/const_surf_conc.png
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+ DVODE--  At T (=R1) and step size H (=R2), the    
+       corrector convergence failed repeatedly     
+       or with abs(H) = HMIN   
+      In above,  R1 =  0.1000000000000D+01   R2 =  0.3990558077801D-12
+python examples/examples/const_surf_conc.py --plot --N 1024 --verbose --nstencil 3 --scaling 1e-20 --logx --logy --factor 1e12 --x0 1e-6 --atol 1e-8 --rtol 1e-8 --savefig _generated/const_surf_conc_logy_logx.png
+{u'neval_f': 397, u'lband': 2, u'uband': 2, u'success': True, u'integrator_name': u'vode', u'neval_j': 6, u'with_jacobian': True, u'texec': 0.3090841770172119, u'rtol': 1e-08, u'atol': 1e-08, u't0_set': False, u'method': u'bdf'}
+sphinx-build -b html -d _build/doctrees   . _build/html
+Making output directory...
+Running Sphinx v1.2.3
+loading pickled environment... not yet created
+building [html]: targets for 25 source files that are out of date
+updating environment: 25 added, 0 changed, 0 removed
+reading sources... [  4%] chemistry
+reading sources... [  8%] core
+reading sources... [ 12%] dev
+reading sources... [ 16%] examples/analytic_N_scaling
+reading sources... [ 20%] examples/analytic_diffusion
+reading sources... [ 24%] examples/aqueous_radiolysis
+reading sources... [ 28%] examples/auto_efield
+reading sources... [ 32%] examples/const_surf_conc
+reading sources... [ 36%] examples/decay
+reading sources... [ 40%] examples/equilibrium
+reading sources... [ 44%] examples/four_species
+reading sources... [ 48%] examples/index
+reading sources... [ 52%] examples/steady_state_approx
+reading sources... [ 56%] index
+reading sources... [ 60%] install
+reading sources... [ 64%] integrate
+reading sources... [ 68%] modules
+reading sources... [ 72%] util/analysis
+reading sources... [ 76%] util/banded
+reading sources... [ 80%] util/grid
+reading sources... [ 84%] util/index
+reading sources... [ 88%] util/plotting
+reading sources... [ 92%] util/stoich
+reading sources... [ 96%] util/table
+reading sources... [100%] util/testing
+
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... done
+preparing documents... done
+writing output... [  4%] chemistry
+writing output... [  8%] core
+writing output... [ 12%] dev
+writing output... [ 16%] examples/analytic_N_scaling
+writing output... [ 20%] examples/analytic_diffusion
+writing output... [ 24%] examples/aqueous_radiolysis
+writing output... [ 28%] examples/auto_efield
+writing output... [ 32%] examples/const_surf_conc
+writing output... [ 36%] examples/decay
+writing output... [ 40%] examples/equilibrium
+writing output... [ 44%] examples/four_species
+writing output... [ 48%] examples/index
+writing output... [ 52%] examples/steady_state_approx
+writing output... [ 56%] index
+writing output... [ 60%] install
+writing output... [ 64%] integrate
+writing output... [ 68%] modules
+writing output... [ 72%] util/analysis
+writing output... [ 76%] util/banded
+writing output... [ 80%] util/grid
+writing output... [ 84%] util/index
+writing output... [ 88%] util/plotting
+writing output... [ 92%] util/stoich
+writing output... [ 96%] util/table
+writing output... [100%] util/testing
+
+writing additional files... (18 module code pages) _modules/index genindex py-modindex search
+copying images... [  7%] examples/../_generated/analytic_N_scaling.png
+copying images... [ 14%] examples/../_generated/analytic_diffusion.png
+copying images... [ 21%] examples/../_generated/four_species_per_reaction.png
+copying images... [ 28%] examples/../_generated/auto_efield.png
+copying images... [ 35%] examples/../_generated/aqueous_radiolysis.png
+copying images... [ 42%] examples/../_generated/const_surf_conc.png
+copying images... [ 50%] examples/../_generated/four_species.png
+copying images... [ 57%] examples/../_generated/equilibrium_unscaled.png
+copying images... [ 64%] examples/../_generated/four_species_jacobian.png
+copying images... [ 71%] examples/../_generated/steady_state_approx.png
+copying images... [ 78%] examples/../_generated/const_surf_conc_logy_logx.png
+copying images... [ 85%] examples/../_generated/decay.png
+copying images... [ 92%] examples/../_generated/equilibrium.png
+copying images... [100%] examples/../_generated/equilibrium_scaled.png
+
+copying downloadable files... [  8%] /home/travis/build/bjodah/chemreac/docs/examples/examples/auto_efield.py
+copying downloadable files... [ 16%] /home/travis/build/bjodah/chemreac/docs/examples/examples/equilibrium.py
+copying downloadable files... [ 25%] /home/travis/build/bjodah/chemreac/docs/_generated/steady_state_approx.html
+copying downloadable files... [ 33%] /home/travis/build/bjodah/chemreac/docs/examples/examples/steady_state_approx.py
+copying downloadable files... [ 41%] /home/travis/build/bjodah/chemreac/docs/examples/examples/aqueous_radiolysis.py
+copying downloadable files... [ 50%] /home/travis/build/bjodah/chemreac/docs/examples/examples/decay.py
+copying downloadable files... [ 58%] /home/travis/build/bjodah/chemreac/docs/examples/examples/four_species.json
+copying downloadable files... [ 66%] /home/travis/build/bjodah/chemreac/docs/examples/examples/const_surf_conc.py
+copying downloadable files... [ 75%] /home/travis/build/bjodah/chemreac/docs/examples/examples/aqueous_radiolysis.json
+copying downloadable files... [ 83%] /home/travis/build/bjodah/chemreac/docs/examples/examples/analytic_diffusion.py
+copying downloadable files... [ 91%] /home/travis/build/bjodah/chemreac/docs/examples/examples/analytic_N_scaling.py
+copying downloadable files... [100%] /home/travis/build/bjodah/chemreac/docs/examples/examples/four_species.py
+
+copying static files... done
+copying extra files... done
+dumping search index... done
+dumping object inventory... done
+build succeeded, 3 warnings.
+
+Build finished. The HTML pages are in _build/html.

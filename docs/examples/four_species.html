@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Four species two reactions &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Steady state approximation" href="steady_state_approx.html"/>
+        <link rel="prev" title="Equilibrium" href="equilibrium.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Four species two reactions</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/examples/four_species.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-four_species"></span><div class="section" id="four-species-two-reactions">
+<h1>Four species two reactions<a class="headerlink" href="#four-species-two-reactions" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" href="../_downloads/four_species.py"><tt class="xref download docutils literal"><span class="pre">examples/four_species.py</span></tt></a> demonstrates how
+to use the plotting utilities <tt class="docutils literal"><span class="pre">plot_per_reaction_contribution</span></tt>
+and <tt class="docutils literal"><span class="pre">plot_jacobian</span></tt>. The reaction system is as follows:</p>
+<div class="math">
+\[\begin{split}A &amp;\rightarrow B ~~~ &amp; k_1=0.05 \\
+2C + B &amp;\rightarrow D + B ~~~ &amp; k_2=3.0\end{split}\]</div>
+<div class="highlight-python"><div class="highlight"><pre>$ python four_species.py --help
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>usage: four_species.py [-h] [-t TEND] [-N N] [-n NT] [-j] [-m MODE] [--logy]
+                       [--logt] [-p] [-s SAVEFIG] [-v]
+
+    Integrates the reaction system defined by
+    :download:`four_species.json &lt;examples/four_species.json&gt;`
+
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t TEND, --tend TEND  10.0
+  -N N, --N N           1
+  -n NT, --nt NT        500
+  -j, --jac-spy         False
+  -m MODE, --mode MODE  -
+  --logy                False
+  --logt                False
+  -p, --plot            False
+  -s SAVEFIG, --savefig SAVEFIG
+                        &#39;None&#39;
+  -v, --verbose         False
+</pre></div>
+</div>
+<p>Here is an example generated by:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python four_species.py --plot --savefig four_species.png
+</pre></div>
+</div>
+<img alt="../_images/four_species.png" src="../_images/four_species.png" />
+<p>Jacobian:</p>
+<img alt="../_images/four_species_jacobian.png" src="../_images/four_species_jacobian.png" />
+<p>Per reaction contribution:</p>
+<img alt="../_images/four_species_per_reaction.png" src="../_images/four_species_per_reaction.png" />
+<dl class="function">
+<dt id="four_species.integrate_rd">
+<tt class="descclassname">four_species.</tt><tt class="descname">integrate_rd</tt><big>(</big><em>tend=10.0</em>, <em>N=1</em>, <em>nt=500</em>, <em>jac_spy=False</em>, <em>mode=None</em>, <em>logy=False</em>, <em>logt=False</em>, <em>plot=False</em>, <em>savefig='None'</em>, <em>verbose=False</em><big>)</big><a class="reference internal" href="../_modules/four_species.html#integrate_rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#four_species.integrate_rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integrates the reaction system defined by
+<a class="reference download internal" href="../_downloads/four_species.json"><tt class="xref download docutils literal"><span class="pre">four_species.json</span></tt></a></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="steady_state_approx.html" class="btn btn-neutral float-right" title="Steady state approximation"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="equilibrium.html" class="btn btn-neutral" title="Equilibrium"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

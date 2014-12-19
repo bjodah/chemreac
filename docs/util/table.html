@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>table &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../index.html"/>
+        <link rel="up" title="util" href="index.html"/>
+        <link rel="next" title="testing" href="testing.html"/>
+        <link rel="prev" title="stoich" href="stoich.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Modules Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chemistry.html">chemistry</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../modules.html">Modules Reference</a> &raquo;</li>
+      
+          <li><a href="index.html">util</a> &raquo;</li>
+      
+    <li>table</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/util/table.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-chemreac.util.table"></span><div class="section" id="table">
+<h1>table<a class="headerlink" href="#table" title="Permalink to this headline">¶</a></h1>
+<p>Convenience functions for representing reaction systems in tables.</p>
+<dl class="function">
+<dt id="chemreac.util.table.rsys2pdf_table">
+<tt class="descclassname">chemreac.util.table.</tt><tt class="descname">rsys2pdf_table</tt><big>(</big><em>rsys</em>, <em>substances</em>, <em>output_dir=None</em>, <em>tex_template=None</em>, <em>tex_template_dict=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/chemreac/util/table.html#rsys2pdf_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.util.table.rsys2pdf_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function to render a ReactionSystem as
+e.g. a pdf using e.g. pdflatex.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rsys: ReactionSystem</strong></p>
+<p><strong>substances: sequence of strings</strong></p>
+<p><strong>output_dir: path to output directory</strong></p>
+<blockquote>
+<div><p>(default: system&#8217;s temporary folder)</p>
+</div></blockquote>
+<p><strong>tex_template: string</strong></p>
+<blockquote>
+<div><p>LaTeX boiler plate temlpate including preamble,
+document environment etc.</p>
+</div></blockquote>
+<p><strong>tex_template_dict: dict (string -&gt; string)</strong></p>
+<blockquote>
+<div><p>dict used to render temlpate (excl. &#8216;table&#8217;)</p>
+</div></blockquote>
+<p><strong>**kwargs:</strong></p>
+<blockquote class="last">
+<div><p>passed on to <cite>rsys2table</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chemreac.util.table.rsys2table">
+<tt class="descclassname">chemreac.util.table.</tt><tt class="descname">rsys2table</tt><big>(</big><em>rsys</em>, <em>substances</em>, <em>table_template=None</em>, <em>table_template_dict=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/chemreac/util/table.html#rsys2table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.util.table.rsys2table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders user provided table_template with table_template_dict which
+also has &#8216;body&#8217; entry generated from <cite>rsys2tablines</cite>.</p>
+<p>Defaults is LaTeX table requiring booktabs package to be used
+(add usepackage{booktabs} to preamble).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rsys: ReactionSystem</strong></p>
+<p><strong>substances: sequence of strings</strong></p>
+<p><strong>table_template: string</strong></p>
+<p><strong>table_tempalte_dict: dict used to render table_template (excl. &#8220;body&#8221;)</strong></p>
+<p><strong>**kwargs:</strong></p>
+<blockquote class="last">
+<div><p>passed onto rsys2tablines</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chemreac.util.table.rsys2tablines">
+<tt class="descclassname">chemreac.util.table.</tt><tt class="descname">rsys2tablines</tt><big>(</big><em>rsys</em>, <em>substances</em>, <em>rref0=1</em>, <em>coldelim=' &amp; '</em>, <em>tex=True</em>, <em>rxnarrow='$\\rightarrow$'</em>, <em>ref_fmt='{}'</em><big>)</big><a class="reference internal" href="../_modules/chemreac/util/table.html#rsys2tablines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.util.table.rsys2tablines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a table representation of a ReactionSystem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rsys: ReactionSystem</strong></p>
+<p><strong>substances: sequence of strings</strong></p>
+<p><strong>rref0: integer</strong></p>
+<blockquote>
+<div><p>default start of index counter (default: 1)</p>
+</div></blockquote>
+<p><strong>coldelim: string</strong></p>
+<blockquote>
+<div><p>column delimiter (default: &#8216; &amp; &#8216;)</p>
+</div></blockquote>
+<p><strong>tex: bool</strong></p>
+<blockquote>
+<div><p>use latex formated output (default: True)</p>
+</div></blockquote>
+<p><strong>rxnarrow: string</strong></p>
+<blockquote>
+<div><p>default: &#8216;$rightarrow$&#8217;</p>
+</div></blockquote>
+<p><strong>ref_fmt: string</strong></p>
+<blockquote class="last">
+<div><p>format string of <tt class="docutils literal"><span class="pre">ref</span></tt> attribute of reactions</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="testing.html" class="btn btn-neutral float-right" title="testing"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="stoich.html" class="btn btn-neutral" title="stoich"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

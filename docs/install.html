@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="index.html"/>
+        <link rel="next" title="Modules Reference" href="modules.html"/>
+        <link rel="prev" title="Welcome to chemreac’s documentation!" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Installation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/install.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Easiest way to install chemreac (on linux) is by using
+<a class="reference external" href="http://docs.continuum.io/anaconda/index.html">conda</a> to pull it from
+<a class="reference external" href="https://binstar.org/bjodah/chemreac">https://binstar.org/bjodah/chemreac</a> by first adding the appropriate channel:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ conda config --add channels http://conda.binstar.org/bjodah
+$ conda install chemreac
+</pre></div>
+</div>
+<div class="section" id="building-from-source">
+<h2>Building from source<a class="headerlink" href="#building-from-source" title="Permalink to this headline">¶</a></h2>
+<p>Below you will find instructions for installation by building chemreac from source.
+You may also look in <tt class="docutils literal"><span class="pre">scripts/</span></tt> folder for automated install scripts used
+by the continuous integration servers.</p>
+<div class="section" id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>C++ compiler with C++11 support (e.g. <a class="reference external" href="https://gcc.gnu.org/">GCC</a> &gt;= 4.8)</li>
+<li>Fortran compiler with ISO_C_BINDING support (Fortran 2003 standard) (e.g. <a class="reference external" href="https://gcc.gnu.org/fortran/">gfortran</a>)</li>
+<li>LAPACK (provided by e.g. <a class="reference external" href="http://www.openblas.net/">OpenBLAS</a>)</li>
+<li><a class="reference external" href="http://computation.llnl.gov/casc/sundials/main.html">Sundials</a> 2.5</li>
+<li><a class="reference external" href="https://www.python.org">Python</a> (2.7 or &gt;=3.3)</li>
+</ul>
+<p>In addition to python, the following python packages are required
+(versions indicate what is tested, they are found on
+<a class="reference external" href="https://pypi.python.org/pypi">PyPI</a> and may be installed using <tt class="docutils literal"><span class="pre">pip</span></tt>):</p>
+<ul class="simple">
+<li>argh&gt;=0.25.0</li>
+<li>numpy&gt;=1.9.0</li>
+<li>cython&gt;=0.21.0</li>
+<li>mako&gt;=1.0.0</li>
+<li>quantities&gt;=0.10.1</li>
+<li>pytest&gt;=2.5.2</li>
+<li>pytest-pep8&gt;=1.0.6</li>
+<li>scipy&gt;=0.14.0</li>
+<li>matplotlib&gt;=1.4.0</li>
+<li>periodictable&gt;=1.4.1</li>
+<li>future&gt;=0.13.0</li>
+<li>pycompilation&gt;=0.4.0</li>
+<li>pycodeexport&gt;=0.1.0</li>
+<li>sympy&gt;=0.7.6</li>
+</ul>
+<p>For rendering the documentation you also need:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://sphinx-doc.org/">Sphinx</a></li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/numpydoc">numpydoc</a></li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/sphinx_rtd_theme">sphinx_rtd_theme</a></li>
+</ul>
+<p>to run all the tests you also need:</p>
+<ul class="simple">
+<li>valgrind</li>
+<li>graphviz</li>
+<li>dot2tex</li>
+</ul>
+</div>
+<div class="section" id="building-and-installing">
+<h3>Building and installing<a class="headerlink" href="#building-and-installing" title="Permalink to this headline">¶</a></h3>
+<p>Once non-python prerequisites are in installed, you may procede e.g. as:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git clone https://github.com/bjodah/chemreac.git
+$ cd chemreac
+$ pip install --user --upgrade -r requirements.txt
+$ python setup.py install --user
+$ py.test
+</pre></div>
+</div>
+<p>the above procedure works on Ubuntu 14.04 for example. See the <a class="reference external" href="https://docs.python.org/2/install/index.html#install-index">Python docs</a> for more information on how to install e.g. system wide.</p>
+<p>To specify an alternative LAPACK lib, set the environment variable LLAPACK, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ LLAPACK=openblas python setup.py build_ext --inplace
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h2>
+<p>Run <tt class="docutils literal"><span class="pre">py.test</span></tt>, possibly with explicit <tt class="docutils literal"><span class="pre">PYTHONPATH</span></tt> (e.g. if <tt class="docutils literal"><span class="pre">build_ext</span> <span class="pre">--inplace</span></tt> was used)</p>
+<div class="highlight-python"><div class="highlight"><pre>$ PYTHONPATH=`pwd`:$PYTHONPATH py.test --slow --veryslow
+</pre></div>
+</div>
+<p>All tests should pass (or xfail). If they do not, please <a class="reference external" href="https://github.com/bjodah/chemreac/issues">file an issue</a>.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="modules.html" class="btn btn-neutral float-right" title="Modules Reference"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to chemreac’s documentation!"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chemreac.util.table &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>chemreac.util.table</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/_modules/chemreac/util/table.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for chemreac.util.table</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">table</span>
+<span class="sd">-----</span>
+
+<span class="sd">Convenience functions for representing reaction systems in tables.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+
+
+<div class="viewcode-block" id="rsys2tablines"><a class="viewcode-back" href="../../../util/table.html#chemreac.util.table.rsys2tablines">[docs]</a><span class="k">def</span> <span class="nf">rsys2tablines</span><span class="p">(</span><span class="n">rsys</span><span class="p">,</span> <span class="n">substances</span><span class="p">,</span> <span class="n">rref0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">coldelim</span><span class="o">=</span><span class="s">&#39; &amp; &#39;</span><span class="p">,</span>
+                  <span class="n">tex</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">rxnarrow</span><span class="o">=</span><span class="s">r&#39;$\rightarrow$&#39;</span><span class="p">,</span> <span class="n">ref_fmt</span><span class="o">=</span><span class="s">&#39;{}&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a table representation of a ReactionSystem.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rsys: ReactionSystem</span>
+<span class="sd">    substances: sequence of strings</span>
+<span class="sd">    rref0: integer</span>
+<span class="sd">        default start of index counter (default: 1)</span>
+<span class="sd">    coldelim: string</span>
+<span class="sd">        column delimiter (default: &#39; &amp; &#39;)</span>
+<span class="sd">    tex: bool</span>
+<span class="sd">        use latex formated output (default: True)</span>
+<span class="sd">    rxnarrow: string</span>
+<span class="sd">        default: &#39;\$\\rightarrow\$&#39;</span>
+<span class="sd">    ref_fmt: string</span>
+<span class="sd">        format string of ``ref`` attribute of reactions</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">param_fmt</span> <span class="o">=</span> <span class="s">&#39;{0:.3g}&#39;</span>  <span class="c"># Could be taken from Reaction instance</span>
+    <span class="n">_get_name</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">sn</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">substances</span><span class="p">[</span><span class="n">sn</span><span class="p">],</span>
+                                   <span class="s">&#39;tex_name&#39;</span> <span class="k">if</span> <span class="n">tex</span> <span class="k">else</span> <span class="s">&#39;name&#39;</span><span class="p">)</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ri</span><span class="p">,</span> <span class="n">rxn</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rsys</span><span class="o">.</span><span class="n">rxns</span><span class="p">):</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coldelim</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">rref0</span><span class="o">+</span><span class="n">ri</span><span class="p">),</span>
+            <span class="s">&#39; + &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([(</span><span class="s">&#39;&#39;</span> <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="o">+</span> <span class="n">_get_name</span><span class="p">(</span><span class="n">sn</span><span class="p">)</span> <span class="k">for</span>
+                        <span class="n">sn</span><span class="p">,</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">reactants</span><span class="o">.</span><span class="n">items</span><span class="p">()]),</span>
+            <span class="n">rxnarrow</span><span class="p">,</span>
+            <span class="s">&#39; + &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([(</span><span class="s">&#39;&#39;</span> <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="o">+</span> <span class="n">_get_name</span><span class="p">(</span><span class="n">sn</span><span class="p">)</span> <span class="k">for</span>
+                       <span class="n">sn</span><span class="p">,</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">items</span><span class="p">()]),</span>
+            <span class="n">param_fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">k</span><span class="p">),</span>
+            <span class="n">ref_fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">ref</span><span class="p">)</span>
+        <span class="p">]))</span>
+    <span class="k">return</span> <span class="n">lines</span>
+
+</div>
+<div class="viewcode-block" id="rsys2table"><a class="viewcode-back" href="../../../util/table.html#chemreac.util.table.rsys2table">[docs]</a><span class="k">def</span> <span class="nf">rsys2table</span><span class="p">(</span><span class="n">rsys</span><span class="p">,</span> <span class="n">substances</span><span class="p">,</span> <span class="n">table_template</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+               <span class="n">table_template_dict</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    Renders user provided table_template with table_template_dict which</span>
+<span class="sd">    also has &#39;body&#39; entry generated from `rsys2tablines`.</span>
+
+<span class="sd">    Defaults is LaTeX table requiring booktabs package to be used</span>
+<span class="sd">    (add \usepackage{booktabs} to preamble).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+<span class="sd">    rsys: ReactionSystem</span>
+<span class="sd">    substances: sequence of strings</span>
+<span class="sd">    table_template: string</span>
+<span class="sd">    table_tempalte_dict: dict used to render table_template (excl. &quot;body&quot;)</span>
+<span class="sd">    **kwargs:</span>
+<span class="sd">        passed onto rsys2tablines</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">line_term</span> <span class="o">=</span> <span class="s">r&#39; </span><span class="se">\\</span><span class="s">&#39;</span>
+    <span class="k">if</span> <span class="n">table_template</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">table_template</span> <span class="o">=</span> <span class="s">r&quot;&quot;&quot;</span>
+<span class="s">\begin{</span><span class="si">%(table_env)s</span><span class="s">}</span>
+<span class="s">\centering</span>
+<span class="s">\label{tab:</span><span class="si">%(label)s</span><span class="s">}</span>
+<span class="s">\caption[</span><span class="si">%(short_cap)s</span><span class="s">]{</span><span class="si">%(long_cap)s</span><span class="s">}</span>
+<span class="s">\begin{tabular}{</span><span class="si">%(alignment)s</span><span class="s">}</span>
+<span class="s">\toprule</span>
+<span class="si">%(header)s</span><span class="s"></span>
+<span class="s">\midrule</span>
+<span class="si">%(body)s</span><span class="s"></span>
+<span class="s">\bottomrule</span>
+<span class="s">\end{tabular}</span>
+<span class="s">\end{</span><span class="si">%(table_env)s</span><span class="s">}&quot;&quot;&quot;</span>
+
+    <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;table_env&#39;</span><span class="p">:</span> <span class="s">&#39;table&#39;</span><span class="p">,</span>  <span class="c"># e.g. longtable</span>
+        <span class="s">&#39;alignment&#39;</span><span class="p">:</span> <span class="s">&#39;llllll&#39;</span><span class="p">,</span>  <span class="c"># e.g. llllSl for siunitx</span>
+        <span class="s">&#39;header&#39;</span><span class="p">:</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;coldelim&#39;</span><span class="p">,</span> <span class="s">&#39; &amp; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="s">&#39;Id.&#39;</span><span class="p">,</span> <span class="s">&#39;Reactants&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;Products&#39;</span><span class="p">,</span> <span class="s">&#39;Rate constant&#39;</span><span class="p">,</span> <span class="s">&#39;Ref&#39;</span>
+        <span class="p">])</span> <span class="o">+</span> <span class="n">line_term</span><span class="p">,</span>
+        <span class="s">&#39;short_cap&#39;</span><span class="p">:</span> <span class="n">rsys</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="s">&#39;long_cap&#39;</span><span class="p">:</span> <span class="n">rsys</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="s">&#39;label&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">rsys</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s">&#39;None&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">table_template_dict</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">table_template_dict</span> <span class="o">=</span> <span class="n">defaults</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">defaults</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table_template_dict</span><span class="p">:</span>
+                <span class="n">table_template_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">if</span> <span class="s">&#39;body&#39;</span> <span class="ow">in</span> <span class="n">table_template_dict</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;There is already a &#39;body&#39; key in table_template_dict&quot;</span><span class="p">)</span>
+    <span class="n">table_template_dict</span><span class="p">[</span><span class="s">&#39;body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">line_term</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rsys2tablines</span><span class="p">(</span>
+        <span class="n">rsys</span><span class="p">,</span> <span class="n">substances</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span> <span class="o">+</span> <span class="n">line_term</span>
+    <span class="k">return</span> <span class="n">table_template</span> <span class="o">%</span> <span class="n">table_template_dict</span>
+
+</div>
+<div class="viewcode-block" id="rsys2pdf_table"><a class="viewcode-back" href="../../../util/table.html#chemreac.util.table.rsys2pdf_table">[docs]</a><span class="k">def</span> <span class="nf">rsys2pdf_table</span><span class="p">(</span><span class="n">rsys</span><span class="p">,</span> <span class="n">substances</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tex_template</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                   <span class="n">tex_template_dict</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convenience function to render a ReactionSystem as</span>
+<span class="sd">    e.g. a pdf using e.g. pdflatex.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+<span class="sd">    rsys: ReactionSystem</span>
+<span class="sd">    substances: sequence of strings</span>
+<span class="sd">    output_dir: path to output directory</span>
+<span class="sd">        (default: system&#39;s temporary folder)</span>
+<span class="sd">    tex_template: string</span>
+<span class="sd">        LaTeX boiler plate temlpate including preamble,</span>
+<span class="sd">        document environment etc.</span>
+<span class="sd">    tex_template_dict: dict (string -&gt; string)</span>
+<span class="sd">        dict used to render temlpate (excl. &#39;table&#39;)</span>
+<span class="sd">    **kwargs:</span>
+<span class="sd">        passed on to `rsys2table`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">tex_template</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">tex_template</span> <span class="o">=</span> <span class="s">r&quot;&quot;&quot;</span>
+<span class="s">\documentclass{article}</span>
+<span class="s">\pagestyle{empty}</span>
+<span class="s">\usepackage{booktabs}</span>
+<span class="s">\usepackage{lscape}</span>
+<span class="s">\begin{document}</span>
+<span class="si">%(begins)s</span><span class="s"></span>
+<span class="si">%(table)s</span><span class="s"></span>
+<span class="si">%(ends)s</span><span class="s"></span>
+<span class="s">\end{document}</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+    <span class="n">_envs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;landscape&#39;</span><span class="p">,</span> <span class="s">&#39;tiny&#39;</span><span class="p">]</span>
+    <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;begins&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">r&#39;\begin{</span><span class="si">%s</span><span class="s">}&#39;</span> <span class="o">%</span> <span class="n">env</span> <span class="k">for</span> <span class="n">env</span> <span class="ow">in</span> <span class="n">_envs</span><span class="p">]),</span>
+        <span class="s">&#39;ends&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">r&#39;\end{</span><span class="si">%s</span><span class="s">}&#39;</span> <span class="o">%</span> <span class="n">env</span> <span class="k">for</span> <span class="n">env</span> <span class="ow">in</span> <span class="n">_envs</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">tex_template_dict</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">tex_template_dict</span> <span class="o">=</span> <span class="n">defaults</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">defaults</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tex_template_dict</span><span class="p">:</span>
+                <span class="n">tex_template_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">if</span> <span class="s">&#39;table&#39;</span> <span class="ow">in</span> <span class="n">tex_template_dict</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;There is already a &#39;tex&#39; key in tex_template_dict&quot;</span><span class="p">)</span>
+    <span class="n">tex_template_dict</span><span class="p">[</span><span class="s">&#39;table&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rsys2table</span><span class="p">(</span><span class="n">rsys</span><span class="p">,</span> <span class="n">substances</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">contents</span> <span class="o">=</span> <span class="n">tex_template</span> <span class="o">%</span> <span class="n">tex_template_dict</span>
+
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span>
+            <span class="s">&#39;wt&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s">&#39;.tex&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmpfh</span><span class="p">:</span>
+        <span class="n">cmds</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;pdflatex&#39;</span><span class="p">,</span> <span class="n">tmpfh</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">tmpfh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+        <span class="n">tmpfh</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmds</span> <span class="o">+</span> <span class="p">[</span><span class="n">tmpfh</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">cwd</span><span class="o">=</span><span class="n">output_dir</span><span class="p">)</span>
+        <span class="n">retcode</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">retcode</span><span class="p">:</span>
+            <span class="n">fmtstr</span> <span class="o">=</span> <span class="s">&quot;{}</span><span class="se">\n</span><span class="s"> returned with exit status {}&quot;</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">fmtstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmds</span><span class="p">),</span> <span class="n">retcode</span><span class="p">))</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

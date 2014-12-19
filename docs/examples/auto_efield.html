@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Automatic electric field computation &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Diffusion from constant concentration surface" href="const_surf_conc.html"/>
+        <link rel="prev" title="Aqueous radiolysis" href="aqueous_radiolysis.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Automatic electric field computation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/examples/auto_efield.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-auto_efield"></span><div class="section" id="automatic-electric-field-computation">
+<h1>Automatic electric field computation<a class="headerlink" href="#automatic-electric-field-computation" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference download internal" href="../_downloads/auto_efield.py"><tt class="xref download docutils literal"><span class="pre">examples/auto_efield.py</span></tt></a> demonstrates how
+drift can be added self-consistently by calculating the
+electric field generated from the concentration profile
+of charged species.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python auto_efield.py --help
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>usage: auto_efield.py [-h] [-D D] [--t0 T0] [--tend TEND] [--x0 X0]
+                      [--xend XEND] [-N N] [-b BASE] [-o OFFSET]
+                      [--mobility MOBILITY] [--nt NT] [-g GEOM] [--logt]
+                      [--logy] [--logx] [--random] [--nstencil NSTENCIL]
+                      [--lrefl] [--rrefl] [--num-jacobian] [--method METHOD]
+                      [-p] [--savefig SAVEFIG] [-a ATOL] [--rtol RTOL]
+                      [--random-seed RANDOM_SEED] [--surf-chg SURF_CHG]
+                      [--sigma-q SIGMA_Q] [--sigma-skew SIGMA_SKEW] [-v]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -D D, --D D           0.0
+  --t0 T0               0.0
+  --tend TEND           7.0
+  --x0 X0               0.1
+  --xend XEND           1.0
+  -N N, --N N           1024
+  -b BASE, --base BASE  0.5
+  -o OFFSET, --offset OFFSET
+                        0.25
+  --mobility MOBILITY   3e-08
+  --nt NT               25
+  -g GEOM, --geom GEOM  &#39;f&#39;
+  --logt                False
+  --logy                False
+  --logx                False
+  --random              False
+  --nstencil NSTENCIL   3
+  --lrefl               False
+  --rrefl               False
+  --num-jacobian        False
+  --method METHOD       &#39;bdf&#39;
+  -p, --plot            False
+  --savefig SAVEFIG     &#39;None&#39;
+  -a ATOL, --atol ATOL  1e-06
+  --rtol RTOL           1e-06
+  --random-seed RANDOM_SEED
+                        42
+  --surf-chg SURF_CHG   (0.0, 0.0)
+  --sigma-q SIGMA_Q     101
+  --sigma-skew SIGMA_SKEW
+                        0.5
+  -v, --verbose         False
+</pre></div>
+</div>
+<p>Here is an example generated by:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ python auto_efield.py --plot --savefig auto_efield.png
+</pre></div>
+</div>
+<img alt="../_images/auto_efield.png" src="../_images/auto_efield.png" />
+<dl class="function">
+<dt id="auto_efield.gaussian">
+<tt class="descclassname">auto_efield.</tt><tt class="descname">gaussian</tt><big>(</big><em>x</em>, <em>mu</em>, <em>sigma</em>, <em>logy</em>, <em>logx</em>, <em>geom</em><big>)</big><a class="reference internal" href="../_modules/auto_efield.html#gaussian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#auto_efield.gaussian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="auto_efield.integrate_rd">
+<tt class="descclassname">auto_efield.</tt><tt class="descname">integrate_rd</tt><big>(</big><em>D=0.0</em>, <em>t0=0.0</em>, <em>tend=7.0</em>, <em>x0=0.1</em>, <em>xend=1.0</em>, <em>N=1024</em>, <em>base=0.5</em>, <em>offset=0.25</em>, <em>mobility=3e-08</em>, <em>nt=25</em>, <em>geom='f'</em>, <em>logt=False</em>, <em>logy=False</em>, <em>logx=False</em>, <em>random=False</em>, <em>nstencil=3</em>, <em>lrefl=False</em>, <em>rrefl=False</em>, <em>num_jacobian=False</em>, <em>method='bdf'</em>, <em>plot=False</em>, <em>savefig='None'</em>, <em>atol=1e-06</em>, <em>rtol=1e-06</em>, <em>random_seed=42</em>, <em>surf_chg=(0.0</em>, <em>0.0)</em>, <em>sigma_q=101</em>, <em>sigma_skew=0.5</em>, <em>verbose=False</em><big>)</big><a class="reference internal" href="../_modules/auto_efield.html#integrate_rd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#auto_efield.integrate_rd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="auto_efield.pair_of_gaussians">
+<tt class="descclassname">auto_efield.</tt><tt class="descname">pair_of_gaussians</tt><big>(</big><em>x</em>, <em>offsets</em>, <em>sigma</em>, <em>logy</em>, <em>logx</em>, <em>geom</em><big>)</big><a class="reference internal" href="../_modules/auto_efield.html#pair_of_gaussians"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#auto_efield.pair_of_gaussians" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="auto_efield.sigm">
+<tt class="descclassname">auto_efield.</tt><tt class="descname">sigm</tt><big>(</big><em>x</em>, <em>lim=150.0</em>, <em>n=8</em><big>)</big><a class="reference internal" href="../_modules/auto_efield.html#sigm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#auto_efield.sigm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="const_surf_conc.html" class="btn btn-neutral float-right" title="Diffusion from constant concentration surface"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="aqueous_radiolysis.html" class="btn btn-neutral" title="Aqueous radiolysis"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

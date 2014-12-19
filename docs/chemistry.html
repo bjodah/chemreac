@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chemistry &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="index.html"/>
+        <link rel="up" title="Modules Reference" href="modules.html"/>
+        <link rel="next" title="util" href="util/index.html"/>
+        <link rel="prev" title="integrate" href="integrate.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrate.html">integrate</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="modules.html">Modules Reference</a> &raquo;</li>
+      
+    <li>chemistry</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/chemistry.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-chemreac.chemistry"></span><div class="section" id="chemistry">
+<h1>chemistry<a class="headerlink" href="#chemistry" title="Permalink to this headline">¶</a></h1>
+<p>Classes to describe substances, reactions and reaction systems. The
+classes have methods to help with low-level conversion to parameters
+of the model.</p>
+<dl class="class">
+<dt id="chemreac.chemistry.Henry">
+<em class="property">class </em><tt class="descclassname">chemreac.chemistry.</tt><tt class="descname">Henry</tt><big>(</big><em>k_H0</em>, <em>derivative</em>, <em>ref=None</em><big>)</big><a class="reference internal" href="_modules/chemreac/chemistry.html#Henry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.chemistry.Henry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Henry&#8217;s gas constant</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>k_H0: float</strong></p>
+<blockquote>
+<div><p>Henry&#8217;s constant [M/atm]</p>
+</div></blockquote>
+<p><strong>derivative: float</strong></p>
+<blockquote>
+<div><p>-dln(k_H)/d(1/T) [K]</p>
+</div></blockquote>
+<p><strong>ref: object</strong></p>
+<blockquote class="last">
+<div><p>Note about origin of parameters</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="chemreac.chemistry.Reaction">
+<em class="property">class </em><tt class="descclassname">chemreac.chemistry.</tt><tt class="descname">Reaction</tt><big>(</big><em>reactants</em>, <em>products</em>, <em>active_reac=None</em>, <em>inactive_reac=None</em>, <em>k=None</em>, <em>T=None</em>, <em>Ea=None</em>, <em>A=None</em>, <em>ref=None</em>, <em>name=None</em><big>)</big><a class="reference internal" href="_modules/chemreac/chemistry.html#Reaction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.chemistry.Reaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reaction with kinetics governed by the law of mass-action.</p>
+<p>Must honor:</p>
+<blockquote>
+<div>A + R &#8211;&gt; A + P</div></blockquote>
+<p>That is: law of massaction depend on [A]</p>
+<p>Also supports</p>
+<blockquote>
+<div>5*C1 + C2 &#8211;&gt; B;  r=k*C1*C2</div></blockquote>
+<p>by specifying active reactants</p>
+<p>reactants and products are dictionaries with substance names
+as keys and positive integers giving their stoichiometric coeffecients
+as values</p>
+<p>rate constant i either given as k (T optional as validity info)
+or as Ea and A for use in the Arrhenius equation</p>
+<p>and ref contains optional information on origin of data.</p>
+<p>along the same lines <cite>name</cite> is possible to use if the reaction
+is known under a certain name, e.g. &#8220;H2O2 auto-decomposition&#8221;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>reactants: dict</strong></p>
+<blockquote>
+<div><p>dictionary mapping substance name (string) to stoichiometric
+coefficient (integer)</p>
+</div></blockquote>
+<p><strong>products: dict</strong></p>
+<blockquote>
+<div><p>dictionary mapping substance name (string) to stoichiometric
+coefficient (integer)</p>
+</div></blockquote>
+<p><strong>active_reac: dict (optional)</strong></p>
+<blockquote>
+<div><p>if the rate expression contains a reactant to the power of a
+number different than its stoichiometric coefficient it may be
+overridden here. For example: active_reac={&#8216;H2O&#8217;: 1} makes the rate
+expression linear in H2O concentration even though reactants[&#8216;H2O&#8217;]
+could be equal to 4 (say)</p>
+</div></blockquote>
+<p><strong>inactive_reac: dict (optional)</strong></p>
+<blockquote>
+<div><p>semantically different but provides same functionality as active_reac
+(only one of these may be passed). Here you specify a positive number &lt;
+the stoichiometric coefficient of the reactant not to be counted. The
+corresponding example to active_reac may be achieved by passing
+inactive_reac={&#8216;H2O&#8217;: 3}</p>
+</div></blockquote>
+<p><strong>k: float</strong></p>
+<blockquote>
+<div><p>rate coefficient</p>
+</div></blockquote>
+<p><strong>T: float</strong></p>
+<blockquote>
+<div><p>absolute temperature</p>
+</div></blockquote>
+<p><strong>Ea: float</strong></p>
+<blockquote>
+<div><p>activation energy</p>
+</div></blockquote>
+<p><strong>A: float</strong></p>
+<blockquote>
+<div><p>preexponential prefactor (Arrhenius type eq.)</p>
+</div></blockquote>
+<p><strong>ref: string</strong></p>
+<blockquote>
+<div><p>Reference key</p>
+</div></blockquote>
+<p><strong>name: string</strong></p>
+<blockquote class="last">
+<div><p>Descriptive name of reaction</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="chemreac.chemistry.ReactionSystem">
+<em class="property">class </em><tt class="descclassname">chemreac.chemistry.</tt><tt class="descname">ReactionSystem</tt><big>(</big><em>rxns=None</em>, <em>name=None</em>, <em>substances=None</em><big>)</big><a class="reference internal" href="_modules/chemreac/chemistry.html#ReactionSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.chemistry.ReactionSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collection of reactions forming a system (model).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rxns: sequence</strong></p>
+<blockquote>
+<div><p>Reaction instances in ReactionSystem</p>
+</div></blockquote>
+<p><strong>name: string</strong></p>
+<blockquote>
+<div><p>Name of ReactionSystem (e.g. model name / citation key)</p>
+</div></blockquote>
+<p><strong>substances: sequence</strong></p>
+<blockquote class="last">
+<div><p>Sequence of Substance instances, will be used in doing
+a sanity check and as default in method <a class="reference internal" href="#chemreac.chemistry.ReactionSystem.to_ReactionDiffusion" title="chemreac.chemistry.ReactionSystem.to_ReactionDiffusion"><tt class="xref py py-meth docutils literal"><span class="pre">to_ReactionDiffusion()</span></tt></a></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chemreac.chemistry.ReactionSystem.to_ReactionDiffusion">
+<tt class="descname">to_ReactionDiffusion</tt><big>(</big><em>substances=None</em>, <em>ordered_names=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/chemreac/chemistry.html#ReactionSystem.to_ReactionDiffusion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.chemistry.ReactionSystem.to_ReactionDiffusion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <tt class="xref py py-class docutils literal"><span class="pre">ReactionDiffusion</span></tt> instance from <tt class="docutils literal"><span class="pre">self</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>substances: sequence of Substance instances</strong></p>
+<blockquote>
+<div><p>pass to override self.substances (optional)</p>
+</div></blockquote>
+<p><strong>ordered_names: sequence of names</strong></p>
+<blockquote>
+<div><p>pass to override self.ordered_names()</p>
+</div></blockquote>
+<p><strong>**kwargs:</strong></p>
+<blockquote class="last">
+<div><p>Keyword arguments passed on to <tt class="xref py py-class docutils literal"><span class="pre">ReactionDiffusion</span></tt></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemreac.chemistry.Substance">
+<em class="property">class </em><tt class="descclassname">chemreac.chemistry.</tt><tt class="descname">Substance</tt><big>(</big><em>name</em>, <em>charge=None</em>, <em>mass=None</em>, <em>formula=None</em>, <em>tex_name=None</em>, <em>multiplicity=None</em>, <em>D=0.0</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/chemreac/chemistry.html#Substance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.chemistry.Substance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Substance class to represent a chemical speices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name: string</strong></p>
+<blockquote>
+<div><p>unique string representation e.g. &#8220;CNO-&#8221;, &#8220;ONC-&#8220;</p>
+</div></blockquote>
+<p><strong>charge: integer</strong></p>
+<blockquote>
+<div><p>charge of substance</p>
+</div></blockquote>
+<p><strong>mass: float</strong></p>
+<blockquote>
+<div><p>molar mass (default None)</p>
+</div></blockquote>
+<p><strong>formula: e.g. periodictable.formulas.Formula instance</strong></p>
+<blockquote>
+<div><p>optional, if formula instance provides <cite>mass</cite> attribute it is
+used as mass in the case mass=None</p>
+</div></blockquote>
+<p><strong>tex_name: string</strong></p>
+<blockquote>
+<div><p>optional, TeX formated string, e.g. &#8216;$mathrm{OH^{-}}$&#8217;</p>
+</div></blockquote>
+<p><strong>multiplicity: integer</strong></p>
+<blockquote>
+<div><p>optional, 1 for singlet, 2 for doublet...</p>
+</div></blockquote>
+<p><strong>D: float (optional)</strong></p>
+<blockquote>
+<div><p>diffusion coefficent, for now: isothermal, isotropic and only
+for one medium.  default: 0.0</p>
+</div></blockquote>
+<p><strong>**kwargs:</strong></p>
+<blockquote class="last">
+<div><p>additional freely chosen attributes</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Substance</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;H2O&#39;</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tex_name</span><span class="o">=</span><span class="s">r&#39;$\mathrm{H_{2}O}$&#39;</span><span class="p">,</span> <span class="n">pKa</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="go">&lt;Substance &#39;H2O&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Substance</span><span class="o">.</span><span class="n">all_substances</span><span class="p">[</span><span class="s">&#39;H2O&#39;</span><span class="p">]</span>
+<span class="go">&lt;Substance &#39;H2O&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s">&#39;H2O&#39;</span> <span class="ow">in</span> <span class="n">Substance</span><span class="o">.</span><span class="n">all_substances</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="chemreac.chemistry.mk_sn_dict_from_names">
+<tt class="descclassname">chemreac.chemistry.</tt><tt class="descname">mk_sn_dict_from_names</tt><big>(</big><em>names</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/chemreac/chemistry.html#mk_sn_dict_from_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.chemistry.mk_sn_dict_from_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function to generate a OrderedDict of Substance
+instances from a sequence of names and corresponding sequences
+of kwargs to Substance class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>names: sequence of strings</strong></p>
+<blockquote>
+<div><p>names of substances</p>
+</div></blockquote>
+<p><strong>**kwargs:</strong></p>
+<blockquote class="last">
+<div><p>sequences of corresponding keyword arguments</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mk_sn_dict_from_names</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s">&#39;ABCD&#39;</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">])</span> 
+<span class="go">OrderedDict([(&#39;A&#39;, &lt;Substance &#39;A&#39;&gt;), (&#39;B&#39;, &lt;Substance &#39;B&#39;&gt;),</span>
+<span class="go">(&#39;C&#39;, &lt;Substance &#39;C&#39;&gt;), (&#39;D&#39;, &lt;Substance &#39;D&#39;&gt;)])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="util/index.html" class="btn btn-neutral float-right" title="util"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="integrate.html" class="btn btn-neutral" title="integrate"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

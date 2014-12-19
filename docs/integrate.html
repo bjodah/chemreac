@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>integrate &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="index.html"/>
+        <link rel="up" title="Modules Reference" href="modules.html"/>
+        <link rel="next" title="chemistry" href="chemistry.html"/>
+        <link rel="prev" title="core" href="core.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Modules Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="core.html">core</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="modules.html">Modules Reference</a> &raquo;</li>
+      
+    <li>integrate</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/integrate.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <span class="target" id="module-chemreac.integrate"></span><div class="section" id="integrate">
+<h1>integrate<a class="headerlink" href="#integrate" title="Permalink to this headline">¶</a></h1>
+<p>This module provides functions for integrating the
+system of ODEs which the ReactionDiffusion represent.
+Currently the user may choose from using a</p>
+<dl class="class">
+<dt id="chemreac.integrate.Integration">
+<em class="property">class </em><tt class="descclassname">chemreac.integrate.</tt><tt class="descname">Integration</tt><big>(</big><em>solver</em>, <em>rd</em>, <em>C0</em>, <em>tout</em>, <em>scaling=1.0</em>, <em>sigm_damp=False</em>, <em>C0_is_log=False</em>, <em>tiny=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/chemreac/integrate.html#Integration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.integrate.Integration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model kinetcs by integrating system of ODEs using
+user specified solver.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>solver: string</strong></p>
+<blockquote>
+<div><p>&#8220;cvode_direct&#8221; or &#8220;scipy&#8221; where scipy uses VODE
+as the solver.</p>
+</div></blockquote>
+<p><strong>rd: ReactionDiffusion instance</strong></p>
+<p><strong>C0: array</strong></p>
+<blockquote>
+<div><p>initial concentrations (unscaled, untransformed)</p>
+</div></blockquote>
+<p><strong>tout: array</strong></p>
+<blockquote>
+<div><p>times for which to report solver results (untransformed)</p>
+</div></blockquote>
+<p><strong>scaling: float</strong></p>
+<blockquote>
+<div><p>Scale concentrations (and rate constants)</p>
+</div></blockquote>
+<p><strong>sigm_damp: bool or tuple of (lim: float, n: int)</strong></p>
+<blockquote>
+<div><p>conditionally damp C0 with an algebraic sigmoid when rd.logy == True.
+s(x) = x/((x/lim)**n+1)**(1./n)
+if sigm==True then <cite>lim</cite> and <cite>n</cite> are the default of <cite>sigm()</cite></p>
+</div></blockquote>
+<p><strong>C0_is_log: bool</strong></p>
+<blockquote>
+<div><p>If True: passed values in C0 are taken to be the natural logarithm of
+initial concentrations. If False and rd.logy == True: a very small
+number is added to C0 to avoid applying log to zero (see <cite>tiny</cite>).</p>
+</div></blockquote>
+<p><strong>tiny: float</strong></p>
+<blockquote>
+<div><p>added to C0 when rd.logy==True and C0_is_log==False. Note that
+if you explicitly want to avoid adding tiny you need to set it
+to zero (e.g. when manually setting any C0==0 to some epsilon).</p>
+</div></blockquote>
+<p><strong>(default: numpy.finfo(np.float64).tiny)</strong></p>
+<p><strong>**kwargs:</strong></p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>mode: not supported by Sundials solver (current wrapper</dt>
+<dd><p class="first last">code auto selects banded for N&gt;1 and uses dense
+mode for N==1)</p>
+</dd>
+<dt>atol: float or sequence</dt>
+<dd><p class="first last">absolute tolerance of solution</p>
+</dd>
+<dt>rtol: float</dt>
+<dd><p class="first last">relative tolerance of solution</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="94%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Cout: array</td>
+<td>linear output concentrations</td>
+</tr>
+<tr class="row-even"><td>yout: array</td>
+<td>output from solver: log(concentrations) if rd.logy == True</td>
+</tr>
+<tr class="row-odd"><td>info: dict</td>
+<td>Information from solver. Guaranteed to contain: - &#8216;texec&#8217;: execution time in seconds. - &#8216;atol&#8217;: float or array, absolute tolerance(s). - &#8216;rtol&#8217;: float, relative tolerance</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>_integrate()</td>
+<td>performs the integration, automatically called by __init__</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chemreac.integrate.run">
+<tt class="descclassname">chemreac.integrate.</tt><tt class="descname">run</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/chemreac/integrate.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.integrate.run" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="docutils literal"><span class="pre">run</span></tt> is provided for environment variable directed solver choice.</p>
+<p>Set <tt class="docutils literal"><span class="pre">CHEMREAC_SOLVER</span></tt> to indicate what integrator to
+use (default: &#8220;scipy&#8221;).</p>
+<p>Set <tt class="docutils literal"><span class="pre">CHEMREAC_SOLVER_KWARGS</span></tt> to a string which can be eval&#8217;d to
+a python dictionary. e.g. &#8220;{&#8216;atol&#8217;: 1e-4, &#8216;rtol&#8217;=1e-7}&#8221;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="chemreac.integrate.sigm">
+<tt class="descclassname">chemreac.integrate.</tt><tt class="descname">sigm</tt><big>(</big><em>x</em>, <em>lim=150.0</em>, <em>n=8</em><big>)</big><a class="reference internal" href="_modules/chemreac/integrate.html#sigm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chemreac.integrate.sigm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Algebraic sigmoid to avoid overflow/underflow of &#8216;double exp(double)&#8217;</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="chemistry.html" class="btn btn-neutral float-right" title="chemistry"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="core.html" class="btn btn-neutral" title="core"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

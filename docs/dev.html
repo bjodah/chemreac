@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Development &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="index.html"/>
+        <link rel="prev" title="Steady state approximation" href="examples/steady_state_approx.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Development</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/dev.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<p>As an open-source project other researchers/students are encouraged to improve upon
+the code/documentation. The code is released under the permissive <a class="reference external" href="http://opensource.org/licenses/BSD-2-Clause">BSD 2-Clause
+License</a>. The source
+code repository is found at <a class="reference external" href="https://github.com/bjodah/chemreac">https://github.com/bjodah/chemreac</a> which is also
+where issues and patches (&#8220;pull requests&#8221;) are posted.</p>
+<div class="section" id="coding-standards">
+<h2>Coding standards<a class="headerlink" href="#coding-standards" title="Permalink to this headline">¶</a></h2>
+<p>The Python code should comply with <a class="reference external" href="http://legacy.python.org/dev/peps/pep-0008/">PEP8</a>. It is also checked by
+the CI.
+For the C++ code, <a class="reference external" href="http://pyne.io/devsguide/style_guide.html#c-c-style-guide">PyNE&#8217;s C/C++ style guide</a> is recommended.</p>
+</div>
+<div class="section" id="documentation-standard">
+<h2>Documentation standard<a class="headerlink" href="#documentation-standard" title="Permalink to this headline">¶</a></h2>
+<p>The API docs are generated automatically and <a class="reference external" href="https://pypi.python.org/pypi/numpydoc">numpydoc</a> is used to
+automatically parse docstrings of functions and classes.
+See the <a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt">NumPy/SciPy documentation guide</a> for more info.</p>
+</div>
+<div class="section" id="unit-tests">
+<h2>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h2>
+<p>The correctness of the implementation is verified through the use of
+(hundreds of) unit tests. Ideally all code should be covered with tests.</p>
+<div class="section" id="continuous-integration">
+<h3>Continuous integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">¶</a></h3>
+<p>In order to minimize the risk of (re)introducing bugs into the code
+base, it is continuously built on two CI services:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://travis-ci.org/bjodah/chemreac">travis-ci.org</a></li>
+<li><a class="reference external" href="https://drone.io/github.com/bjodah/chemreac">drone.io</a></li>
+</ul>
+<a class="reference external image-reference" href="https://travis-ci.org/bjodah/chemreac"><img alt="https://travis-ci.org/bjodah/chemreac.png?branch=master" src="https://travis-ci.org/bjodah/chemreac.png?branch=master" /></a>
+<p>above you can find the build status shield for travis-ci (Py 2.7, Py
+3.4, no OpenMP, runs coveralls, builds docs and pushes them to the
+gh-pages branch).</p>
+<a class="reference external image-reference" href="https://drone.io/github.com/bjodah/chemreac/latest"><img alt="https://drone.io/github.com/bjodah/chemreac/status.png" src="https://drone.io/github.com/bjodah/chemreac/status.png" /></a>
+<p>above you can find build status shield for drone.io (Py 2.7, uses OpenMP and the Sundials backend, build docs as artifact, html coverage report as artifact):</p>
+</div>
+<div class="section" id="test-coverage">
+<h3>Test coverage<a class="headerlink" href="#test-coverage" title="Permalink to this headline">¶</a></h3>
+<a class="reference external image-reference" href="https://coveralls.io/r/bjodah/chemreac?branch=master"><img alt="Test coverage" src="https://coveralls.io/repos/bjodah/chemreac/badge.png?branch=master" /></a>
+<p>unit testing is a great tool provided they actually cover the majority
+of the code base. In order to keep track of the coverage coveralls is
+used (click the badge above to see detailed per-line breakdown).</p>
+</div>
+</div>
+<div class="section" id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
+<p>The documentation assumes a *NIX like environment, or at
+least familiarity with this environment for tweaking build scripts
+etc. Feedback from users and developers on other platforms are most
+welcome.</p>
+<p>If you are new to github and the like, a good start is SymPy&#8217;s wiki
+entry on <a class="reference external" href="https://github.com/sympy/sympy/wiki/Development-workflow">development workflow</a> (minus
+the SymPy specific parts obviously).</p>
+<div class="section" id="example-of-setting-up-a-development-environment">
+<h3>Example of setting up a development environment<a class="headerlink" href="#example-of-setting-up-a-development-environment" title="Permalink to this headline">¶</a></h3>
+<p>Here is an example to get you started developing chemreac and contributing
+to the code:</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://help.github.com/articles/fork-a-repo/">Fork</a> the repository on github</li>
+<li>Install the dependencies specified in the README.rst</li>
+<li>Clone you own repo:</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre>$ git clone https://bitbucket.org/YOUR_GITHUB_USERNAME/chemreac.git
+</pre></div>
+</div>
+<p>4. Set-up the pre-commit hook.</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cd .git/hooks
+$ ln -s ../../scripts/pre-commit.sh pre-commit
+$ cd -
+</pre></div>
+</div>
+<p>5. Create a new branch</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git checkout -b fix_silly_bug
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li>Edit files, add test(s), make sure all tests pass.</li>
+</ol>
+<p>7. make a commit, and push your changes:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ git commit -am &quot;Fixed a silly bug in the complex-thingy.&quot;
+$ git push
+</pre></div>
+</div>
+<ol class="arabic simple" start="7">
+<li>Go to your forked repo on github and create a <a class="reference external" href="https://help.github.com/articles/using-pull-requests/">pull-request</a> from there.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="examples/steady_state_approx.html" class="btn btn-neutral" title="Steady state approximation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

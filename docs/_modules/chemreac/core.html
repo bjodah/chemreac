@@ -1,0 +1,445 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chemreac.core &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>chemreac.core</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/_modules/chemreac/core.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for chemreac.core</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">core</span>
+<span class="sd">====</span>
+<span class="sd">Provides core functinoality: ReactionDiffusion</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;READTHEDOCS&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;True&#39;</span><span class="p">:</span>
+    <span class="c"># On readthedocs, cannot compile extension module.</span>
+    <span class="k">class</span> <span class="nc">CppReactionDiffusion</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="k">pass</span>  <span class="c"># mockup</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">._chemreac</span> <span class="kn">import</span> <span class="n">CppReactionDiffusion</span>
+
+<span class="n">DENSE</span><span class="p">,</span> <span class="n">BANDED</span><span class="p">,</span> <span class="n">SPARSE</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">FLAT</span><span class="p">,</span> <span class="n">CYLINDRICAL</span><span class="p">,</span> <span class="n">SPHERICAL</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Geom_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">FLAT</span><span class="p">:</span> <span class="s">&#39;Flat&#39;</span><span class="p">,</span> <span class="n">CYLINDRICAL</span><span class="p">:</span> <span class="s">&#39;Cylindrical&#39;</span><span class="p">,</span> <span class="n">SPHERICAL</span><span class="p">:</span> <span class="s">&#39;Spherical&#39;</span><span class="p">}</span>
+<span class="n">GEOM_ORDER</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Flat&#39;</span><span class="p">,</span> <span class="s">&#39;Cylindrical&#39;</span><span class="p">,</span> <span class="s">&#39;Spherical&#39;</span><span class="p">)</span>
+
+<span class="c"># Having a Python side wrapper for our Cython Extension (CppReactionDiffusion)</span>
+<span class="c"># allows e.g. Jedi (Python IDE capabilities) to inspect and give help strings</span>
+
+
+<span class="k">class</span> <span class="nc">ReactionDiffusionBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">to_Reaction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ri</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convenience method for making a Reaction instance</span>
+<span class="sd">        for reaction index ri</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.chemistry</span> <span class="kn">import</span> <span class="n">Reaction</span>
+        <span class="k">return</span> <span class="n">Reaction</span><span class="p">(</span>
+            <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">substance_names</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="bp">self</span><span class="o">.</span><span class="n">stoich_reac</span><span class="p">[</span><span class="n">ri</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span>
+             <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)},</span>
+            <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">substance_names</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="bp">self</span><span class="o">.</span><span class="n">stoich_prod</span><span class="p">[</span><span class="n">ri</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span>
+             <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)},</span>
+            <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">substance_names</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="bp">self</span><span class="o">.</span><span class="n">stoich_actv</span><span class="p">[</span><span class="n">ri</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span>
+             <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)},</span>
+            <span class="n">k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">[</span><span class="n">ri</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">alloc_fout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">alloc_jout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">banded</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">order</span> <span class="o">==</span> <span class="s">&#39;C&#39;</span><span class="p">:</span>
+            <span class="n">rpad</span><span class="p">,</span> <span class="n">cpad</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pad</span>
+        <span class="k">elif</span> <span class="n">order</span> <span class="o">==</span> <span class="s">&#39;F&#39;</span><span class="p">:</span>
+            <span class="n">rpad</span><span class="p">,</span> <span class="n">cpad</span> <span class="o">=</span> <span class="n">pad</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Order must be &#39;C&#39; or &#39;F&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">banded</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">rpad</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">+</span> <span class="n">cpad</span><span class="p">),</span>
+                            <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">+</span> <span class="n">rpad</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">+</span> <span class="n">cpad</span><span class="p">),</span>
+                            <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ny</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+
+
+<div class="viewcode-block" id="ReactionDiffusion"><a class="viewcode-back" href="../../core.html#chemreac.core.ReactionDiffusion">[docs]</a><span class="k">class</span> <span class="nc">ReactionDiffusion</span><span class="p">(</span><span class="n">CppReactionDiffusion</span><span class="p">,</span> <span class="n">ReactionDiffusionBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Object representing the numerical model, with callbacks for evaluating</span>
+<span class="sd">    derivatives and jacobian.</span>
+
+<span class="sd">    The instance provides methods:</span>
+
+<span class="sd">    f(t, y, fout)</span>
+<span class="sd">    dense_jac_rmaj(t, y, Jout)</span>
+<span class="sd">    dense_jac_cmaj(t, y, Jout)</span>
+<span class="sd">    banded_jac_cmaj(t, y, Jout)</span>
+<span class="sd">    banded_packed_jac_cmaj(t, y, Jout)</span>
+
+<span class="sd">    some of which are used by chemreac.integrate.integrate_scipy</span>
+
+<span class="sd">    In addition error estimates (if provided by user) are stored as:</span>
+<span class="sd">    - k_err</span>
+<span class="sd">    - D_err</span>
+
+<span class="sd">    Additional convenience attributes (not used by underlying C++ class):</span>
+<span class="sd">    - substance_names</span>
+<span class="sd">    - substance_tex_names</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n: integer</span>
+<span class="sd">        number of species</span>
+<span class="sd">    stoich_reac: list of lists of integer indices</span>
+<span class="sd">        reactant index lists per reaction.</span>
+<span class="sd">    stoich_prod: list of lists of integer indices</span>
+<span class="sd">        product index lists per reaction.</span>
+<span class="sd">    k: 1-dimensional array</span>
+<span class="sd">        reaction rate coefficients (if 2-tuples,</span>
+<span class="sd">        assumed (val, stddev) pairs)</span>
+<span class="sd">    N: integer</span>
+<span class="sd">        number of compartments (default: 1 if x==None else len(x)-1)</span>
+<span class="sd">    D: sequence of floats</span>
+<span class="sd">        diffusion coefficients (of length n)</span>
+<span class="sd">    z_chg: sequence of integers</span>
+<span class="sd">        1-dimensional array ion charges</span>
+<span class="sd">    mobility: sequence of floats</span>
+<span class="sd">        mobility of ions</span>
+<span class="sd">    x: sequence of floats or pair of flats or float, optional</span>
+<span class="sd">        compartment boundaries (of length N+1), default: linspace(0, 1, N+1)</span>
+<span class="sd">        if x is a pair of floats it is expanded into linspace(x[0], x[1], N+1).</span>
+<span class="sd">        if x is a float it is expanded into linspace(0, x, N+1)</span>
+<span class="sd">    stoich_actv: list of lists of integer indices</span>
+<span class="sd">        list of ACTIVE reactant index lists per reaction.n, default: []</span>
+<span class="sd">    bin_k_factor: sequence of sequences of floats</span>
+<span class="sd">        per compartment modulation of rate coefficients</span>
+<span class="sd">    bin_k_factor_span: sequence of integers</span>
+<span class="sd">        spans over reaction indices affected by bin_k_factor</span>
+<span class="sd">    geom: integer</span>
+<span class="sd">        any of (FLAT, SPHERICAL, CYLINDRICAL)</span>
+<span class="sd">    logy: bool</span>
+<span class="sd">        f and \*_jac_\* routines operate on log(concentration)</span>
+<span class="sd">    logt: bool</span>
+<span class="sd">        f and \*_jac_\* routines operate on log(time)</span>
+<span class="sd">    logx: bool</span>
+<span class="sd">        f and \*_jac_\* routines operate on log(space)</span>
+<span class="sd">    nstencil: integer</span>
+<span class="sd">        number of points used in finite difference scheme</span>
+<span class="sd">    lrefl: bool</span>
+<span class="sd">        reflective left boundary (default: True)</span>
+<span class="sd">    rrefl: bool</span>
+<span class="sd">        reflective right boundary (default: True)</span>
+<span class="sd">    auto_efield: bool</span>
+<span class="sd">        calculate electric field from concentrations (default: False)</span>
+<span class="sd">    surf_chg: pair of floats</span>
+<span class="sd">        total charge of surface (defaut: (0.0, 0.0))</span>
+<span class="sd">    eps: float</span>
+<span class="sd">        relative permitivity of medium (dielectric constant)</span>
+<span class="sd">    xscale: float</span>
+<span class="sd">        use internal scaling of length (default: 1.0)</span>
+<span class="sd">        (finite difference scheme works best for step-size ~1)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># not used by C++ class</span>
+    <span class="n">extra_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;k_err&#39;</span><span class="p">,</span> <span class="s">&#39;D_err&#39;</span><span class="p">,</span> <span class="s">&#39;substance_names&#39;</span><span class="p">,</span> <span class="s">&#39;substance_tex_names&#39;</span><span class="p">]</span>
+
+    <span class="c"># subset of extra_attrs optionally passed by user</span>
+    <span class="n">kwarg_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;substance_names&#39;</span><span class="p">,</span> <span class="s">&#39;substance_tex_names&#39;</span><span class="p">]</span>
+
+    <span class="n">_substance_names</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">_substance_tex_names</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">substance_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_substance_names</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)))</span>
+
+    <span class="nd">@substance_names.setter</span>
+    <span class="k">def</span> <span class="nf">substance_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_substance_names</span> <span class="o">=</span> <span class="n">names</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">substance_tex_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_substance_tex_names</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)))</span>
+
+    <span class="nd">@substance_tex_names.setter</span>
+    <span class="k">def</span> <span class="nf">substance_tex_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tex_names</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_substance_tex_names</span> <span class="o">=</span> <span class="n">tex_names</span>
+
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">stoich_reac</span><span class="p">,</span> <span class="n">stoich_prod</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">z_chg</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                <span class="n">mobility</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stoich_actv</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">bin_k_factor</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                <span class="n">bin_k_factor_span</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">geom</span><span class="o">=</span><span class="n">FLAT</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">logt</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                <span class="n">logx</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">nstencil</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">lrefl</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">rrefl</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                <span class="n">auto_efield</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">surf_chg</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                <span class="n">xscale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">N</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">N</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">nstencil</span> <span class="o">=</span> <span class="n">nstencil</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">N</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">N</span> <span class="o">&lt;</span> <span class="n">nstencil</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;N must be &gt;= nstencil&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">z_chg</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">z_chg</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mobility</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">mobility</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">N</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">z_chg</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">mobility</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">D</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+
+        <span class="n">k_val</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">k_err</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">D_val</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">D_err</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">inp</span><span class="p">,</span> <span class="n">val_lst</span><span class="p">,</span> <span class="n">err_lst</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">k</span><span class="p">,</span> <span class="n">k_val</span><span class="p">,</span> <span class="n">k_err</span><span class="p">),</span> <span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">D_val</span><span class="p">,</span> <span class="n">D_err</span><span class="p">)]:</span>
+            <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">entry</span>
+                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+                    <span class="n">val</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">entry</span><span class="p">,</span> <span class="mi">0</span>
+                <span class="n">val_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                <span class="n">err_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+                <span class="c"># monotonic:</span>
+                <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+                <span class="n">_x</span> <span class="o">=</span> <span class="n">x</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Don&#39;t know what to do with len(x) == </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span>
+                                 <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">stoich_actv</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">_stoich_actv</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([[]]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">stoich_reac</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_stoich_actv</span> <span class="o">=</span> <span class="n">stoich_actv</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">_stoich_actv</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">stoich_reac</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">stoich_reac</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">stoich_prod</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">geom</span> <span class="ow">in</span> <span class="p">(</span><span class="n">FLAT</span><span class="p">,</span> <span class="n">CYLINDRICAL</span><span class="p">,</span> <span class="n">SPHERICAL</span><span class="p">)</span>
+
+        <span class="c"># Handle bin_k_factor</span>
+        <span class="k">if</span> <span class="n">bin_k_factor</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">bin_k_factor_span</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">bin_k_factor_span</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">bin_k_factor</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">bin_k_factor_span</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">bin_k_factor</span><span class="p">)</span> <span class="o">==</span> <span class="n">N</span>
+            <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">bin_k_factor_span</span><span class="p">)</span> <span class="k">for</span>
+                        <span class="n">x</span> <span class="ow">in</span> <span class="n">bin_k_factor</span><span class="p">])</span>
+            <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bin_k_factor_span</span><span class="p">])</span>
+
+        <span class="n">rd</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ReactionDiffusion</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span>
+            <span class="n">cls</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">stoich_reac</span><span class="p">,</span> <span class="n">stoich_prod</span><span class="p">,</span> <span class="n">k_val</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span>
+            <span class="n">D_val</span><span class="p">,</span> <span class="n">z_chg</span><span class="p">,</span> <span class="n">mobility</span><span class="p">,</span> <span class="n">_x</span><span class="p">,</span> <span class="n">_stoich_actv</span><span class="p">,</span> <span class="n">bin_k_factor</span><span class="p">,</span>
+            <span class="n">bin_k_factor_span</span><span class="p">,</span> <span class="n">geom</span><span class="p">,</span> <span class="n">logy</span><span class="p">,</span> <span class="n">logt</span><span class="p">,</span> <span class="n">logx</span><span class="p">,</span>
+            <span class="n">nstencil</span><span class="p">,</span> <span class="n">lrefl</span><span class="p">,</span> <span class="n">rrefl</span><span class="p">,</span> <span class="n">auto_efield</span><span class="p">,</span> <span class="n">surf_chg</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">xscale</span>
+        <span class="p">)</span>
+        <span class="n">rd</span><span class="o">.</span><span class="n">k_err</span> <span class="o">=</span> <span class="n">k_err</span>
+        <span class="n">rd</span><span class="o">.</span><span class="n">D_err</span> <span class="o">=</span> <span class="n">D_err</span>
+
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">kwarg_attrs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">rd</span><span class="p">,</span> <span class="s">&#39;_&#39;</span> <span class="o">+</span> <span class="n">attr</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">attr</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;Unkown kwargs: &quot;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">rd</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

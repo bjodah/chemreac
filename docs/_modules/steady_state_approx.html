@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>steady_state_approx &mdash; chemreac 0.2.4 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="chemreac 0.2.4 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> chemreac</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#building-from-source">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#tests">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core.html">core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../integrate.html">integrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chemistry.html">chemistry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html">util</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/analytic_diffusion.html">Analytic diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/analytic_N_scaling.html">Analytic error scaling vs. number of bins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/aqueous_radiolysis.html">Aqueous radiolysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/auto_efield.html">Automatic electric field computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/const_surf_conc.html">Diffusion from constant concentration surface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/decay.html">Two coupled decays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/equilibrium.html">Equilibrium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/four_species.html">Four species two reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/steady_state_approx.html">Steady state approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#coding-standards">Coding standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#documentation-standard">Documentation standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev.html#environment">Environment</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">chemreac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>steady_state_approx</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="https://github.com/bjodah/chemreac/blob/master/docs/_modules/steady_state_approx.rst" class="fa fa-github"> Edit on GitHub</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for steady_state_approx</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="c"># ::</span>
+<span class="c">#</span>
+<span class="c">#     A     -&gt;  B      k1</span>
+<span class="c">#         B -&gt;  C      k2</span>
+<span class="c">#     A + B -&gt;  B + C  k3</span>
+<span class="c">#</span>
+<span class="c">#     dA/dt = -k1*A          - k3*A*B</span>
+<span class="c">#     dB/dt =  k1*A - k2*B</span>
+<span class="c">#     dC/dt =         k2*B   + k3*A*B</span>
+
+
+<span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">Steady state approximation</span>
+<span class="sd">--------------------------</span>
+
+<span class="sd">:download:`examples/steady_state_approx.py` shows how you can estimate</span>
+<span class="sd">errors commited when assuming steady state for simple systems. In this</span>
+<span class="sd">essence it is quite different from the other examples where we have been</span>
+<span class="sd">investigating the error of the numerical integration `vs.` an analytic</span>
+<span class="sd">solution. Here we will do the reverse, we will assume that our result</span>
+<span class="sd">from the numerical integration is correct (or rather: much more accurate)</span>
+<span class="sd">compared to our approximately correct analytic expressions.</span>
+
+<span class="sd">We will consider the following system:</span>
+
+<span class="sd">.. math ::</span>
+
+<span class="sd">    A &amp;    &amp;\rightarrow  B &amp;     &amp;~~~k_1 \\</span>
+<span class="sd">      &amp;  B &amp;\rightarrow  C &amp;     &amp;~~~k_2 \\</span>
+<span class="sd">    A + &amp;B &amp;\rightarrow  B &amp;+ C  &amp;~~~k_3</span>
+
+<span class="sd">.. math ::</span>
+
+<span class="sd">    \frac{dA}{dt} &amp;= -k1 \cdot A  &amp;        &amp;- k3 \cdot A \cdot B \\</span>
+<span class="sd">    \frac{dB}{dt} &amp;=  +k1 \cdot A  &amp;- k2 \cdot B   &amp;         \\</span>
+<span class="sd">    \frac{dC}{dt} &amp;=        &amp;+ k2 \cdot B   &amp;+ k3 \cdot A \cdot B</span>
+
+<span class="sd">The rate expressions are from mass action and hence</span>
+<span class="sd">we are conserving mass:</span>
+
+<span class="sd">.. math ::</span>
+
+<span class="sd">    A+B+C = A_0 + B_0 + C_0</span>
+
+
+<span class="sd">sum of derivatives = 0 (already satisfied)</span>
+
+
+<span class="sd">For initial concentrations of A much larger than B we have:</span>
+
+
+<span class="sd">Steady state assumption for B (:math:`A_0 \gg B_0`):</span>
+
+<span class="sd">.. math ::</span>
+
+<span class="sd">    B &amp;= \frac{k_1 A}{k_2} \\</span>
+<span class="sd">    \frac{dA}{dt} &amp;= -k_1\left(A + \frac{k_3}{k_2}A^2 \right) \\</span>
+<span class="sd">    \log{A} - \log{\left( \frac{k_3}{k_2}A + 1 \right)} &amp;= -k_1t +</span>
+<span class="sd">        \left(\log{A_0} - \log{\left( \frac{k_3}{k_2}A_0 + 1\right)}\right) \\</span>
+<span class="sd">    \frac{A}{\frac{k_3}{k_2}A + 1} &amp;= f(t)</span>
+
+
+<span class="sd">using</span>
+
+<span class="sd">.. math ::</span>
+
+<span class="sd">    f(t) = \frac{A_0}{\frac{k_3}{k_2}A_0 + 1}e^{-k_1 t}</span>
+
+
+<span class="sd">we get</span>
+
+<span class="sd">.. math ::</span>
+
+<span class="sd">    A(1 - f(t) \cdot \frac{k_3}{k_2}) &amp;= f(t) \\</span>
+<span class="sd">    A &amp;= \frac{f(t)}{1 - f(t)\frac{k_3}{k_2}} [*] \\</span>
+<span class="sd">    A &amp;= \frac{1}{\frac{1}{f(t)} - \frac{k_3}{k_2}} \\</span>
+<span class="sd">    A &amp;= \frac{1}{\frac{\frac{k_3}{k_2}A_0 + 1}{A_0}e^{k_1 t} -</span>
+<span class="sd">        \frac{k_3}{k_2}} \\</span>
+
+
+<span class="sd">where we note:</span>
+
+<span class="sd">.. math ::</span>
+
+<span class="sd">    [*] ~~ if \frac{k_3}{k_2} &lt;&lt; 1: \\</span>
+<span class="sd">    A = f(t)</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span>
+                        <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">future.builtins</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">argh</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">chemreac</span> <span class="kn">import</span> <span class="n">ReactionDiffusion</span>
+<span class="kn">from</span> <span class="nn">chemreac.integrate</span> <span class="kn">import</span> <span class="n">run</span>
+<span class="kn">from</span> <span class="nn">chemreac.util.plotting</span> <span class="kn">import</span> <span class="n">plot_C_vs_t_in_bin</span><span class="p">,</span> <span class="n">save_and_or_show_plot</span>
+
+
+<div class="viewcode-block" id="integrate_rd"><a class="viewcode-back" href="../examples/steady_state_approx.html#steady_state_approx.integrate_rd">[docs]</a><span class="k">def</span> <span class="nf">integrate_rd</span><span class="p">(</span><span class="n">tend</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1</span><span class="o">=</span><span class="mf">7e-1</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">3e2</span><span class="p">,</span> <span class="n">k3</span><span class="o">=</span><span class="mf">7.0</span><span class="p">,</span>
+                 <span class="n">A0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">B0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">C0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">nt</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+                 <span class="n">plot</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="s">&#39;None&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs integration and (optionally) generates plots.</span>
+
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    ::</span>
+
+<span class="sd">       $ python steady_state_approx.py --plot --savefig steady_state_approx.png</span>
+
+
+<span class="sd">    .. image:: ../_generated/steady_state_approx.png</span>
+
+
+<span class="sd">    ::</span>
+
+<span class="sd">       $ python steady_state_approx.py --plot --savefig \</span>
+<span class="sd">steady_state_approx.html</span>
+
+
+<span class="sd">    :download:`steady_state_approx.html\</span>
+<span class="sd">        &lt;../_generated/steady_state_approx.html&gt;`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">A0</span><span class="o">/</span><span class="p">(</span><span class="n">k3</span><span class="o">/</span><span class="n">k2</span><span class="o">*</span><span class="n">A0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">A0</span><span class="p">,</span> <span class="n">B0</span><span class="p">,</span> <span class="n">C0</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="p">[</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">]</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">ReactionDiffusion</span><span class="p">(</span>
+        <span class="mi">3</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tend</span><span class="p">,</span> <span class="n">nt</span><span class="p">)</span>
+    <span class="n">integr</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">rd</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">A_ssB</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">k3</span><span class="o">/</span><span class="n">k2</span><span class="p">)</span>
+    <span class="n">A_ssB_2fast</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">plot_C_vs_t_in_bin</span><span class="p">(</span><span class="n">rd</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">integr</span><span class="o">.</span><span class="n">Cout</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">integr</span><span class="o">.</span><span class="n">Cout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">A_ssB</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="s">&quot;Abs. err. in A assuming steady state of B&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">})</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">integr</span><span class="o">.</span><span class="n">Cout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">A_ssB_2fast</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="s">&quot;Abs. err. in A when also assuming k2 &gt;&gt; k3&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">})</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+        <span class="n">save_and_or_show_plot</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="n">savefig</span><span class="p">)</span>
+
+    <span class="n">ydot</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">k3</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">k1</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">k2</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                         <span class="n">k2</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">k3</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">integr</span><span class="o">.</span><span class="n">Cout</span><span class="p">,</span> <span class="n">A_ssB</span><span class="p">,</span> <span class="n">A_ssB_2fast</span><span class="p">,</span> <span class="n">ydot</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">argh</span><span class="o">.</span><span class="n">dispatch_command</span><span class="p">(</span><span class="n">integrate_rd</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Björn Dahlgren.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
