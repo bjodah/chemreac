@@ -12,7 +12,7 @@
 
 namespace chemreac {
 
-enum class Geom {FLAT, CYLINDRICAL, SPHERICAL};
+enum class Geom {FLAT, CYLINDRICAL, SPHERICAL, PERIODIC};
 
 using std::vector;
 using std::pair;

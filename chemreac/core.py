@@ -280,7 +280,7 @@ class ReactionDiffusion(PyReactionDiffusion, ReactionDiffusionBase):
     stoich_inact: list of lists of integer indices
         List of inactive reactant index lists per reaction.n, default: ``[]``.
     geom: str (letter)
-        Any in 'fcs' (flat, cylindrical, spherical).
+        Any in 'fcsp', i.e. flat, cylindrical, spherical, periodic (flat).
     logy: bool
         f and \*_jac_\* routines operate on log_b(concentration).
     logt: bool

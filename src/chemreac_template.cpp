@@ -1,12 +1,14 @@
-## -*- coding: utf-8; compile-command: "cd ~/vc/chemreac; rm -r build/; PYTHONPATH=~/vc/pycompilation:~/vc/pycodeexport python setup.py build_ext -i; cd build/temp.linux-x86_64-2.7; /usr/bin/g++ -O2 -c -std=c++0x -fPIC -Wall -Wextra -o src/chemreac.o -I/home/bjorn/vc/chemreac/src -I/home/bjorn/vc/chemreac/src/finitediff/include -I/home/bjorn/vc/chemreac/src/finitediff/external/newton_interval/include -I/home/bjorn/.local/lib/python2.7/site-packages/numpy/core/include src/chemreac.cpp" -*-
-// ${_warning_in_the_generated_file_not_to_edit}
-<%doc>
+<%doc> coding: utf-8; compile-command: "cd ~/vc/chemreac; rm -r build/; PYTHONPATH=~/vc/pycompilation:~/vc/pycodeexport python setup.py build_ext -i; cd build/temp.linux-x86_64-2.7; /usr/bin/g++ -O2 -c -std=c++0x -fPIC -Wall -Wextra -o src/chemreac.o -I/home/bjorn/vc/chemreac/src -I/home/bjorn/vc/chemreac/src/finitediff/include -I/home/bjorn/vc/chemreac/src/finitediff/external/newton_interval/include -I/home/bjorn/.local/lib/python2.7/site-packages/numpy/core/include src/chemreac.cpp" -*-
 // This is a templated source file.
 // Render template using Mako (Python templating engine)
 </%doc>
+// ${'{0} eval: (read-only-mode) {0}'.format('-*-')}
+// ${_warning_in_the_generated_file_not_to_edit}
+
 #include <algorithm> // std::count
 //#include <vector>    // std::vector
 #include <algorithm> // std::max, std::min
+#include <cmath>
 #include <cstdlib> // free,  C++11 aligned_alloc
 #include "chemreac.hpp"
 #include "finitediff_templated.hpp" // fintie differences
@@ -119,6 +121,9 @@ ReactionDiffusion<Real_t>::ReactionDiffusion(
         break;
     case 2:
         geom = Geom::SPHERICAL;
+        break;
+    case 3:
+        geom = Geom::PERIODIC;
         break;
     default:
         throw std::logic_error("Unknown geom.");
@@ -299,7 +304,7 @@ ReactionDiffusion<Real_t>::apply_fd_(uint bi){
     finitediff::populate_weights<Real_t>(0, lxc, nstencil-1, 2, c);
     delete []lxc;
 
-    const Real_t logbdenom = use_log2 ? 1/log(2) : 1;
+    const Real_t logbdenom = use_log2 ? M_LOG2E : 1; // M_LOG2E == log(e)/log(2) == 1/log(2)
 
     for (uint li=0; li<nstencil; ++li){ // li: local index
         D_WEIGHT(bi, li) = FDWEIGHT(2, li);
@@ -413,8 +418,10 @@ ReactionDiffusion<Real_t>::rhs(Real_t t, const Real_t * const y, Real_t * const 
     // note condifiontal call to free at end of this function
     const Real_t * const linC = (logy) ? alloc_and_populate_linC(y, true) : y;
     const Real_t * const rlinC = (logy) ? alloc_and_populate_linC(y, true, true) : nullptr;
+    std::vector<Real_t> velocity;
     if (auto_efield){
         calc_efield(linC);
+
     }
     const Real_t expb_t = (logt) ? expb(t) : 0.0;
     ${"Real_t * const local_r = new Real_t[nr];" if not WITH_OPENMP else ""}
@@ -484,12 +491,12 @@ ReactionDiffusion<Real_t>::rhs(Real_t t, const Real_t * const y, Real_t * const 
             if (logy){
                 DYDT(bi, si) *= RLINC(bi, si);
                 if (!logt and use_log2)
-                    DYDT(bi, si) /= log(2);
+                    DYDT(bi, si) /= M_LN2;
             }
             if (logt){
                 DYDT(bi, si) *= expb_t;
                 if (!logy and use_log2)
-                    DYDT(bi, si) *= log(2);
+                    DYDT(bi, si) *= M_LN2;
             }
         }
         ${"delete []local_r;" if WITH_OPENMP else ""}
@@ -538,7 +545,7 @@ ReactionDiffusion<Real_t>::${token}(Real_t t,
 #error "Unhandled token."
     %endif
     const Real_t exp_t = (logt) ? expb(t) : 0.0;
-    const Real_t logbfactor = use_log2 ? log(2) : 1;
+    const Real_t logbfactor = use_log2 ? M_LN2 : 1;
 
     Real_t * fout = nullptr;
     if (logy){ // fy useful..
@@ -813,6 +820,7 @@ ReactionDiffusion<Real_t>::get_geom_as_int() const
     case Geom::FLAT :        return 0;
     case Geom::CYLINDRICAL : return 1;
     case Geom::SPHERICAL :   return 2;
+    case Geom::PERIODIC :   return 3;
     default:                 return -1;
     }
 }
@@ -823,7 +831,6 @@ ReactionDiffusion<Real_t>::calc_efield(const Real_t * const linC)
 {
     // Prototype for self-generated electric field
     const Real_t F = this->faraday_const; // Faraday's constant
-    const Real_t pi = 3.14159265358979324;
     const Real_t eps = eps_rel*vacuum_permittivity;
     Real_t nx, cx = logx ? expb(x[0]) : x[0];
     for (uint bi=0; bi<N; ++bi){
@@ -841,13 +848,15 @@ ReactionDiffusion<Real_t>::calc_efield(const Real_t * const linC)
             Q += netchg[bi]*(nx - cx);
             break;
         case Geom::CYLINDRICAL:
-            efield[bi] = F*Q/(2*pi*eps*r); // Gauss's law
-            Q += netchg[bi]*pi*(nx*nx - cx*cx);
+            efield[bi] = F*Q/(2*M_PI*eps*r); // Gauss's law
+            Q += netchg[bi]*M_PI*(nx*nx - cx*cx);
             break;
         case Geom::SPHERICAL:
-            efield[bi] = F*Q/(4*pi*eps*r*r); // Gauss's law
-            Q += netchg[bi]*4*pi/3*(nx*nx*nx - cx*cx*cx);
+            efield[bi] = F*Q/(4*M_PI*eps*r*r); // Gauss's law
+            Q += netchg[bi]*4*M_PI/3*(nx*nx*nx - cx*cx*cx);
             break;
+        case Geom::PERIODIC:
+            efield[bi] = 0;
         }
         cx = nx;
     }

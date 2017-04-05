@@ -139,7 +139,7 @@ cdef class PyReactionDiffusion:
         """
         if linC.shape != (self.N,):
             raise ValueError("linC must be of length N")
-        if self.geom == 'f':
+        if self.geom in ('f', 'p'):
             return np.sum(np.diff(self.lin_x)*linC)
         elif self.geom == 'c':
             return np.sum(np.pi*np.diff(self.lin_x**2)*linC)
@@ -169,7 +169,11 @@ cdef class PyReactionDiffusion:
 
     property geom:
         def __get__(self):
-            return 'fcs'[self.thisptr.get_geom_as_int()]
+            cdef int idx = self.thisptr.get_geom_as_int()
+            tokens = 'fcsp'
+            if idx < 0 or idx > len(tokens):
+                raise ValueError("Incorrect geom.")
+            return tokens[idx]
 
     property stoich_active:
         def __get__(self):
