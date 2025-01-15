@@ -1,16 +1,16 @@
 when:
-  - event: [pull_request, tag, cron, push]
+  - event: [push]
 
 steps:
 
   - name: restore-cache
     image: cont-reg.bjodah.se:443/bjodah/triceratops-3:24
     commands:
-      - curl ftp://chempy:$${ARTIFACTS_PASS}@$${FTP_SERVER}/cache/cache-ci.tar | tar x
+      - curl ftp://chemreac:$${ARTIFACTS_PASS}@$${FTP_SERVER}/cache/cache-ci.tar | tar x
     secrets: [ ARTIFACTS_PASS, FTP_SERVER ]
     when:
      - event: push
-       repo: bjodah/chempy
+       repo: bjodah/chemreac
 
   - name: install
     image: cont-reg.bjodah.se:443/bjodah/triceratops-3:24
@@ -30,7 +30,7 @@ steps:
       - CPLUS_INCLUDE_PATH=/opt-3/boost-1.87.0/include
       - SUNDBASE=/opt-3/sundials-6.7.0-release
       - CPATH=/usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
-      - CHEMPY_SKIP_NO_TESTS=1
+      - CHEMREAC_SKIP_NO_TESTS=1
     commands:
       - export CACHE_ROOT=$(pwd)/cache-ci
       - export PYTHONUSERBASE=$CACHE_ROOT/pyusrb
@@ -40,20 +40,20 @@ steps:
       - .ci/ci-02-run-tests.sh
       - cp -r htmlcov/ deploy/public_html/branches/${CI_COMMIT_BRANCH}/
       - ./.ci/grep-for-merge-blocking-token.sh
-      - export CHEMPY_DEPRECATION_FILTER=ignore
+      - export CHEMREAC_DEPRECATION_FILTER=ignore
       - python3 -m virtualenv /tmp/test_sdist
       - python3 -m virtualenv /tmp/test_git_archive
       - cd deploy/public_html/branches/${CI_COMMIT_BRANCH}
-      - unset CHEMPY_SKIP_NO_TESTS  # I can't get pip to install extras when using local file...
-      - bash -c "source /tmp/test_sdist/bin/activate; pip install --cache-dir $CACHE_ROOT/pip_cache file://$(realpath $(eval ls chempy-*.tar.gz))#chempy[all] pytest; pytest --pyargs chempy"
-      - bash -c "source /tmp/test_git_archive/bin/activate; pip install --cache-dir $CACHE_ROOT/pip_cache file://$(realpath chempy-head.zip)#chempy[all] pytest; pytest --pyargs chempy"
+      - unset CHEMREAC_SKIP_NO_TESTS  # I can't get pip to install extras when using local file...
+      - bash -c "source /tmp/test_sdist/bin/activate; pip install --cache-dir $CACHE_ROOT/pip_cache file://$(realpath $(eval ls chemreac-*.tar.gz))#chemreac[all] pytest; pytest --pyargs chemreac"
+      - bash -c "source /tmp/test_git_archive/bin/activate; pip install --cache-dir $CACHE_ROOT/pip_cache file://$(realpath chemreac-head.zip)#chemreac[all] pytest; pytest --pyargs chemreac"
     depends_on:
       - install
 
   - name: render-notebooks
     image: cont-reg.bjodah.se:443/bjodah/triceratops-3:24
     environment:
-      - CHEMPY_DEPRECATION_FILTER=ignore
+      - CHEMREAC_DEPRECATION_FILTER=ignore
       - SUNDBASE=/opt-3/sundials-6.7.0-release
       - CPATH=/usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
     commands:
@@ -71,7 +71,7 @@ steps:
   - name: compile-documentation
     image: cont-reg.bjodah.se:443/bjodah/triceratops-3:24
     environment:
-      - CHEMPY_DEPRECATION_FILTER=ignore
+      - CHEMREAC_DEPRECATION_FILTER=ignore
       - SUNDBASE=/opt-3/sundials-6.7.0-release
     commands:
       - export PYTHONUSERBASE=$(pwd)/cache-ci/pyusrb
@@ -90,23 +90,23 @@ steps:
     commands:
       - find ./cache-ci/ -type f -mtime +90 -exec rm {} \;
       - tar cf cache-ci.tar ./cache-ci/
-      - curl -T cache-ci.tar ftp://chempy:$${ARTIFACTS_PASS}@$${FTP_SERVER}/cache/
+      - curl -T cache-ci.tar ftp://chemreac:$${ARTIFACTS_PASS}@$${FTP_SERVER}/cache/
     secrets: [ ARTIFACTS_PASS, FTP_SERVER ]
     when:
      - event: push
-       repo: bjodah/chempy
+       repo: bjodah/chemreac
     depends_on:
       - compile-documentation
 
   - name: deploy-public-html
     image: cont-reg.bjodah.se:443/bjodah/triceratops-3:24
     commands:
-      - tar czf chempy-${CI_COMMIT_BRANCH}.tar.gz ./deploy/public_html
-      - curl -T chempy-${CI_COMMIT_BRANCH}.tar.gz ftp://chempy:$${ARTIFACTS_PASS}@$${FTP_SERVER}/public_html/
+      - tar czf chemreac-${CI_COMMIT_BRANCH}.tar.gz ./deploy/public_html
+      - curl -T chemreac-${CI_COMMIT_BRANCH}.tar.gz ftp://chemreac:$${ARTIFACTS_PASS}@$${FTP_SERVER}/public_html/
     secrets: [ ARTIFACTS_PASS, FTP_SERVER ]
     when:
      - event: push
-       repo: bjodah/chempy
+       repo: bjodah/chemreac
     depends_on:
       - compile-documentation
 
