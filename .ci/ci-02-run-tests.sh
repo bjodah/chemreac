@@ -6,7 +6,8 @@ if [[ "$CI_BRANCH" =~ ^v[0-9]+.[0-9]?* ]]; then
     eval export ${1^^}_RELEASE_VERSION=\$CI_BRANCH
 fi
 
-python3 -m pip install --user -e .[all]
+INSTALL_PIP_FLAGS=""
+python3 -m pip install $INSTALL_PIP_FLAGS -e .[all]
 python3 setup.py build_ext -i
 mkdir -p dist
 cp -r chemreac dist/.
