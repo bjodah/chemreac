@@ -30,10 +30,10 @@ for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitedif
         env \
             CFLAGS="-isystem $SUNDBASE/include $CFLAGS" \
             LDFLAGS="-Wl,--disable-new-dtags -Wl,-rpath,$SUNDBASE/lib -L$SUNDBASE/lib $LDFLAGS" \
-            py3 -m pip install $INSTALL_PIP_FLAGS $pypkg_fqn
+            python -m pip install $INSTALL_PIP_FLAGS $pypkg_fqn
     else
-        py3 -m pip install $INSTALL_PIP_FLAGS $pypkg_fqn
+        python -m pip install $INSTALL_PIP_FLAGS $pypkg_fqn
     fi
-    py3 -m pytest -k "not pool_discontinuity_approx" --pyargs $pypkg
+    python -m pytest -k "not pool_discontinuity_approx" --pyargs $pypkg
 done
 
