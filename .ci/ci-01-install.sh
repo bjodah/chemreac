@@ -2,8 +2,15 @@
 set -euxo pipefail
 source /opt-3/cpython-v3.*-apt-deb/bin/activate
 INSTALL_PIP_FLAGS="--cache-dir ./ci-cache/pip-cache --upgrade"  # --user
-for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitediff block_diag_ilu pycvodes pyodesys chempy; do
+
+export PYODESYS_CVODE_FLAGS="-isystem $SUNDBASE/include ${CFLAGS:-}"
+export PYODESYS_CVODE_LDFLAGS="-Wl,--disable-new-dtags -Wl,-rpath,$SUNDBASE/lib -L$SUNDBASE/lib ${LDFLAGS:-}"
+
+for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitediff block_diag_ilu pycvodes sym pyodesys chempy; do
     case $pypkg in
+        sym)
+            pypkg_fqn="git+https://github.com/bjodah/sym@jun21#egg=sym"
+            ;;
         pyodeint)
             pypkg_fqn="git+https://github.com/bjodah/pyodeint@sep21#egg=pyodeint"
             ;;
@@ -34,8 +41,8 @@ for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitedif
     esac
     if [[ $pypkg == "pycvodes" ]]; then
         env \
-            CFLAGS="-isystem $SUNDBASE/include ${CFLAGS:-}" \
-            LDFLAGS="-Wl,--disable-new-dtags -Wl,-rpath,$SUNDBASE/lib -L$SUNDBASE/lib ${LDFLAGS:-}" \
+            CFLAGS=$PYODESYS_CVODE_FLAGS \
+            LDFLAGS=$PYODESYS_CVODE_LDFLAGS \
             python -m pip install $INSTALL_PIP_FLAGS $pypkg_fqn
     else
         python -m pip install $INSTALL_PIP_FLAGS $pypkg_fqn
