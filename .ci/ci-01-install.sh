@@ -6,7 +6,7 @@ INSTALL_PIP_FLAGS="--cache-dir ./ci-cache/pip-cache --upgrade"  # --user
 export PYODESYS_CVODE_FLAGS="-isystem $SUNDBASE/include ${CFLAGS:-}"
 export PYODESYS_CVODE_LDFLAGS="-Wl,--disable-new-dtags -Wl,-rpath,$SUNDBASE/lib -L$SUNDBASE/lib ${LDFLAGS:-}"
 
-for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitediff block_diag_ilu pycvodes sym pyodesys chempy; do
+for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitediff block_diag_ilu pycvodes pykinsol sym pyodesys chempy; do
     case $pypkg in
         sym)
             pypkg_fqn="git+https://github.com/bjodah/sym@jun21#egg=sym"
@@ -32,6 +32,9 @@ for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitedif
          pyodesys)
              pypkg_fqn="git+https://github.com/bjodah/pyodesys@bdf2#egg=pyodesys"
              ;;
+         pykinsol)
+             pypkg_fqn="git+https://github.com/bjodah/pykinsol@jan25#egg=pykinsol"
+             ;;
          chempy)
              pypkg_fqn="git+https://github.com/bjodah/chempy@nov20#egg=chempy"
              ;;
@@ -39,10 +42,10 @@ for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitedif
              pypkg_fqn=$pypkg
              ;;
     esac
-    if [[ $pypkg == "pycvodes" ]]; then
+    if [[ $pypkg == "pycvodes" || $pypkg == "pykinsol" ]]; then
         env \
-            CFLAGS=$PYODESYS_CVODE_FLAGS \
-            LDFLAGS=$PYODESYS_CVODE_LDFLAGS \
+            CFLAGS="$PYODESYS_CVODE_FLAGS" \
+            LDFLAGS="$PYODESYS_CVODE_LDFLAGS" \
             python -m pip install $INSTALL_PIP_FLAGS $pypkg_fqn
     else
         python -m pip install $INSTALL_PIP_FLAGS $pypkg_fqn
