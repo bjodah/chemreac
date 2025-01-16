@@ -34,8 +34,8 @@ for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitedif
     esac
     if [[ $pypkg == "pycvodes" ]]; then
         env \
-            CFLAGS="-isystem $SUNDBASE/include $CFLAGS" \
-            LDFLAGS="-Wl,--disable-new-dtags -Wl,-rpath,$SUNDBASE/lib -L$SUNDBASE/lib $LDFLAGS" \
+            CFLAGS="-isystem $SUNDBASE/include ${CFLAGS:-}" \
+            LDFLAGS="-Wl,--disable-new-dtags -Wl,-rpath,$SUNDBASE/lib -L$SUNDBASE/lib ${LDFLAGS:-}" \
             python -m pip install $INSTALL_PIP_FLAGS $pypkg_fqn
     else
         python -m pip install $INSTALL_PIP_FLAGS $pypkg_fqn
