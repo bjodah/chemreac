@@ -4,6 +4,12 @@ source /opt-3/cpython-v3.*-apt-deb/bin/activate
 INSTALL_PIP_FLAGS="--cache-dir ./ci-cache/pip-cache --upgrade"  # --user
 for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitediff block_diag_ilu pycvodes pyodesys chempy; do
     case $pypkg in
+        pyodeint)
+            pypkg_fqn="git+https://github.com/bjodah/pyodeint@sep21#egg=pyodeint"
+            ;;
+        pygslodeiv2)
+            pypkg_fqn="git+https://github.com/bjodah/pygslodeiv2@cython-except-plus#egg=pygslodeiv2"
+            ;;
          block_diag_ilu)
              pypkg_fqn="git+https://github.com/bjodah/block_diag_ilu"
              ;;
@@ -17,7 +23,7 @@ for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitedif
              pypkg_fqn="git+https://github.com/bjodah/pycvodes@may21#egg=pycvodes"
              ;;
          pyodesys)
-             pypkg_fqn="git+https://github.com/bjodah/pyodesys@bdf2#egg=pycvodes"
+             pypkg_fqn="git+https://github.com/bjodah/pyodesys@bdf2#egg=pyodesys"
              ;;
          chempy)
              pypkg_fqn="git+https://github.com/bjodah/chempy@nov20#egg=chempy"
