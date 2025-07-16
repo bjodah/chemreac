@@ -93,7 +93,8 @@ if len(sys.argv) > 1 and '--help' not in sys.argv[1:] and sys.argv[1] not in (
     from pycvodes._libs import get_libs as pc_get_libs
     import block_diag_ilu as bdi
 
-    setup_requires = _common_requires + ['mako>=1.0'] + (["cython>=0.29.15"] if USE_CYTHON else [])
+    setup_requires = ['cython==3.0.12']#<-- https://github.com/cython/cython/issues/6981
+    # setup_requires = _common_requires + ['mako>=1.0'] + (["cython>=0.29.15"] if USE_CYTHON else [])
 
     rendered_path = 'src/chemreac.cpp'
     template_path = rendered_path + '.mako'
@@ -115,11 +116,13 @@ if len(sys.argv) > 1 and '--help' not in sys.argv[1:] and sys.argv[1] not in (
 
     if USE_CYTHON:
         from Cython.Build import cythonize
-        ext_modules = cythonize(ext_modules, include_path=[
+        cythonize_inc_path = [
             package_include,
             pc.get_include(),
             os.path.join('external', 'anyode', 'cython_def')
-        ])
+        ]
+        print(f"{cythonize_inc_path=}")
+        ext_modules = cythonize(ext_modules, include_path=cythonize_inc_path)
         if not os.path.exists(os.path.join('external', 'anyode', 'cython_def', 'anyode.pxd')):
             raise FileNotFoundError("No anyode.pxd?")
     ext_modules[0].include_dirs += [
