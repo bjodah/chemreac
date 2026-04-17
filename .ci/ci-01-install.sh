@@ -21,10 +21,10 @@ for pypkg in pyodeint pygslodeiv2 pycompilation pycodeexport batemaneq finitedif
              pypkg_fqn="git+https://github.com/bjodah/block_diag_ilu"
              ;;
          pycompilation)
-             pypkg_fqn="git+https://github.com/bjodah/pycompilation@use-importlib-rather-than-imp#egg=pycompilation"
+             pypkg_fqn="git+https://github.com/bjodah/pycompilation@master#egg=pycompilation"
              ;;
          pycodeexport)
-             pypkg_fqn="git+https://github.com/bjodah/pycodeexport@qulify-extension-name-and-new-ci#egg=pycodeexport"
+             pypkg_fqn="git+https://github.com/bjodah/pycodeexport@master#egg=pycodeexport"
              ;;
          pycvodes)
              pypkg_fqn="git+https://github.com/bjodah/pycvodes@may21#egg=pycvodes"
