@@ -1,10 +1,13 @@
+variables:
+  - &ci_image 'cont-reg.bjodah.se:443/bjodah/triceratops-3:34'
+
 when:
   - event: [push]
 
 steps:
 
   - name: restore-cache
-    image: cont-reg.bjodah.se:443/bjodah/triceratops-3:34
+    image: *ci_image
     commands:
       - curl ftp://chemreac:$${ARTIFACTS_PASS}@$${FTP_SERVER}/cache/cache-ci.tar | tar x
     secrets: [ ARTIFACTS_PASS, FTP_SERVER ]
@@ -13,9 +16,9 @@ steps:
        repo: bjodah/chemreac
 
   - name: install
-    image: cont-reg.bjodah.se:443/bjodah/triceratops-3:34
+    image: *ci_image
     environment:
-      - CPLUS_INCLUDE_PATH=/opt-3/boost-1.87.0/include
+      - CPLUS_INCLUDE_PATH=/opt-3/boost-1.88.0/include
       - SUNDBASE=/opt-3/sundials-6.7.0-release
       - CPATH=/usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
     commands:
@@ -25,9 +28,9 @@ steps:
       - .ci/ci-01-install.sh
 
   - name: test-suite
-    image: cont-reg.bjodah.se:443/bjodah/triceratops-3:34
+    image: *ci_image
     environment:
-      - CPLUS_INCLUDE_PATH=/opt-3/boost-1.87.0/include
+      - CPLUS_INCLUDE_PATH=/opt-3/boost-1.88.0/include
       - SUNDBASE=/opt-3/sundials-6.7.0-release
       - CPATH=/usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
       - CHEMREAC_SKIP_NO_TESTS=1
@@ -51,7 +54,7 @@ steps:
       - install
 
   - name: render-notebooks
-    image: cont-reg.bjodah.se:443/bjodah/triceratops-3:34
+    image: *ci_image
     environment:
       - CHEMREAC_DEPRECATION_FILTER=ignore
       - SUNDBASE=/opt-3/sundials-6.7.0-release
@@ -69,7 +72,7 @@ steps:
       - install
 
   - name: compile-documentation
-    image: cont-reg.bjodah.se:443/bjodah/triceratops-3:34
+    image: *ci_image
     environment:
       - CHEMREAC_DEPRECATION_FILTER=ignore
       - SUNDBASE=/opt-3/sundials-6.7.0-release
@@ -86,7 +89,7 @@ steps:
       - render-notebooks
 
   - name: rebuild-cache
-    image: cont-reg.bjodah.se:443/bjodah/triceratops-3:34
+    image: *ci_image
     commands:
       - find ./cache-ci/ -type f -mtime +90 -exec rm {} \;
       - tar cf cache-ci.tar ./cache-ci/
@@ -99,7 +102,7 @@ steps:
       - compile-documentation
 
   - name: deploy-public-html
-    image: cont-reg.bjodah.se:443/bjodah/triceratops-3:34
+    image: *ci_image
     commands:
       - tar czf chemreac-${CI_COMMIT_BRANCH}.tar.gz ./deploy/public_html
       - curl -T chemreac-${CI_COMMIT_BRANCH}.tar.gz ftp://chemreac:$${ARTIFACTS_PASS}@$${FTP_SERVER}/public_html/
