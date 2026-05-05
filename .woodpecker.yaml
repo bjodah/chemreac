@@ -1,5 +1,5 @@
 variables:
-  - &ci_image 'cont-reg.bjodah.se:443/bjodah/triceratops-3:41'
+  - &ci_image 'cont-reg.bjodah.se:443/bjodah/triceratops-4:33'
 
 when:
   - event: [push]
@@ -22,7 +22,7 @@ steps:
   - name: install
     image: *ci_image
     environment:
-      CPLUS_INCLUDE_PATH: /opt-3/boost-1.88.0/include
+      CPLUS_INCLUDE_PATH: /opt-4/boost-1.91.0-release/include
       SUNDBASE: /opt-3/sundials-6.7.0-release
       CPATH: /usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
     commands:
@@ -34,7 +34,7 @@ steps:
   - name: test-suite
     image: *ci_image
     environment:
-      CPLUS_INCLUDE_PATH: /opt-3/boost-1.88.0/include
+      CPLUS_INCLUDE_PATH: /opt-4/boost-1.91.0-release/include
       SUNDBASE: /opt-3/sundials-6.7.0-release
       CPATH: /usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
       CHEMREAC_SKIP_NO_TESTS: 1
