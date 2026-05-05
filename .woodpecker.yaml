@@ -1,5 +1,5 @@
 variables:
-  - &ci_image 'cont-reg.bjodah.se:443/bjodah/triceratops-3:34'
+  - &ci_image 'cont-reg.bjodah.se:443/bjodah/triceratops-3:41'
 
 when:
   - event: [push]
@@ -8,9 +8,13 @@ steps:
 
   - name: restore-cache
     image: *ci_image
+    environment:
+      ARTIFACTS_PASS:
+        from_secret: ARTIFACTS_PASS
+      FTP_SERVER:
+        from_secret: FTP_SERVER
     commands:
       - curl ftp://chemreac:$${ARTIFACTS_PASS}@$${FTP_SERVER}/cache/cache-ci.tar | tar x
-    secrets: [ ARTIFACTS_PASS, FTP_SERVER ]
     when:
      - event: push
        repo: bjodah/chemreac
@@ -18,9 +22,9 @@ steps:
   - name: install
     image: *ci_image
     environment:
-      - CPLUS_INCLUDE_PATH=/opt-3/boost-1.88.0/include
-      - SUNDBASE=/opt-3/sundials-6.7.0-release
-      - CPATH=/usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
+      CPLUS_INCLUDE_PATH: /opt-3/boost-1.88.0/include
+      SUNDBASE: /opt-3/sundials-6.7.0-release
+      CPATH: /usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
     commands:
       - export CACHE_ROOT=$(pwd)/cache-ci
       - export PYTHONUSERBASE=$CACHE_ROOT/pyusrb
@@ -30,10 +34,10 @@ steps:
   - name: test-suite
     image: *ci_image
     environment:
-      - CPLUS_INCLUDE_PATH=/opt-3/boost-1.88.0/include
-      - SUNDBASE=/opt-3/sundials-6.7.0-release
-      - CPATH=/usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
-      - CHEMREAC_SKIP_NO_TESTS=1
+      CPLUS_INCLUDE_PATH: /opt-3/boost-1.88.0/include
+      SUNDBASE: /opt-3/sundials-6.7.0-release
+      CPATH: /usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
+      CHEMREAC_SKIP_NO_TESTS: 1
     commands:
       - export CACHE_ROOT=$(pwd)/cache-ci
       - export PYTHONUSERBASE=$CACHE_ROOT/pyusrb
@@ -56,9 +60,9 @@ steps:
   - name: render-notebooks
     image: *ci_image
     environment:
-      - CHEMREAC_DEPRECATION_FILTER=ignore
-      - SUNDBASE=/opt-3/sundials-6.7.0-release
-      - CPATH=/usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
+      CHEMREAC_DEPRECATION_FILTER: ignore
+      SUNDBASE: /opt-3/sundials-6.7.0-release
+      CPATH: /usr/include/suitesparse  # sunlinsol_klu.h includes "klu.h"
     commands:
       - export PYTHONUSERBASE=$(pwd)/cache-ci/pyusrb
       - export CPATH=$SUNDBASE/include:$CPATH
@@ -74,8 +78,8 @@ steps:
   - name: compile-documentation
     image: *ci_image
     environment:
-      - CHEMREAC_DEPRECATION_FILTER=ignore
-      - SUNDBASE=/opt-3/sundials-6.7.0-release
+      CHEMREAC_DEPRECATION_FILTER: ignore
+      SUNDBASE: /opt-3/sundials-6.7.0-release
     commands:
       - export PYTHONUSERBASE=$(pwd)/cache-ci/pyusrb
       - export CPATH=$SUNDBASE/include
@@ -90,11 +94,15 @@ steps:
 
   - name: rebuild-cache
     image: *ci_image
+    environment:
+      ARTIFACTS_PASS:
+        from_secret: ARTIFACTS_PASS
+      FTP_SERVER:
+        from_secret: FTP_SERVER
     commands:
       - find ./cache-ci/ -type f -mtime +90 -exec rm {} \;
       - tar cf cache-ci.tar ./cache-ci/
       - curl -T cache-ci.tar ftp://chemreac:$${ARTIFACTS_PASS}@$${FTP_SERVER}/cache/
-    secrets: [ ARTIFACTS_PASS, FTP_SERVER ]
     when:
      - event: push
        repo: bjodah/chemreac
@@ -103,14 +111,17 @@ steps:
 
   - name: deploy-public-html
     image: *ci_image
+    environment:
+      ARTIFACTS_PASS:
+        from_secret: ARTIFACTS_PASS
+      FTP_SERVER:
+        from_secret: FTP_SERVER
     commands:
       - tar czf chemreac-${CI_COMMIT_BRANCH}.tar.gz ./deploy/public_html
       - curl -T chemreac-${CI_COMMIT_BRANCH}.tar.gz ftp://chemreac:$${ARTIFACTS_PASS}@$${FTP_SERVER}/public_html/
-    secrets: [ ARTIFACTS_PASS, FTP_SERVER ]
     when:
      - event: push
        repo: bjodah/chemreac
     depends_on:
       - compile-documentation
-
 
