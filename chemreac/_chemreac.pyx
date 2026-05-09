@@ -653,7 +653,7 @@ def cvode_adaptive(
     xyout_dims[0] = nout + 1
     xyout_dims[1] = y0.size*(nderiv+1) + 1
     xyout_arr = cnp.PyArray_SimpleNewFromData(2, xyout_dims, cnp.NPY_DOUBLE, <void *>xyout)
-    PyArray_ENABLEFLAGS(xyout_arr, cnp.NPY_OWNDATA)
+    PyArray_ENABLEFLAGS(xyout_arr, cnp.NPY_ARRAY_OWNDATA)
     tout = xyout_arr[:, 0]
     yout = xyout_arr[:, 1:]
     if return_on_error:
@@ -670,7 +670,7 @@ def cvode_adaptive(
         ew_ele_dims[2] = rd.N
         ew_ele_dims[3] = rd.n
         ew_ele_arr = cnp.PyArray_SimpleNewFromData(4, ew_ele_dims, cnp.NPY_DOUBLE, <void *>ew_ele_out)
-        PyArray_ENABLEFLAGS(ew_ele_arr, cnp.NPY_OWNDATA)
+        PyArray_ENABLEFLAGS(ew_ele_arr, cnp.NPY_ARRAY_OWNDATA)
         info['ew_ele'] = ew_ele_arr
 
     return tout, yout.reshape((tout.size, rd.N, rd.n)), info
