@@ -73,10 +73,9 @@ package_include = os.path.join(pkg_name, 'include')
 
 
 _src = {ext: _path_under_setup(pkg_name, '_%s.%s' % (pkg_name, ext)) for ext in "cpp pyx".split()}
-if _HAVE_CYTHON and os.path.exists(_src["pyx"]):
+if os.path.exists(_src["pyx"]):
     # Possible that a new release of Python needs a re-rendered Cython source,
-    # or that we want to include possible bug-fix to Cython, disable by manually
-    # deleting .pyx file from source distribution.
+    # or that we want to include possible bug-fix to Cython.
     USE_CYTHON = True
     if os.path.exists(_src['cpp']):
         os.unlink(_src['cpp'])  # ensure c++ source is re-generated.
@@ -85,6 +84,7 @@ else:
 
 ext_modules = []
 
+
 if len(sys.argv) > 1 and '--help' not in sys.argv[1:] and sys.argv[1] not in (
         '--help-commands', 'egg_info', 'clean', '--version'):
     import numpy as np
@@ -92,9 +92,6 @@ if len(sys.argv) > 1 and '--help' not in sys.argv[1:] and sys.argv[1] not in (
     import pycvodes as pc
     from pycvodes._libs import get_libs as pc_get_libs
     import block_diag_ilu as bdi
-
-    setup_requires = ['cython==3.0.12']#<-- https://github.com/cython/cython/issues/6981
-    # setup_requires = _common_requires + ['mako>=1.0'] + (["cython>=0.29.15"] if USE_CYTHON else [])
 
     rendered_path = 'src/chemreac.cpp'
     template_path = rendered_path + '.mako'
@@ -139,8 +136,6 @@ if len(sys.argv) > 1 and '--help' not in sys.argv[1:] and sys.argv[1] not in (
     )
     ext_modules[0].libraries += [l for l in (pc_get_libs().split(',') + os.environ.get(
         'CHEMREAC_LAPACK', "lapack,blas").split(",")) if l != ""] + ['m']
-else:
-    setup_requires = []
 
 modules = [
     pkg_name+'.util',
@@ -188,7 +183,7 @@ setup_kwargs = dict(
     },
     ext_modules=ext_modules,
     classifiers=classifiers,
-    setup_requires=setup_requires,
+    setup_requires = ['cython==3.0.12'], #<-- https://github.com/cython/cython/issues/6981
     install_requires=install_requires,
     extras_require={'all': [
         'argh', 'pytest', 'scipy>=0.19.1', 'matplotlib', 'mpld3',
