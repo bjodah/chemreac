@@ -29,7 +29,7 @@ class SymRD(ReactionDiffusionBase):
     @classmethod
     def from_rd(cls, rd, **kwargs):
         return cls(*tuple(kwargs.get(attr, getattr(rd, attr)) for attr in
-                          inspect.getargspec(cls.__init__).args[1:]))
+                          inspect.getfullargspec(cls.__init__).args[1:]))
 
     def expb(self, x):
         if self.use_log2:

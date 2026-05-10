@@ -521,7 +521,7 @@ class ReactionDiffusion(PyReactionDiffusion, ReactionDiffusionBase):
         return rd
 
     def __reduce__(self):
-        args = inspect.getargspec(self.__new__).args[1:]
+        args = inspect.getfullargspec(self.__new__).args[1:]
         return (self.__class__, tuple(getattr(self, attr) for attr in args))
 
     _prop_unit = {

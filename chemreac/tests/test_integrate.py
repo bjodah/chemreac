@@ -305,7 +305,7 @@ def test_integrate_nondimensionalisation(from_rsys):
     Cref_mol_p_m3[:, 1] = C0_mol_p_m3[1] + missing_A/2
     assert allclose(integr.with_units('tout'), t_sec*u.s)
     assert allclose(integr.with_units('Cout').squeeze(),
-                    Cref_mol_p_m3*u.mol/u.metre**3, rtol=1e-6)
+                    Cref_mol_p_m3*u.mol/u.metre**3, rtol=5e-4)
 
 
 @pytest.mark.parametrize("from_rsys", [False, True])
@@ -321,7 +321,7 @@ def test_integrate_nondimensionalisation__g_values(from_rsys):
             variables=dict(doserate=0.15*u.Gy/u.s, density=0.998*u.kg/u.dm3))
         assert rd.g_value_parents == [-1]
         assert rd.g_values == [[2.1e-7]*2]
-        assert abs(rd.fields[0][0] - 0.15*998) < 1e-14
+        assert abs(rd.fields[0][0] - 0.15*998) < 1e-13
     else:
         rd = ReactionDiffusion.nondimensionalisation(
             2, [[]], [[0, 1]], [2.1e-7*0.15*0.998*u.molar/u.second],

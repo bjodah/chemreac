@@ -98,7 +98,7 @@ def coloured_spy(A, cmap_name='coolwarm', log=False,
     from matplotlib.ticker import MaxNLocator
     from matplotlib.cm import get_cmap
     from matplotlib.colors import LogNorm, SymLogNorm
-    from mpl_toolkits.axes_grid import make_axes_locatable
+    from mpl_toolkits.axes_grid1 import make_axes_locatable
 
     A = np.asarray(A)
     if 'cmap' not in kwargs:
